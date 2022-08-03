@@ -10,6 +10,7 @@ add_library(${PROJECT_NAME}
         exodusIIcppNodeSet.cpp
         exodusIIcppSideSet.cpp
 )
+target_code_coverage(${PROJECT_NAME})
 
 set_target_properties(
     ${PROJECT_NAME}

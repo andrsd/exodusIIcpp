@@ -35,6 +35,8 @@ if(EXODUSIICPP_CODE_COVERAGE)
             --ignore-filename-regex=/include/gtest/*
             --ignore-filename-regex=/include/gmock/*
             --ignore-filename-regex=test/*
+            --ignore-filename-regex=exodusII.h
+            --ignore-filename-regex=mpicxx.h
         )
 
         set(CODE_COVERAGE_BINS
@@ -120,6 +122,8 @@ if(EXODUSIICPP_CODE_COVERAGE)
             --exclude=*/include/gmock/*
             --exclude=*/include/fmt/*
             --exclude=/usr/include/*
+            --exclude=exodusII.h
+            --exclude=mpicxx.h
         )
 
         add_custom_target(coverage DEPENDS ${COVERAGE_INFO})
