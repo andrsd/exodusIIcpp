@@ -1,9 +1,6 @@
 #pragma once
 
 #include <vector>
-#include <stdexcept>
-#include "mpi.h"
-#include "fmt/printf.h"
 #include "exodusII.h"
 #include "exodusIIcppElementBlock.h"
 #include "exodusIIcppEnums.h"

@@ -1,4 +1,5 @@
 #include "exodusIIcppNodeSet.h"
+#include <stdexcept>
 
 namespace exodusIIcpp {
 

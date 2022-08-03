@@ -1,4 +1,6 @@
 #include "exodusIIcppFile.h"
+#include "fmt/printf.h"
+#include <stdexcept>
 
 namespace exodusIIcpp {
 

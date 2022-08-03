@@ -1,4 +1,5 @@
 #include "exodusIIcppSideSet.h"
+#include <stdexcept>
 
 namespace exodusIIcpp {
 
