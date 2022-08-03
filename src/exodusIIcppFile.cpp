@@ -270,7 +270,7 @@ File::read_blocks()
         eb.set_id(id);
         eb.set_name(name);
         if (n_elems_in_block > 0) {
-            std::vector<int> connect(n_elems_in_block * n_nodes_per_elem);
+            std::vector<int> connect((std::size_t) n_elems_in_block * n_nodes_per_elem);
             EXODUSIICPP_CHECK_ERROR(
                 ex_get_conn(this->exoid, EX_ELEM_BLOCK, id, connect.data(), 0, 0));
             eb.set_connectivity(elem_type, n_elems_in_block, n_nodes_per_elem, connect);
