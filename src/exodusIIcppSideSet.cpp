@@ -1,0 +1,66 @@
+#include "exodusIIcppSideSet.h"
+
+namespace exodusIIcpp {
+
+SideSet::SideSet() : id(-1) {}
+
+int
+SideSet::get_id() const
+{
+    return this->id;
+}
+
+const std::string &
+SideSet::get_name() const
+{
+    return this->name;
+}
+
+int
+SideSet::get_size() const
+{
+    return this->elem_ids.size();
+}
+
+int
+SideSet::get_element_id(std::size_t idx) const
+{
+    if (idx < this->elem_ids.size())
+        return this->elem_ids[idx];
+    else
+        throw std::out_of_range("Index of out bounds.");
+}
+
+int
+SideSet::get_side_id(std::size_t idx) const
+{
+    if (idx < this->side_ids.size())
+        return this->side_ids[idx];
+    else
+        throw std::out_of_range("Index of out bounds.");
+}
+
+void
+SideSet::set_id(int id)
+{
+    this->id = id;
+}
+
+void
+SideSet::set_name(const std::string & name)
+{
+    this->name = name;
+}
+
+void
+SideSet::set_sides(const std::vector<int> & elems, const std::vector<int> & sides)
+{
+    if (elems.size() == sides.size()) {
+        this->elem_ids = elems;
+        this->side_ids = sides;
+    }
+    else
+        throw std::logic_error("The length of 'elems' must be equal to the length of 'sides'");
+}
+
+} // namespace exodusIIcpp
