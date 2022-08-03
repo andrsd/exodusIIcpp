@@ -4,6 +4,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 add_executable(${PROJECT_NAME}
+    ElementBlock_test.cpp
     main.cpp
 )
 target_code_coverage(${PROJECT_NAME})
