@@ -3,12 +3,12 @@
     #include <filesystem>
     #include <utility>
 namespace exodusIIcpp {
-    namespace fs = std::filesystem;
+namespace fs = std::filesystem;
 }
 #elif __has_include(<experimental/filesystem>)
     #include <experimental/filesystem>
 namespace exodusIIcpp {
-    namespace fs = std::experimental::filesystem;
+namespace fs = std::experimental::filesystem;
 }
 #else
     #error Could not find includes: <filesystem> or <experimental/filesystem>

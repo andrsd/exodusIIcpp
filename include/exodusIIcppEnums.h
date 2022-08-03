@@ -9,4 +9,4 @@ enum class FileAccess {
 };
 /* clang-format on */
 
-} // namespace exodusII
+} // namespace exodusIIcpp
