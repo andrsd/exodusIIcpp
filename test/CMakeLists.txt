@@ -5,6 +5,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 add_executable(${PROJECT_NAME}
     ElementBlock_test.cpp
+    NodeSet_test.cpp
     main.cpp
 )
 target_code_coverage(${PROJECT_NAME})
