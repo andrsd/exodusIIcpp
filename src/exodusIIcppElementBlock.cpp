@@ -1,4 +1,5 @@
 #include "exodusIIcppElementBlock.h"
+#include <stdexcept>
 
 namespace exodusIIcpp {
 
