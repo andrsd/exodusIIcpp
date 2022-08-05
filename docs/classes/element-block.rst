@@ -1,0 +1,4 @@
+ElementBlock
+============
+
+.. doxygenclass:: exodusIIcpp::ElementBlock

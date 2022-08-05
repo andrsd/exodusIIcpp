@@ -27,16 +27,21 @@ if(DOXYGEN_FOUND)
         SPHINX_BUILD
     )
 
+    configure_file(conf.py.in conf.py)
+
     add_custom_target(doc DEPENDS ${PROJECT_BINARY_DIR}/docs/html/index.html)
+
+    file(GLOB_RECURSE RST_FILES ${PROJECT_SOURCE_DIR}/docs/*.rst)
 
     add_custom_command(
         OUTPUT
             ${PROJECT_BINARY_DIR}/docs/html/index.html
         COMMAND
-            ${SPHINX_BUILD} -b html -d ${PROJECT_BINARY_DIR}/docs/.doctrees ${PROJECT_SOURCE_DIR}/docs html
+            ${SPHINX_BUILD} -c ${PROJECT_BINARY_DIR}/docs -b html -d ${PROJECT_BINARY_DIR}/docs/.doctrees ${PROJECT_SOURCE_DIR}/docs html
         DEPENDS
-            ${PROJECT_SOURCE_DIR}/docs/conf.py
+            ${PROJECT_BINARY_DIR}/docs/conf.py
             ${PROJECT_BINARY_DIR}/docs/xml/index.xml
+            ${RST_FILES}
     )
 
     add_custom_command(

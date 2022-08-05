@@ -1,0 +1,4 @@
+NodeSet
+=======
+
+.. doxygenclass:: exodusIIcpp::NodeSet

@@ -1,0 +1,4 @@
+SideSet
+=======
+
+.. doxygenclass:: exodusIIcpp::SideSet
