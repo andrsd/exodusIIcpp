@@ -74,8 +74,8 @@ public:
     /// @param elem_type Element type.
     /// @param n_elems_in_block Number of elements in the block
     /// @param n_nodes_per_elem Number of nodes per element
-    /// @param connect Connectivity array. Must contain `n_elems_in_block * n_nodes_per_elem` numbers.
-    /// Elements must be ordered as follows `[el1_n1, el1_n2, ..., el2_n1, el2_n2, ... ]`
+    /// @param connect Connectivity array. Must contain `n_elems_in_block * n_nodes_per_elem`
+    /// numbers. Elements must be ordered as follows `[el1_n1, el1_n2, ..., el2_n1, el2_n2, ... ]`
     void set_connectivity(const char * elem_type,
                           int n_elems_in_block,
                           int n_nodes_per_elem,
