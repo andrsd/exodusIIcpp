@@ -6,6 +6,7 @@ project = 'exodusIIcpp'
 copyright = '2022, David Andrs'
 author = 'David Andrs'
 
+master_doc = 'index'
 templates_path = ['_templates']
 
 exclude_patterns = []
