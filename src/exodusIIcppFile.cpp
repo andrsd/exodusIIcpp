@@ -43,9 +43,6 @@ File::~File()
     close();
 }
 
-/// Open file
-///
-/// @param file_path File path to the file to
 void
 File::open(const std::string & file_path)
 {
