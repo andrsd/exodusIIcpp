@@ -3,30 +3,12 @@
 find_package(Doxygen QUIET)
 
 if(DOXYGEN_FOUND)
-    set(DOXYGEN_GENERATE_HTML NO)
-    set(DOXYGEN_GENERATE_XML YES)
-    set(DOXYGEN_STRIP_FROM_INC_PATH
-        ${PROJECT_SOURCE_DIR}/include
-        ${PROJECT_SOURCE_DIR}/src
-    )
-    set(DOXYGEN_STRIP_FROM_PATH
-        ${PROJECT_SOURCE_DIR}/include
-        ${PROJECT_SOURCE_DIR}/src
-    )
-
-    doxygen_add_docs(
-        doxygen
-        ${PROJECT_SOURCE_DIR}/include
-        ${PROJECT_SOURCE_DIR}/src
-        STRIP_FROM_PATH
-        COMMENT "Generate doxygen XML"
-    )
-
     find_program(SPHINX_BUILD sphinx-build)
     mark_as_advanced(FORCE
         SPHINX_BUILD
     )
 
+    configure_file(Doxyfile.in Doxyfile)
     configure_file(conf.py.in conf.py)
 
     add_custom_target(doc DEPENDS ${PROJECT_BINARY_DIR}/docs/html/index.html)
@@ -48,9 +30,9 @@ if(DOXYGEN_FOUND)
         OUTPUT
             ${PROJECT_BINARY_DIR}/docs/xml/index.xml
         COMMAND
-            doxygen Doxyfile.doxygen
+            doxygen Doxyfile
         DEPENDS
-            ${PROJECT_BINARY_DIR}/docs/Doxyfile.doxygen
+            ${PROJECT_BINARY_DIR}/docs/Doxyfile
             ${PROJECT_SOURCE_DIR}/include/*.h
     )
 
