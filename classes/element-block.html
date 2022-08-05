@@ -1,0 +1,340 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ElementBlock &mdash; exodusIIcpp  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="File" href="file.html" />
+    <link rel="prev" title="Writing a file" href="../examples/write.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> exodusIIcpp
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../examples/read.html">Reading a file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/write.html">Writing a file</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ElementBlock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="file.html">File</a></li>
+<li class="toctree-l1"><a class="reference internal" href="node-set.html">NodeSet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="side-set.html">SideSet</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">exodusIIcpp</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>ElementBlock</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="elementblock">
+<h1>ElementBlock<a class="headerlink" href="#elementblock" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="_CPPv4N11exodusIIcpp12ElementBlockE">
+<span id="_CPPv3N11exodusIIcpp12ElementBlockE"></span><span id="_CPPv2N11exodusIIcpp12ElementBlockE"></span><span id="exodusIIcpp::ElementBlock"></span><span class="target" id="classexodus_i_icpp_1_1_element_block"></span><em class="property">class </em><code class="descname">ElementBlock</code><a class="headerlink" href="#_CPPv4N11exodusIIcpp12ElementBlockE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Represents an element block. </p>
+<p>Element block is a connectivity array with an ID and optionally a name. Each element block can have only one type of elements in it. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv4NK11exodusIIcpp12ElementBlock6get_idEv">
+<span id="_CPPv3NK11exodusIIcpp12ElementBlock6get_idEv"></span><span id="_CPPv2NK11exodusIIcpp12ElementBlock6get_idEv"></span><span id="exodusIIcpp::ElementBlock::get_idC"></span><span class="target" id="classexodus_i_icpp_1_1_element_block_1ad0326764dddb777383e6170ced4dd771"></span>int <code class="descname">get_id</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK11exodusIIcpp12ElementBlock6get_idEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get element block ID. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>Node set ID </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK11exodusIIcpp12ElementBlock8get_nameEv">
+<span id="_CPPv3NK11exodusIIcpp12ElementBlock8get_nameEv"></span><span id="_CPPv2NK11exodusIIcpp12ElementBlock8get_nameEv"></span><span id="exodusIIcpp::ElementBlock::get_nameC"></span><span class="target" id="classexodus_i_icpp_1_1_element_block_1a17e7763d691db37fcd5d41a5bf5505e1"></span><em class="property">const</em> std::string &amp;<code class="descname">get_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK11exodusIIcpp12ElementBlock8get_nameEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get element block name. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>Element block name </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK11exodusIIcpp12ElementBlock8get_sizeEv">
+<span id="_CPPv3NK11exodusIIcpp12ElementBlock8get_sizeEv"></span><span id="_CPPv2NK11exodusIIcpp12ElementBlock8get_sizeEv"></span><span id="exodusIIcpp::ElementBlock::get_sizeC"></span><span class="target" id="classexodus_i_icpp_1_1_element_block_1a3f3d87e33ab6eda5c7a2911b2b97bde1"></span>int <code class="descname">get_size</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK11exodusIIcpp12ElementBlock8get_sizeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the number of elements in the block. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>Element block size </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK11exodusIIcpp12ElementBlock25get_num_nodes_per_elementEv">
+<span id="_CPPv3NK11exodusIIcpp12ElementBlock25get_num_nodes_per_elementEv"></span><span id="_CPPv2NK11exodusIIcpp12ElementBlock25get_num_nodes_per_elementEv"></span><span id="exodusIIcpp::ElementBlock::get_num_nodes_per_elementC"></span><span class="target" id="classexodus_i_icpp_1_1_element_block_1a0bd3fc48d49ae46514cd0e84aa9c64c8"></span>int <code class="descname">get_num_nodes_per_element</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK11exodusIIcpp12ElementBlock25get_num_nodes_per_elementEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the number of nodes per element. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The number of nodes per element </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK11exodusIIcpp12ElementBlock16get_element_typeEv">
+<span id="_CPPv3NK11exodusIIcpp12ElementBlock16get_element_typeEv"></span><span id="_CPPv2NK11exodusIIcpp12ElementBlock16get_element_typeEv"></span><span id="exodusIIcpp::ElementBlock::get_element_typeC"></span><span class="target" id="classexodus_i_icpp_1_1_element_block_1a7c643c85f1baf7edce4713dc94044504"></span><em class="property">const</em> std::string &amp;<code class="descname">get_element_type</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK11exodusIIcpp12ElementBlock16get_element_typeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the type of elements in the element block. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The type of the elements in this block </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK11exodusIIcpp12ElementBlock24get_element_connectivityENSt6size_tE">
+<span id="_CPPv3NK11exodusIIcpp12ElementBlock24get_element_connectivityENSt6size_tE"></span><span id="_CPPv2NK11exodusIIcpp12ElementBlock24get_element_connectivityENSt6size_tE"></span><span id="exodusIIcpp::ElementBlock::get_element_connectivity__std::sC"></span><span class="target" id="classexodus_i_icpp_1_1_element_block_1a06a924cf60975817eefc917390098209"></span>std::vector&lt;int&gt; <code class="descname">get_element_connectivity</code><span class="sig-paren">(</span>std::size_t <em>element_idx</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK11exodusIIcpp12ElementBlock24get_element_connectivityENSt6size_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the element connectivity. </p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#classexodus_i_icpp_1_1_element_block_1a3f3d87e33ab6eda5c7a2911b2b97bde1"><span class="std std-ref">get_size</span></a> </dd>
+<dt><strong>Return</strong></dt>
+<dd>List of node IDs that comprise the element </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">element_idx</span></code>: Index of an element in the block. <code class="docutils literal notranslate"><span class="pre">0..&lt;n&gt;</span></code>, where <code class="docutils literal notranslate"><span class="pre">&lt;n&gt;</span></code> is the size of the block. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N11exodusIIcpp12ElementBlock6set_idEi">
+<span id="_CPPv3N11exodusIIcpp12ElementBlock6set_idEi"></span><span id="_CPPv2N11exodusIIcpp12ElementBlock6set_idEi"></span><span id="exodusIIcpp::ElementBlock::set_id__i"></span><span class="target" id="classexodus_i_icpp_1_1_element_block_1aa05fa735f3c910521dec7d4d1290ec04"></span>void <code class="descname">set_id</code><span class="sig-paren">(</span>int <em>id</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11exodusIIcpp12ElementBlock6set_idEi" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set element block ID. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">id</span></code>: Desired ID of the element block </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N11exodusIIcpp12ElementBlock8set_nameERKNSt6stringE">
+<span id="_CPPv3N11exodusIIcpp12ElementBlock8set_nameERKNSt6stringE"></span><span id="_CPPv2N11exodusIIcpp12ElementBlock8set_nameERKNSt6stringE"></span><span id="exodusIIcpp::ElementBlock::set_name__ssCR"></span><span class="target" id="classexodus_i_icpp_1_1_element_block_1a92d81e6ce0775e623bc150a6c8f141d9"></span>void <code class="descname">set_name</code><span class="sig-paren">(</span><em class="property">const</em> std::string &amp;<em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11exodusIIcpp12ElementBlock8set_nameERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set element block name. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">name</span></code>: Desired name of the element block </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N11exodusIIcpp12ElementBlock16set_connectivityEPKciiRKNSt6vectorIiEE">
+<span id="_CPPv3N11exodusIIcpp12ElementBlock16set_connectivityEPKciiRKNSt6vectorIiEE"></span><span id="_CPPv2N11exodusIIcpp12ElementBlock16set_connectivityEPKciiRKNSt6vectorIiEE"></span><span id="exodusIIcpp::ElementBlock::set_connectivity__cCP.i.i.std::vector:i:CR"></span><span class="target" id="classexodus_i_icpp_1_1_element_block_1a877859e71f30f799c507c75733e1807b"></span>void <code class="descname">set_connectivity</code><span class="sig-paren">(</span><em class="property">const</em> char *<em>elem_type</em>, int <em>n_elems_in_block</em>, int <em>n_nodes_per_elem</em>, <em class="property">const</em> std::vector&lt;int&gt; &amp;<em>connect</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11exodusIIcpp12ElementBlock16set_connectivityEPKciiRKNSt6vectorIiEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set block connectivity. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">elem_type</span></code>: Element type. </li>
+<li><code class="docutils literal notranslate"><span class="pre">n_elems_in_block</span></code>: Number of elements in the block </li>
+<li><code class="docutils literal notranslate"><span class="pre">n_nodes_per_elem</span></code>: Number of nodes per element </li>
+<li><code class="docutils literal notranslate"><span class="pre">connect</span></code>: Connectivity array. Must contain <code class="docutils literal notranslate"><span class="pre">n_elems_in_block</span> <span class="pre">*</span> <span class="pre">n_nodes_per_elem</span></code> numbers. Elements must be ordered as follows <code class="docutils literal notranslate"><span class="pre">[el1_n1,</span> <span class="pre">el1_n2,</span> <span class="pre">...,</span> <span class="pre">el2_n1,</span> <span class="pre">el2_n2,</span> <span class="pre">...</span> <span class="pre">]</span></code> </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="file.html" class="btn btn-neutral float-right" title="File" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../examples/write.html" class="btn btn-neutral float-left" title="Writing a file" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, David Andrs
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

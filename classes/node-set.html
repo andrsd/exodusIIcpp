@@ -1,0 +1,315 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>NodeSet &mdash; exodusIIcpp  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="SideSet" href="side-set.html" />
+    <link rel="prev" title="File" href="file.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> exodusIIcpp
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../examples/read.html">Reading a file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/write.html">Writing a file</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="element-block.html">ElementBlock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="file.html">File</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">NodeSet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="side-set.html">SideSet</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">exodusIIcpp</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>NodeSet</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="nodeset">
+<h1>NodeSet<a class="headerlink" href="#nodeset" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="_CPPv4N11exodusIIcpp7NodeSetE">
+<span id="_CPPv3N11exodusIIcpp7NodeSetE"></span><span id="_CPPv2N11exodusIIcpp7NodeSetE"></span><span id="exodusIIcpp::NodeSet"></span><span class="target" id="classexodus_i_icpp_1_1_node_set"></span><em class="property">class </em><code class="descname">NodeSet</code><a class="headerlink" href="#_CPPv4N11exodusIIcpp7NodeSetE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Node set. </p>
+<p>Represents a node set stored in/loaded from the ExodusII file </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv4NK11exodusIIcpp7NodeSet6get_idEv">
+<span id="_CPPv3NK11exodusIIcpp7NodeSet6get_idEv"></span><span id="_CPPv2NK11exodusIIcpp7NodeSet6get_idEv"></span><span id="exodusIIcpp::NodeSet::get_idC"></span><span class="target" id="classexodus_i_icpp_1_1_node_set_1a463b67bebba1745e5a24b84e2db657c4"></span>int <code class="descname">get_id</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK11exodusIIcpp7NodeSet6get_idEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get node set ID. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>Node set ID </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK11exodusIIcpp7NodeSet8get_nameEv">
+<span id="_CPPv3NK11exodusIIcpp7NodeSet8get_nameEv"></span><span id="_CPPv2NK11exodusIIcpp7NodeSet8get_nameEv"></span><span id="exodusIIcpp::NodeSet::get_nameC"></span><span class="target" id="classexodus_i_icpp_1_1_node_set_1ade6dd0d2ed8dd7d09c63381866387707"></span><em class="property">const</em> std::string &amp;<code class="descname">get_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK11exodusIIcpp7NodeSet8get_nameEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get node set name. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>Node set name </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK11exodusIIcpp7NodeSet8get_sizeEv">
+<span id="_CPPv3NK11exodusIIcpp7NodeSet8get_sizeEv"></span><span id="_CPPv2NK11exodusIIcpp7NodeSet8get_sizeEv"></span><span id="exodusIIcpp::NodeSet::get_sizeC"></span><span class="target" id="classexodus_i_icpp_1_1_node_set_1a28f920434be240113e7ba8ad03f57711"></span>int <code class="descname">get_size</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK11exodusIIcpp7NodeSet8get_sizeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the number of nodes in the set. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>Node set size </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK11exodusIIcpp7NodeSet11get_node_idENSt6size_tE">
+<span id="_CPPv3NK11exodusIIcpp7NodeSet11get_node_idENSt6size_tE"></span><span id="_CPPv2NK11exodusIIcpp7NodeSet11get_node_idENSt6size_tE"></span><span id="exodusIIcpp::NodeSet::get_node_id__std::sC"></span><span class="target" id="classexodus_i_icpp_1_1_node_set_1a32446aa123b67e5f8c741701bc1ba4f3"></span>int <code class="descname">get_node_id</code><span class="sig-paren">(</span>std::size_t <em>idx</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK11exodusIIcpp7NodeSet11get_node_idENSt6size_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get an ID of a node in the node set. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>Node ID </dd>
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#classexodus_i_icpp_1_1_node_set_1a28f920434be240113e7ba8ad03f57711"><span class="std std-ref">get_size</span></a> </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">idx</span></code>: Index of the node. Can be <code class="docutils literal notranslate"><span class="pre">0..&lt;size</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">node</span> <span class="pre">set&gt;</span></code>. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N11exodusIIcpp7NodeSet6set_idEi">
+<span id="_CPPv3N11exodusIIcpp7NodeSet6set_idEi"></span><span id="_CPPv2N11exodusIIcpp7NodeSet6set_idEi"></span><span id="exodusIIcpp::NodeSet::set_id__i"></span><span class="target" id="classexodus_i_icpp_1_1_node_set_1a6c2a302d93c3dd989db5bdf451cbd86e"></span>void <code class="descname">set_id</code><span class="sig-paren">(</span>int <em>id</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11exodusIIcpp7NodeSet6set_idEi" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set node set ID. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">id</span></code>: Desired ID of the node set </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N11exodusIIcpp7NodeSet8set_nameERKNSt6stringE">
+<span id="_CPPv3N11exodusIIcpp7NodeSet8set_nameERKNSt6stringE"></span><span id="_CPPv2N11exodusIIcpp7NodeSet8set_nameERKNSt6stringE"></span><span id="exodusIIcpp::NodeSet::set_name__ssCR"></span><span class="target" id="classexodus_i_icpp_1_1_node_set_1a70a77f01407233bd5385d865f514ea5c"></span>void <code class="descname">set_name</code><span class="sig-paren">(</span><em class="property">const</em> std::string &amp;<em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11exodusIIcpp7NodeSet8set_nameERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set node set name. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">name</span></code>: Desired name of the node set </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N11exodusIIcpp7NodeSet9set_nodesERKNSt6vectorIiEE">
+<span id="_CPPv3N11exodusIIcpp7NodeSet9set_nodesERKNSt6vectorIiEE"></span><span id="_CPPv2N11exodusIIcpp7NodeSet9set_nodesERKNSt6vectorIiEE"></span><span id="exodusIIcpp::NodeSet::set_nodes__std::vector:i:CR"></span><span class="target" id="classexodus_i_icpp_1_1_node_set_1a149bce97bbe02c324055ffab17f6b17c"></span>void <code class="descname">set_nodes</code><span class="sig-paren">(</span><em class="property">const</em> std::vector&lt;int&gt; &amp;<em>nodes</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11exodusIIcpp7NodeSet9set_nodesERKNSt6vectorIiEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set node set nodes. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">nodes</span></code>: List of node IDs that will comprise the node set </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="side-set.html" class="btn btn-neutral float-right" title="SideSet" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="file.html" class="btn btn-neutral float-left" title="File" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, David Andrs
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
