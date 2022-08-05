@@ -33,7 +33,7 @@ if(DOXYGEN_FOUND)
         OUTPUT
             ${PROJECT_BINARY_DIR}/docs/html/index.html
         COMMAND
-            ${SPHINX_BUILD} -b html ${PROJECT_SOURCE_DIR}/docs html
+            ${SPHINX_BUILD} -b html -d ${PROJECT_BINARY_DIR}/docs/.doctrees ${PROJECT_SOURCE_DIR}/docs html
         DEPENDS
             ${PROJECT_SOURCE_DIR}/docs/conf.py
             ${PROJECT_BINARY_DIR}/docs/xml/index.xml
