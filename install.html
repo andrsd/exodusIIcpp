@@ -81,7 +81,11 @@
             
             
               <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#cmake">CMake</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#embedding-into-project">Embedding into project</a></li>
+</ul>
+</li>
 </ul>
 <p class="caption"><span class="caption-text">Examples</span></p>
 <ul>
@@ -158,6 +162,94 @@
             
   <div class="section" id="installation">
 <h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<p>Requirements</p>
+<ul>
+<li><p class="first">C++17 compiler</p>
+</li>
+<li><p class="first">cmake 3.16+</p>
+</li>
+<li><p class="first"><a class="reference external" href="https://github.com/fmtlib/fmt">fmt</a></p>
+</li>
+<li><p class="first">ExodusII</p>
+<blockquote>
+<div><ul class="simple">
+<li>Usually depends on NetCDF and HDF5</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<div class="section" id="cmake">
+<h2>CMake<a class="headerlink" href="#cmake" title="Permalink to this headline">¶</a></h2>
+<p>Standard installation steps should build the library:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> /path/to/exodusIIcpp
+$ mkdir build
+$ <span class="nb">cd</span> build
+$ cmake ..
+$ make
+$ make install
+</pre></div>
+</div>
+</div>
+<div class="section" id="embedding-into-project">
+<h2>Embedding into project<a class="headerlink" href="#embedding-into-project" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">Copy files from <code class="docutils literal notranslate"><span class="pre">include/</span></code> and <code class="docutils literal notranslate"><span class="pre">src/</span></code> directory into your project directory</p>
+</li>
+<li><p class="first">Add <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> file in that directory:</p>
+<blockquote>
+<div><div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">project</span><span class="p">(</span><span class="s">exodusIIcpp</span><span class="p">)</span>
+
+<span class="nb">add_library</span><span class="p">(</span><span class="o">${</span><span class="nv">PROJECT_NAME</span><span class="o">}</span>
+   <span class="s">STATIC</span>
+       <span class="s">exodusIIcppElementBlock.cpp</span>
+       <span class="s">exodusIIcppFile.cpp</span>
+       <span class="s">exodusIIcppNodeSet.cpp</span>
+       <span class="s">exodusIIcppSideSet.cpp</span>
+<span class="p">)</span>
+
+<span class="nb">target_link_libraries</span><span class="p">(</span>
+   <span class="o">${</span><span class="nv">PROJECT_NAME</span><span class="o">}</span>
+   <span class="s">PUBLIC</span>
+       <span class="o">${</span><span class="nv">EXODUSII_LIBRARY</span><span class="o">}</span>
+<span class="p">)</span>
+
+<span class="nb">install</span><span class="p">(</span>
+   <span class="s">DIRECTORY</span>
+       <span class="o">${</span><span class="nv">PROJECT_SOURCE_DIR</span><span class="o">}</span>
+   <span class="s">DESTINATION</span>
+       <span class="o">${</span><span class="nv">CMAKE_INSTALL_INCLUDEDIR</span><span class="o">}</span>
+   <span class="s">FILES_MATCHING</span>
+       <span class="s">PATTERN</span> <span class="s2">&quot;*.h&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Copy the <code class="docutils literal notranslate"><span class="pre">FindExodsuII.cmake</span></code> and <code class="docutils literal notranslate"><span class="pre">FindNetCDF.cmake</span></code> files from the <code class="docutils literal notranslate"><span class="pre">cmake/</span></code> directory into your project</p>
+</li>
+<li><p class="first">Use the following code to find the dependencies</p>
+<blockquote>
+<div><div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">find_package</span><span class="p">(</span><span class="s">NetCDF</span> <span class="s">REQUIRED</span><span class="p">)</span>
+<span class="nb">find_package</span><span class="p">(</span><span class="s">ExodusII</span> <span class="s">REQUIRED</span><span class="p">)</span>
+<span class="nb">find_package</span><span class="p">(</span><span class="s">HDF5</span> <span class="s">COMPONENTS</span> <span class="s">C</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">ExodusII depends on NetCDF. Newer versions also depend on HDF5.</p>
+</div>
+<p>This will set the <code class="docutils literal notranslate"><span class="pre">EXODUSII_LIBRARY</span></code> variable we are using in the <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> above.</p>
+</div></blockquote>
+</li>
+<li><p class="first">Do not forget to add your directory in your main <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> via:</p>
+<blockquote>
+<div><div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">add_subdirectory</span><span class="p">(</span><span class="s">path/to/the/dir/with/exodusIIcpp/files</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</div>
 </div>
 
 

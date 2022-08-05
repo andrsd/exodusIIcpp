@@ -161,7 +161,557 @@
 <dl class="class">
 <dt id="_CPPv4N11exodusIIcpp4FileE">
 <span id="_CPPv3N11exodusIIcpp4FileE"></span><span id="_CPPv2N11exodusIIcpp4FileE"></span><span id="exodusIIcpp::File"></span><span class="target" id="classexodus_i_icpp_1_1_file"></span><em class="property">class </em><code class="descname">File</code><a class="headerlink" href="#_CPPv4N11exodusIIcpp4FileE" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv4N11exodusIIcpp4File4FileEN11exodusIIcpp2fs4pathEN11exodusIIcpp10FileAccessE">
+<span id="_CPPv3N11exodusIIcpp4File4FileEN11exodusIIcpp2fs4pathEN11exodusIIcpp10FileAccessE"></span><span id="_CPPv2N11exodusIIcpp4File4FileEN11exodusIIcpp2fs4pathEN11exodusIIcpp10FileAccessE"></span><span id="exodusIIcpp::File::File__exodusIIcpp::fs::path.exodusIIcpp::FileAccess"></span><span class="target" id="classexodus_i_icpp_1_1_file_1a1105d49a357b997765b8b320a7f75492"></span><code class="descname">File</code><span class="sig-paren">(</span>exodusIIcpp::fs::path <em>file_path</em>, exodusIIcpp::FileAccess <em>file_access</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11exodusIIcpp4File4FileEN11exodusIIcpp2fs4pathEN11exodusIIcpp10FileAccessE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Open/create an ExodusII file. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">file_path</span></code>: Path to the file to open/create </li>
+<li><code class="docutils literal notranslate"><span class="pre">file_access</span></code>: Desired file access<ul>
+<li><code class="docutils literal notranslate"><span class="pre">exodusIIcpp::FileAccess::READ</span></code> for reading,</li>
+<li><code class="docutils literal notranslate"><span class="pre">exodusIIcpp::FileAccess::WRITE</span></code> for writing. </li>
+</ul>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N11exodusIIcpp4File4openERKNSt6stringE">
+<span id="_CPPv3N11exodusIIcpp4File4openERKNSt6stringE"></span><span id="_CPPv2N11exodusIIcpp4File4openERKNSt6stringE"></span><span id="exodusIIcpp::File::open__ssCR"></span><span class="target" id="classexodus_i_icpp_1_1_file_1aec2c472957e89122484aeb7f09bd1efe"></span>void <code class="descname">open</code><span class="sig-paren">(</span><em class="property">const</em> std::string &amp;<em>file_path</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11exodusIIcpp4File4openERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Open an ExodusII file. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">file_path</span></code>: Path to the file to open </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N11exodusIIcpp4File6createERKNSt6stringE">
+<span id="_CPPv3N11exodusIIcpp4File6createERKNSt6stringE"></span><span id="_CPPv2N11exodusIIcpp4File6createERKNSt6stringE"></span><span id="exodusIIcpp::File::create__ssCR"></span><span class="target" id="classexodus_i_icpp_1_1_file_1a003d212e5c189389b4678c2340815639"></span>void <code class="descname">create</code><span class="sig-paren">(</span><em class="property">const</em> std::string &amp;<em>file_path</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11exodusIIcpp4File6createERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Create an ExodusII file. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">file_path</span></code>: Path to the file to create </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK11exodusIIcpp4File9is_openedEv">
+<span id="_CPPv3NK11exodusIIcpp4File9is_openedEv"></span><span id="_CPPv2NK11exodusIIcpp4File9is_openedEv"></span><span id="exodusIIcpp::File::is_openedC"></span><span class="target" id="classexodus_i_icpp_1_1_file_1a121bd580d7652972e14d37ddbc213690"></span>bool <code class="descname">is_opened</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK11exodusIIcpp4File9is_openedEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Is file opened. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><code class="docutils literal notranslate"><span class="pre">true</span></code> if opened, <code class="docutils literal notranslate"><span class="pre">false</span></code> otherwise </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N11exodusIIcpp4File4initEv">
+<span id="_CPPv3N11exodusIIcpp4File4initEv"></span><span id="_CPPv2N11exodusIIcpp4File4initEv"></span><span id="exodusIIcpp::File::init"></span><span class="target" id="classexodus_i_icpp_1_1_file_1ae5b722dde2f83da48a687f2b02da3de0"></span>void <code class="descname">init</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11exodusIIcpp4File4initEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Init the file before doing any <em>read</em> operations. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N11exodusIIcpp4File4initEPKciiiiii">
+<span id="_CPPv3N11exodusIIcpp4File4initEPKciiiiii"></span><span id="_CPPv2N11exodusIIcpp4File4initEPKciiiiii"></span><span id="exodusIIcpp::File::init__cCP.i.i.i.i.i.i"></span><span class="target" id="classexodus_i_icpp_1_1_file_1aab1f20e6d08b76f34119f86184662925"></span>void <code class="descname">init</code><span class="sig-paren">(</span><em class="property">const</em> char *<em>title</em>, int <em>n_dims</em>, int <em>n_nodes</em>, int <em>n_elems</em>, int <em>n_elem_blks</em>, int <em>n_node_sets</em>, int <em>n_side_sets</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11exodusIIcpp4File4initEPKciiiiii" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Init the file before doing any <em>write</em> operations. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">title</span></code>: Title of the file. Can be empty. </li>
+<li><code class="docutils literal notranslate"><span class="pre">n_dims</span></code>: Number of spatial dimensions. <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">3]</span></code> </li>
+<li><code class="docutils literal notranslate"><span class="pre">n_nodes</span></code>: Total number of nodes </li>
+<li><code class="docutils literal notranslate"><span class="pre">n_elems</span></code>: Total number of elements </li>
+<li><code class="docutils literal notranslate"><span class="pre">n_elem_blks</span></code>: Number of element blocks </li>
+<li><code class="docutils literal notranslate"><span class="pre">n_node_sets</span></code>: Number of node sets </li>
+<li><code class="docutils literal notranslate"><span class="pre">n_side_sets</span></code>: Number of side sets </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK11exodusIIcpp4File7get_dimEv">
+<span id="_CPPv3NK11exodusIIcpp4File7get_dimEv"></span><span id="_CPPv2NK11exodusIIcpp4File7get_dimEv"></span><span id="exodusIIcpp::File::get_dimC"></span><span class="target" id="classexodus_i_icpp_1_1_file_1a07418e920d5f4a4909b2847b66074111"></span>int <code class="descname">get_dim</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK11exodusIIcpp4File7get_dimEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the spatial dimension. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The spatial dimension </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK11exodusIIcpp4File13get_num_nodesEv">
+<span id="_CPPv3NK11exodusIIcpp4File13get_num_nodesEv"></span><span id="_CPPv2NK11exodusIIcpp4File13get_num_nodesEv"></span><span id="exodusIIcpp::File::get_num_nodesC"></span><span class="target" id="classexodus_i_icpp_1_1_file_1ac2e10fd000256a2cd70acfde930a950a"></span>int <code class="descname">get_num_nodes</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK11exodusIIcpp4File13get_num_nodesEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the total number of nodes. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The total number of nodes </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK11exodusIIcpp4File16get_num_elementsEv">
+<span id="_CPPv3NK11exodusIIcpp4File16get_num_elementsEv"></span><span id="_CPPv2NK11exodusIIcpp4File16get_num_elementsEv"></span><span id="exodusIIcpp::File::get_num_elementsC"></span><span class="target" id="classexodus_i_icpp_1_1_file_1a7cace5af0f95e6556163fb8fe1c57e95"></span>int <code class="descname">get_num_elements</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK11exodusIIcpp4File16get_num_elementsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the total number of elements. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The total number of elements </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK11exodusIIcpp4File22get_num_element_blocksEv">
+<span id="_CPPv3NK11exodusIIcpp4File22get_num_element_blocksEv"></span><span id="_CPPv2NK11exodusIIcpp4File22get_num_element_blocksEv"></span><span id="exodusIIcpp::File::get_num_element_blocksC"></span><span class="target" id="classexodus_i_icpp_1_1_file_1a8aa8896f12956431a31d2eb8e83da041"></span>int <code class="descname">get_num_element_blocks</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK11exodusIIcpp4File22get_num_element_blocksEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the number of element blocks. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The number of element blocks </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK11exodusIIcpp4File17get_num_node_setsEv">
+<span id="_CPPv3NK11exodusIIcpp4File17get_num_node_setsEv"></span><span id="_CPPv2NK11exodusIIcpp4File17get_num_node_setsEv"></span><span id="exodusIIcpp::File::get_num_node_setsC"></span><span class="target" id="classexodus_i_icpp_1_1_file_1a8360bc9427112e23f899ac1bc12e1fac"></span>int <code class="descname">get_num_node_sets</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK11exodusIIcpp4File17get_num_node_setsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the number of node sets. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The number of node sets </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK11exodusIIcpp4File17get_num_side_setsEv">
+<span id="_CPPv3NK11exodusIIcpp4File17get_num_side_setsEv"></span><span id="_CPPv2NK11exodusIIcpp4File17get_num_side_setsEv"></span><span id="exodusIIcpp::File::get_num_side_setsC"></span><span class="target" id="classexodus_i_icpp_1_1_file_1a3ac0ee091b6d1c2ef48abca200d42900"></span>int <code class="descname">get_num_side_sets</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK11exodusIIcpp4File17get_num_side_setsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the number of side sets. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The number of side sets </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK11exodusIIcpp4File12get_x_coordsEv">
+<span id="_CPPv3NK11exodusIIcpp4File12get_x_coordsEv"></span><span id="_CPPv2NK11exodusIIcpp4File12get_x_coordsEv"></span><span id="exodusIIcpp::File::get_x_coordsC"></span><span class="target" id="classexodus_i_icpp_1_1_file_1a29a4bb54eb88746d8d71eb91bd5ed59b"></span><em class="property">const</em> std::vector&lt;double&gt; &amp;<code class="descname">get_x_coords</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK11exodusIIcpp4File12get_x_coordsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the x-coordinates of nodes. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The x-coordinates of nodes </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK11exodusIIcpp4File12get_y_coordsEv">
+<span id="_CPPv3NK11exodusIIcpp4File12get_y_coordsEv"></span><span id="_CPPv2NK11exodusIIcpp4File12get_y_coordsEv"></span><span id="exodusIIcpp::File::get_y_coordsC"></span><span class="target" id="classexodus_i_icpp_1_1_file_1a5e94bc79c3bea3bcb143e30d4aa36dc5"></span><em class="property">const</em> std::vector&lt;double&gt; &amp;<code class="descname">get_y_coords</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK11exodusIIcpp4File12get_y_coordsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the y-coordinates of nodes. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The y-coordinates of nodes </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK11exodusIIcpp4File12get_z_coordsEv">
+<span id="_CPPv3NK11exodusIIcpp4File12get_z_coordsEv"></span><span id="_CPPv2NK11exodusIIcpp4File12get_z_coordsEv"></span><span id="exodusIIcpp::File::get_z_coordsC"></span><span class="target" id="classexodus_i_icpp_1_1_file_1aa608ff011d3c12c77c50d581833142cd"></span><em class="property">const</em> std::vector&lt;double&gt; &amp;<code class="descname">get_z_coords</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK11exodusIIcpp4File12get_z_coordsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the z-coordinates of nodes. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The z-coordinates of nodes </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK11exodusIIcpp4File18get_element_blocksEv">
+<span id="_CPPv3NK11exodusIIcpp4File18get_element_blocksEv"></span><span id="_CPPv2NK11exodusIIcpp4File18get_element_blocksEv"></span><span id="exodusIIcpp::File::get_element_blocksC"></span><span class="target" id="classexodus_i_icpp_1_1_file_1acf136dda74c90a4e7f6dca998886befc"></span><em class="property">const</em> std::vector&lt;<a class="reference internal" href="element-block.html#_CPPv4N11exodusIIcpp12ElementBlockE" title="exodusIIcpp::ElementBlock">ElementBlock</a>&gt; &amp;<code class="descname">get_element_blocks</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK11exodusIIcpp4File18get_element_blocksEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get element blocks. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The list of element blocks </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK11exodusIIcpp4File17get_element_blockENSt6size_tE">
+<span id="_CPPv3NK11exodusIIcpp4File17get_element_blockENSt6size_tE"></span><span id="_CPPv2NK11exodusIIcpp4File17get_element_blockENSt6size_tE"></span><span id="exodusIIcpp::File::get_element_block__std::sC"></span><span class="target" id="classexodus_i_icpp_1_1_file_1a638a12495886ad1e377ef217bec7eff2"></span><em class="property">const</em> <a class="reference internal" href="element-block.html#_CPPv4N11exodusIIcpp12ElementBlockE" title="exodusIIcpp::ElementBlock">ElementBlock</a> &amp;<code class="descname">get_element_block</code><span class="sig-paren">(</span>std::size_t <em>idx</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK11exodusIIcpp4File17get_element_blockENSt6size_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get an element block. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The element block at index <code class="docutils literal notranslate"><span class="pre">idx</span></code> </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">idx</span></code>: Index of the element block: <code class="docutils literal notranslate"><span class="pre">[0..&lt;number</span> <span class="pre">of</span> <span class="pre">element</span> <span class="pre">blocks&gt;)</span></code> </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK11exodusIIcpp4File13get_side_setsEv">
+<span id="_CPPv3NK11exodusIIcpp4File13get_side_setsEv"></span><span id="_CPPv2NK11exodusIIcpp4File13get_side_setsEv"></span><span id="exodusIIcpp::File::get_side_setsC"></span><span class="target" id="classexodus_i_icpp_1_1_file_1a6c7b92c5a2e6e404720da61c7afe665b"></span><em class="property">const</em> std::vector&lt;<a class="reference internal" href="side-set.html#_CPPv4N11exodusIIcpp7SideSetE" title="exodusIIcpp::SideSet">SideSet</a>&gt; &amp;<code class="descname">get_side_sets</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK11exodusIIcpp4File13get_side_setsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get side sets. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The list of side sets </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK11exodusIIcpp4File13get_node_setsEv">
+<span id="_CPPv3NK11exodusIIcpp4File13get_node_setsEv"></span><span id="_CPPv2NK11exodusIIcpp4File13get_node_setsEv"></span><span id="exodusIIcpp::File::get_node_setsC"></span><span class="target" id="classexodus_i_icpp_1_1_file_1a598b8e4ece98b42f7e9bbfd960a18baf"></span><em class="property">const</em> std::vector&lt;<a class="reference internal" href="node-set.html#_CPPv4N11exodusIIcpp7NodeSetE" title="exodusIIcpp::NodeSet">NodeSet</a>&gt; &amp;<code class="descname">get_node_sets</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK11exodusIIcpp4File13get_node_setsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get node sets. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The list of node sets </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N11exodusIIcpp4File4readEv">
+<span id="_CPPv3N11exodusIIcpp4File4readEv"></span><span id="_CPPv2N11exodusIIcpp4File4readEv"></span><span id="exodusIIcpp::File::read"></span><span class="target" id="classexodus_i_icpp_1_1_file_1a83d717a506fcaa7322e1a174bcad27d3"></span>void <code class="descname">read</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11exodusIIcpp4File4readEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Read <em>all</em> data from the ExodusII file. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N11exodusIIcpp4File11read_coordsEv">
+<span id="_CPPv3N11exodusIIcpp4File11read_coordsEv"></span><span id="_CPPv2N11exodusIIcpp4File11read_coordsEv"></span><span id="exodusIIcpp::File::read_coords"></span><span class="target" id="classexodus_i_icpp_1_1_file_1a96abd18671d258931ccde0c9da986941"></span>void <code class="descname">read_coords</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11exodusIIcpp4File11read_coordsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Read coordinate data from the ExodusII file. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N11exodusIIcpp4File13read_elem_mapEv">
+<span id="_CPPv3N11exodusIIcpp4File13read_elem_mapEv"></span><span id="_CPPv2N11exodusIIcpp4File13read_elem_mapEv"></span><span id="exodusIIcpp::File::read_elem_map"></span><span class="target" id="classexodus_i_icpp_1_1_file_1ab04cd4587d1024c072ac3982b8d6dab2"></span>void <code class="descname">read_elem_map</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11exodusIIcpp4File13read_elem_mapEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Read element map from the ExodusII file. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N11exodusIIcpp4File11read_blocksEv">
+<span id="_CPPv3N11exodusIIcpp4File11read_blocksEv"></span><span id="_CPPv2N11exodusIIcpp4File11read_blocksEv"></span><span id="exodusIIcpp::File::read_blocks"></span><span class="target" id="classexodus_i_icpp_1_1_file_1a91bf0c5230b9b0eadf01d2bbc78e1387"></span>void <code class="descname">read_blocks</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11exodusIIcpp4File11read_blocksEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Read element blocks from the ExodusII file. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N11exodusIIcpp4File14read_node_setsEv">
+<span id="_CPPv3N11exodusIIcpp4File14read_node_setsEv"></span><span id="_CPPv2N11exodusIIcpp4File14read_node_setsEv"></span><span id="exodusIIcpp::File::read_node_sets"></span><span class="target" id="classexodus_i_icpp_1_1_file_1afb1284536eb48a9a7c14f1451e943015"></span>void <code class="descname">read_node_sets</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11exodusIIcpp4File14read_node_setsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Read node sets from the ExodusII file. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N11exodusIIcpp4File14read_side_setsEv">
+<span id="_CPPv3N11exodusIIcpp4File14read_side_setsEv"></span><span id="_CPPv2N11exodusIIcpp4File14read_side_setsEv"></span><span id="exodusIIcpp::File::read_side_sets"></span><span class="target" id="classexodus_i_icpp_1_1_file_1af6a8d3862fd18d579e37ac6811c73280"></span>void <code class="descname">read_side_sets</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11exodusIIcpp4File14read_side_setsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Read side sets from the ExodusII file. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N11exodusIIcpp4File12write_coordsERKNSt6vectorIdEE">
+<span id="_CPPv3N11exodusIIcpp4File12write_coordsERKNSt6vectorIdEE"></span><span id="_CPPv2N11exodusIIcpp4File12write_coordsERKNSt6vectorIdEE"></span><span id="exodusIIcpp::File::write_coords__std::vector:double:CR"></span><span class="target" id="classexodus_i_icpp_1_1_file_1afc9905847ab00552f43a8384846493a5"></span>void <code class="descname">write_coords</code><span class="sig-paren">(</span><em class="property">const</em> std::vector&lt;double&gt; &amp;<em>x</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11exodusIIcpp4File12write_coordsERKNSt6vectorIdEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Write 1-D coordinates to the ExodusII file. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">x</span></code>: x-coordinates </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N11exodusIIcpp4File12write_coordsERKNSt6vectorIdEERKNSt6vectorIdEE">
+<span id="_CPPv3N11exodusIIcpp4File12write_coordsERKNSt6vectorIdEERKNSt6vectorIdEE"></span><span id="_CPPv2N11exodusIIcpp4File12write_coordsERKNSt6vectorIdEERKNSt6vectorIdEE"></span><span id="exodusIIcpp::File::write_coords__std::vector:double:CR.std::vector:double:CR"></span><span class="target" id="classexodus_i_icpp_1_1_file_1a46be7dce5069aeaf33ce6381ff0a12c9"></span>void <code class="descname">write_coords</code><span class="sig-paren">(</span><em class="property">const</em> std::vector&lt;double&gt; &amp;<em>x</em>, <em class="property">const</em> std::vector&lt;double&gt; &amp;<em>y</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11exodusIIcpp4File12write_coordsERKNSt6vectorIdEERKNSt6vectorIdEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Write 2-D coordinates to the ExodusII file. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">x</span></code>: x-coordinates </li>
+<li><code class="docutils literal notranslate"><span class="pre">y</span></code>: y-coordinates </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N11exodusIIcpp4File12write_coordsERKNSt6vectorIdEERKNSt6vectorIdEERKNSt6vectorIdEE">
+<span id="_CPPv3N11exodusIIcpp4File12write_coordsERKNSt6vectorIdEERKNSt6vectorIdEERKNSt6vectorIdEE"></span><span id="_CPPv2N11exodusIIcpp4File12write_coordsERKNSt6vectorIdEERKNSt6vectorIdEERKNSt6vectorIdEE"></span><span id="exodusIIcpp::File::write_coords__std::vector:double:CR.std::vector:double:CR.std::vector:double:CR"></span><span class="target" id="classexodus_i_icpp_1_1_file_1a5a81970913a84a10b023ad3b4f6b5d02"></span>void <code class="descname">write_coords</code><span class="sig-paren">(</span><em class="property">const</em> std::vector&lt;double&gt; &amp;<em>x</em>, <em class="property">const</em> std::vector&lt;double&gt; &amp;<em>y</em>, <em class="property">const</em> std::vector&lt;double&gt; &amp;<em>z</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11exodusIIcpp4File12write_coordsERKNSt6vectorIdEERKNSt6vectorIdEERKNSt6vectorIdEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Write 3-D coordinates to the ExodusII file. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">x</span></code>: x-coordinates </li>
+<li><code class="docutils literal notranslate"><span class="pre">y</span></code>: y-coordinates </li>
+<li><code class="docutils literal notranslate"><span class="pre">z</span></code>: z-coordinates </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N11exodusIIcpp4File17write_coord_namesEv">
+<span id="_CPPv3N11exodusIIcpp4File17write_coord_namesEv"></span><span id="_CPPv2N11exodusIIcpp4File17write_coord_namesEv"></span><span id="exodusIIcpp::File::write_coord_names"></span><span class="target" id="classexodus_i_icpp_1_1_file_1a936aab06bffdbb68cbfe5bcc3012bced"></span>void <code class="descname">write_coord_names</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11exodusIIcpp4File17write_coord_namesEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Write coordinate names to the ExodusII file. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N11exodusIIcpp4File10write_infoENSt6vectorINSt6stringEEE">
+<span id="_CPPv3N11exodusIIcpp4File10write_infoENSt6vectorINSt6stringEEE"></span><span id="_CPPv2N11exodusIIcpp4File10write_infoENSt6vectorINSt6stringEEE"></span><span id="exodusIIcpp::File::write_info__std::vector:ss:"></span><span class="target" id="classexodus_i_icpp_1_1_file_1ae15a3b6adf39326b68a259640da0e3b5"></span>void <code class="descname">write_info</code><span class="sig-paren">(</span>std::vector&lt;std::string&gt; <em>info</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11exodusIIcpp4File10write_infoENSt6vectorINSt6stringEEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Write information records to the ExodusII file. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">info</span></code>: List of information records </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N11exodusIIcpp4File10write_timeEid">
+<span id="_CPPv3N11exodusIIcpp4File10write_timeEid"></span><span id="_CPPv2N11exodusIIcpp4File10write_timeEid"></span><span id="exodusIIcpp::File::write_time__i.double"></span><span class="target" id="classexodus_i_icpp_1_1_file_1ae46bf566ec3f194d4acacdcc128c2763"></span>void <code class="descname">write_time</code><span class="sig-paren">(</span>int <em>time_step</em>, double <em>time</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11exodusIIcpp4File10write_timeEid" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Write time slice to the ExodusII file. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">time_step</span></code>: Time step number </li>
+<li><code class="docutils literal notranslate"><span class="pre">time</span></code>: Time corresponding to the time step </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N11exodusIIcpp4File20write_node_set_namesERKNSt6vectorINSt6stringEEE">
+<span id="_CPPv3N11exodusIIcpp4File20write_node_set_namesERKNSt6vectorINSt6stringEEE"></span><span id="_CPPv2N11exodusIIcpp4File20write_node_set_namesERKNSt6vectorINSt6stringEEE"></span><span id="exodusIIcpp::File::write_node_set_names__std::vector:ss:CR"></span><span class="target" id="classexodus_i_icpp_1_1_file_1a9ab2246a7d6a9a2abb54a31cf3ee3e84"></span>void <code class="descname">write_node_set_names</code><span class="sig-paren">(</span><em class="property">const</em> std::vector&lt;std::string&gt; &amp;<em>names</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11exodusIIcpp4File20write_node_set_namesERKNSt6vectorINSt6stringEEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Write node set names to the ExodusII file. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">names</span></code>: Names of node sets </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N11exodusIIcpp4File14write_node_setE12ex_entity_idRKNSt6vectorIiEE">
+<span id="_CPPv3N11exodusIIcpp4File14write_node_setE12ex_entity_idRKNSt6vectorIiEE"></span><span id="_CPPv2N11exodusIIcpp4File14write_node_setE12ex_entity_idRKNSt6vectorIiEE"></span><span id="exodusIIcpp::File::write_node_set__ex_entity_id.std::vector:i:CR"></span><span class="target" id="classexodus_i_icpp_1_1_file_1a5ca4d9fc409f5d3b9d43b2ca4e2c4c7c"></span>void <code class="descname">write_node_set</code><span class="sig-paren">(</span>ex_entity_id <em>set_id</em>, <em class="property">const</em> std::vector&lt;int&gt; &amp;<em>node_set</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11exodusIIcpp4File14write_node_setE12ex_entity_idRKNSt6vectorIiEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Write node set to the ExodusII file. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">set_id</span></code>: Node set index </li>
+<li><code class="docutils literal notranslate"><span class="pre">node_set</span></code>: List of node IDs that comprise the node set </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N11exodusIIcpp4File20write_side_set_namesERKNSt6vectorINSt6stringEEE">
+<span id="_CPPv3N11exodusIIcpp4File20write_side_set_namesERKNSt6vectorINSt6stringEEE"></span><span id="_CPPv2N11exodusIIcpp4File20write_side_set_namesERKNSt6vectorINSt6stringEEE"></span><span id="exodusIIcpp::File::write_side_set_names__std::vector:ss:CR"></span><span class="target" id="classexodus_i_icpp_1_1_file_1adad8f0d2e5d422b2c430de6059ce67c0"></span>void <code class="descname">write_side_set_names</code><span class="sig-paren">(</span><em class="property">const</em> std::vector&lt;std::string&gt; &amp;<em>names</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11exodusIIcpp4File20write_side_set_namesERKNSt6vectorINSt6stringEEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Write side set names to the ExodusII file. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">names</span></code>: Names of side sets </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N11exodusIIcpp4File14write_side_setE12ex_entity_idRKNSt6vectorIiEERKNSt6vectorIiEE">
+<span id="_CPPv3N11exodusIIcpp4File14write_side_setE12ex_entity_idRKNSt6vectorIiEERKNSt6vectorIiEE"></span><span id="_CPPv2N11exodusIIcpp4File14write_side_setE12ex_entity_idRKNSt6vectorIiEERKNSt6vectorIiEE"></span><span id="exodusIIcpp::File::write_side_set__ex_entity_id.std::vector:i:CR.std::vector:i:CR"></span><span class="target" id="classexodus_i_icpp_1_1_file_1a64df271ab6cc126cdc482d3fc2fa5fd2"></span>void <code class="descname">write_side_set</code><span class="sig-paren">(</span>ex_entity_id <em>set_id</em>, <em class="property">const</em> std::vector&lt;int&gt; &amp;<em>elem_list</em>, <em class="property">const</em> std::vector&lt;int&gt; &amp;<em>side_list</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11exodusIIcpp4File14write_side_setE12ex_entity_idRKNSt6vectorIiEERKNSt6vectorIiEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Write side set to the ExodusII file. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">set_id</span></code>: Side set index </li>
+<li><code class="docutils literal notranslate"><span class="pre">elem_list</span></code>: List of element IDs that comprise the side set </li>
+<li><code class="docutils literal notranslate"><span class="pre">side_list</span></code>: List of local side numbers that comprise the side set </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N11exodusIIcpp4File17write_block_namesERKNSt6vectorINSt6stringEEE">
+<span id="_CPPv3N11exodusIIcpp4File17write_block_namesERKNSt6vectorINSt6stringEEE"></span><span id="_CPPv2N11exodusIIcpp4File17write_block_namesERKNSt6vectorINSt6stringEEE"></span><span id="exodusIIcpp::File::write_block_names__std::vector:ss:CR"></span><span class="target" id="classexodus_i_icpp_1_1_file_1a67a977cbbc3b365fbcab68bfcfd52510"></span>void <code class="descname">write_block_names</code><span class="sig-paren">(</span><em class="property">const</em> std::vector&lt;std::string&gt; &amp;<em>names</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11exodusIIcpp4File17write_block_namesERKNSt6vectorINSt6stringEEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Write element block names to the ExodusII file. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">names</span></code>: Names of element blocks </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N11exodusIIcpp4File11write_blockE12ex_entity_idPKc7int64_tRKNSt6vectorIiEE">
+<span id="_CPPv3N11exodusIIcpp4File11write_blockE12ex_entity_idPKc7int64_tRKNSt6vectorIiEE"></span><span id="_CPPv2N11exodusIIcpp4File11write_blockE12ex_entity_idPKc7int64_tRKNSt6vectorIiEE"></span><span id="exodusIIcpp::File::write_block__ex_entity_id.cCP.int64_t.std::vector:i:CR"></span><span class="target" id="classexodus_i_icpp_1_1_file_1a7f42054d63f78865a4c70caa5d43e3ed"></span>void <code class="descname">write_block</code><span class="sig-paren">(</span>ex_entity_id <em>blk_id</em>, <em class="property">const</em> char *<em>elem_type</em>, int64_t <em>n_elems_in_block</em>, <em class="property">const</em> std::vector&lt;int&gt; &amp;<em>connect</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11exodusIIcpp4File11write_blockE12ex_entity_idPKc7int64_tRKNSt6vectorIiEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Write element block to the ExodusII file. </p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>The number of nodes per element is infered from the size of <code class="docutils literal notranslate"><span class="pre">connect</span></code> array and the number of elements in the block <code class="docutils literal notranslate"><span class="pre">n_elems_in_block</span></code>. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">blk_id</span></code>: Element block index </li>
+<li><code class="docutils literal notranslate"><span class="pre">elem_type</span></code>: Element type </li>
+<li><code class="docutils literal notranslate"><span class="pre">n_elems_in_block</span></code>: Number of elements in the block </li>
+<li><code class="docutils literal notranslate"><span class="pre">connect</span></code>: Connectivity array <code class="docutils literal notranslate"><span class="pre">[el1_n1,</span> <span class="pre">el1_n2,</span> <span class="pre">...,</span> <span class="pre">el2_n1,</span> <span class="pre">el2_n2,</span> <span class="pre">...]</span></code> </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N11exodusIIcpp4File21write_nodal_var_namesERKNSt6vectorINSt6stringEEE">
+<span id="_CPPv3N11exodusIIcpp4File21write_nodal_var_namesERKNSt6vectorINSt6stringEEE"></span><span id="_CPPv2N11exodusIIcpp4File21write_nodal_var_namesERKNSt6vectorINSt6stringEEE"></span><span id="exodusIIcpp::File::write_nodal_var_names__std::vector:ss:CR"></span><span class="target" id="classexodus_i_icpp_1_1_file_1a67e56381bd9453c3c797af855d1b3bcc"></span>void <code class="descname">write_nodal_var_names</code><span class="sig-paren">(</span><em class="property">const</em> std::vector&lt;std::string&gt; &amp;<em>var_names</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11exodusIIcpp4File21write_nodal_var_namesERKNSt6vectorINSt6stringEEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Write nodal variable names to the ExodusII file. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">var_names</span></code>: Names of nodal variables </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N11exodusIIcpp4File20write_elem_var_namesERKNSt6vectorINSt6stringEEE">
+<span id="_CPPv3N11exodusIIcpp4File20write_elem_var_namesERKNSt6vectorINSt6stringEEE"></span><span id="_CPPv2N11exodusIIcpp4File20write_elem_var_namesERKNSt6vectorINSt6stringEEE"></span><span id="exodusIIcpp::File::write_elem_var_names__std::vector:ss:CR"></span><span class="target" id="classexodus_i_icpp_1_1_file_1a334918056e5dbd6d234a3887858fd8e7"></span>void <code class="descname">write_elem_var_names</code><span class="sig-paren">(</span><em class="property">const</em> std::vector&lt;std::string&gt; &amp;<em>var_names</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11exodusIIcpp4File20write_elem_var_namesERKNSt6vectorINSt6stringEEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Write elemental variable names to the ExodusII file. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">var_names</span></code>: Names of elemental variables </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N11exodusIIcpp4File22write_global_var_namesERKNSt6vectorINSt6stringEEE">
+<span id="_CPPv3N11exodusIIcpp4File22write_global_var_namesERKNSt6vectorINSt6stringEEE"></span><span id="_CPPv2N11exodusIIcpp4File22write_global_var_namesERKNSt6vectorINSt6stringEEE"></span><span id="exodusIIcpp::File::write_global_var_names__std::vector:ss:CR"></span><span class="target" id="classexodus_i_icpp_1_1_file_1a2fc0362ec26ab04e29190c9c40bc124c"></span>void <code class="descname">write_global_var_names</code><span class="sig-paren">(</span><em class="property">const</em> std::vector&lt;std::string&gt; &amp;<em>var_names</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11exodusIIcpp4File22write_global_var_namesERKNSt6vectorINSt6stringEEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Write global variable names to the ExodusII file. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">var_names</span></code>: Names of global variables </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N11exodusIIcpp4File23write_partial_nodal_varEii12ex_entity_id7int64_td">
+<span id="_CPPv3N11exodusIIcpp4File23write_partial_nodal_varEii12ex_entity_id7int64_td"></span><span id="_CPPv2N11exodusIIcpp4File23write_partial_nodal_varEii12ex_entity_id7int64_td"></span><span id="exodusIIcpp::File::write_partial_nodal_var__i.i.ex_entity_id.int64_t.double"></span><span class="target" id="classexodus_i_icpp_1_1_file_1add6907943708aaac4dc550d7f4a33d7d"></span>void <code class="descname">write_partial_nodal_var</code><span class="sig-paren">(</span>int <em>step_num</em>, int <em>var_index</em>, ex_entity_id <em>obj_id</em>, int64_t <em>start_index</em>, double <em>var_value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11exodusIIcpp4File23write_partial_nodal_varEii12ex_entity_id7int64_td" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Write nodal variable value to the ExodusII file. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">step_num</span></code>: Time step index </li>
+<li><code class="docutils literal notranslate"><span class="pre">var_index</span></code>: Variable index </li>
+<li><code class="docutils literal notranslate"><span class="pre">obj_id</span></code>: Object ID </li>
+<li><code class="docutils literal notranslate"><span class="pre">start_index</span></code>: Index of the value </li>
+<li><code class="docutils literal notranslate"><span class="pre">var_value</span></code>: Value to write </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N11exodusIIcpp4File22write_partial_elem_varEii12ex_entity_id7int64_td">
+<span id="_CPPv3N11exodusIIcpp4File22write_partial_elem_varEii12ex_entity_id7int64_td"></span><span id="_CPPv2N11exodusIIcpp4File22write_partial_elem_varEii12ex_entity_id7int64_td"></span><span id="exodusIIcpp::File::write_partial_elem_var__i.i.ex_entity_id.int64_t.double"></span><span class="target" id="classexodus_i_icpp_1_1_file_1a0a564b344b4dfd097fc67382796074b9"></span>void <code class="descname">write_partial_elem_var</code><span class="sig-paren">(</span>int <em>step_num</em>, int <em>var_index</em>, ex_entity_id <em>obj_id</em>, int64_t <em>start_index</em>, double <em>var_value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11exodusIIcpp4File22write_partial_elem_varEii12ex_entity_id7int64_td" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Write elemental variable value to the ExodusII file. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">step_num</span></code>: Time step index </li>
+<li><code class="docutils literal notranslate"><span class="pre">var_index</span></code>: Variable index </li>
+<li><code class="docutils literal notranslate"><span class="pre">obj_id</span></code>: Object ID </li>
+<li><code class="docutils literal notranslate"><span class="pre">start_index</span></code>: Index of the value </li>
+<li><code class="docutils literal notranslate"><span class="pre">var_value</span></code>: Value to write </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N11exodusIIcpp4File16write_global_varEiid">
+<span id="_CPPv3N11exodusIIcpp4File16write_global_varEiid"></span><span id="_CPPv2N11exodusIIcpp4File16write_global_varEiid"></span><span id="exodusIIcpp::File::write_global_var__i.i.double"></span><span class="target" id="classexodus_i_icpp_1_1_file_1a82dc039ce8a6957828993d151a2ff65e"></span>void <code class="descname">write_global_var</code><span class="sig-paren">(</span>int <em>step_num</em>, int <em>var_index</em>, double <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11exodusIIcpp4File16write_global_varEiid" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Write global variable value to the ExodusII file. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">step_num</span></code>: Time step index </li>
+<li><code class="docutils literal notranslate"><span class="pre">var_index</span></code>: Variable index </li>
+<li><code class="docutils literal notranslate"><span class="pre">value</span></code>: Value to write </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N11exodusIIcpp4File6updateEv">
+<span id="_CPPv3N11exodusIIcpp4File6updateEv"></span><span id="_CPPv2N11exodusIIcpp4File6updateEv"></span><span id="exodusIIcpp::File::update"></span><span class="target" id="classexodus_i_icpp_1_1_file_1a5bd358da9dde8d05f127535471d70dbb"></span>void <code class="descname">update</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11exodusIIcpp4File6updateEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Update the file. </p>
+<p>Call after the time step data were all saved </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N11exodusIIcpp4File5closeEv">
+<span id="_CPPv3N11exodusIIcpp4File5closeEv"></span><span id="_CPPv2N11exodusIIcpp4File5closeEv"></span><span id="exodusIIcpp::File::close"></span><span class="target" id="classexodus_i_icpp_1_1_file_1a14b24083470d488ee7406a46e5102d88"></span>void <code class="descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11exodusIIcpp4File5closeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Close the file. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
 
 </div>
 
