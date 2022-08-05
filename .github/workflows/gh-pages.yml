@@ -18,7 +18,8 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update -qq
-          sudo apt install python3-sphinx python3-sphinx-rtd-theme doxygen
+          sudo apt install python3-sphinx python3-sphinx-rtd-theme doxygen \
+            libfmt-dev libnetcdf-dev libhdf5-dev libexodusii-dev
       - name: Build doco
         run: |
           cmake -S . -B ${{ github.workspace }}/build
