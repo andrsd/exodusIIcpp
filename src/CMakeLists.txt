@@ -53,9 +53,9 @@ install(
 
 install(
     DIRECTORY
-        ${PROJECT_SOURCE_DIR}
+        ${CMAKE_SOURCE_DIR}/include/
     DESTINATION
-        ${CMAKE_INSTALL_INCLUDEDIR}
+        ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}
     FILES_MATCHING
         PATTERN "*.h"
 )
