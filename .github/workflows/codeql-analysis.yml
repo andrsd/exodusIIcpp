@@ -26,19 +26,21 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
+    - name: Install dependencies
+      run: |
+        sudo apt-get update -qq
+        sudo apt install llvm-12 libfmt-dev libnetcdf-dev libhdf5-dev libexodusii-dev
+
+    - name: Configure
+      run: |
+        cmake -S . -B ${{ github.workspace }}/build \
+          -DEXODUSIICPP_BUILD_TESTS=YES
+
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v2
       with:
         languages: ${{ matrix.language }}
 
-    - name: Install dependencies
-      run: |
-        sudo apt-get update -qq
-        sudo apt install llvm-12 libfmt-dev libnetcdf-dev libhdf5-dev libexodusii-dev
-    - name: Configure
-      run: |
-        cmake -S . -B ${{ github.workspace }}/build \
-          -DEXODUSIICPP_BUILD_TESTS=YES
     - name: Build
       run: make -C ${{ github.workspace }}/build
 
