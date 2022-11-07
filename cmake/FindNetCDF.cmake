@@ -10,7 +10,6 @@ find_path(
         netcdf.h
     PATHS
         $ENV{NETCDF_DIR}/include
-        $ENV{PETSC_DIR}/include
 )
 
 find_library(
@@ -18,7 +17,6 @@ find_library(
         netcdf
     PATHS
         $ENV{NETCDF_DIR}/lib
-        $ENV{PETSC_DIR}/lib
 )
 
 include(FindPackageHandleStandardArgs)
