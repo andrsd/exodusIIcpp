@@ -31,11 +31,12 @@ File::File(exodusIIcpp::fs::path file_path, exodusIIcpp::FileAccess file_access)
     n_node_sets(-1),
     n_side_sets(-1)
 {
-    if (file_access == exodusIIcpp::FileAccess::READ)
+    if (file_access == exodusIIcpp::FileAccess::READ) {
         open(file_path.string());
+        init();
+    }
     else
         create(file_path.string());
-    init();
 }
 
 File::~File()
