@@ -1,8 +1,36 @@
 #include "exodusIIcppFile.h"
+#include "exodusII.h"
 #include "fmt/printf.h"
 #include <stdexcept>
 
 namespace exodusIIcpp {
+
+static void
+write_variable_names(int exoid, ex_entity_type obj_type, const std::vector<std::string> & var_names)
+{
+    int n_vars = var_names.size();
+    if (n_vars == 0)
+        return;
+
+    EXODUSIICPP_CHECK_ERROR(ex_put_variable_param(exoid, obj_type, n_vars));
+    std::vector<const char *> names(n_vars);
+    for (int i = 0; i < n_vars; i++)
+        names[i] = var_names[i].c_str();
+    EXODUSIICPP_CHECK_ERROR(ex_put_variable_names(exoid, obj_type, n_vars, (char **) names.data()));
+}
+
+static void
+write_names(int exoid, ex_entity_type obj_type, const std::vector<std::string> & names)
+{
+    int n = names.size();
+    if (n == 0)
+        return;
+
+    std::vector<const char *> c_names(n);
+    for (int i = 0; i < n; i++)
+        c_names[i] = names[i].c_str();
+    EXODUSIICPP_CHECK_ERROR(ex_put_names(exoid, obj_type, (char **) c_names.data()));
+}
 
 File::File() :
     cpu_word_size(sizeof(double)),
@@ -387,11 +415,11 @@ File::write_time(int time_step, double time)
 void
 File::write_node_set_names(const std::vector<std::string> & names)
 {
-    write_names(EX_NODE_SET, names);
+    write_names(this->exoid, EX_NODE_SET, names);
 }
 
 void
-File::write_node_set(ex_entity_id set_id, const std::vector<int> & node_set)
+File::write_node_set(int64_t set_id, const std::vector<int> & node_set)
 {
     EXODUSIICPP_CHECK_ERROR(
         ex_put_set_param(this->exoid, EX_NODE_SET, set_id, (int64_t) node_set.size(), 0));
@@ -401,11 +429,11 @@ File::write_node_set(ex_entity_id set_id, const std::vector<int> & node_set)
 void
 File::write_side_set_names(const std::vector<std::string> & names)
 {
-    write_names(EX_SIDE_SET, names);
+    write_names(this->exoid, EX_SIDE_SET, names);
 }
 
 void
-File::write_side_set(ex_entity_id set_id,
+File::write_side_set(int64_t set_id,
                      const std::vector<int> & elem_list,
                      const std::vector<int> & side_list)
 {
@@ -422,11 +450,11 @@ File::write_side_set(ex_entity_id set_id,
 void
 File::write_block_names(const std::vector<std::string> & names)
 {
-    write_names(EX_ELEM_BLOCK, names);
+    write_names(this->exoid, EX_ELEM_BLOCK, names);
 }
 
 void
-File::write_block(ex_entity_id blk_id,
+File::write_block(int64_t blk_id,
                   const char * elem_type,
                   int64_t n_elems_in_block,
                   const std::vector<int> & connect)
@@ -447,25 +475,25 @@ File::write_block(ex_entity_id blk_id,
 void
 File::write_nodal_var_names(const std::vector<std::string> & var_names)
 {
-    write_variable_names(EX_NODAL, var_names);
+    write_variable_names(this->exoid, EX_NODAL, var_names);
 }
 
 void
 File::write_elem_var_names(const std::vector<std::string> & var_names)
 {
-    write_variable_names(EX_ELEM_BLOCK, var_names);
+    write_variable_names(this->exoid, EX_ELEM_BLOCK, var_names);
 }
 
 void
 File::write_global_var_names(const std::vector<std::string> & var_names)
 {
-    write_variable_names(EX_GLOBAL, var_names);
+    write_variable_names(this->exoid, EX_GLOBAL, var_names);
 }
 
 void
 File::write_partial_nodal_var(int step_num,
                               int var_index,
-                              ex_entity_id obj_id,
+                              int64_t obj_id,
                               int64_t start_index,
                               double var_value)
 {
@@ -482,7 +510,7 @@ File::write_partial_nodal_var(int step_num,
 void
 File::write_partial_elem_var(int step_num,
                              int var_index,
-                             ex_entity_id obj_id,
+                             int64_t obj_id,
                              int64_t start_index,
                              double var_value)
 {
@@ -515,34 +543,6 @@ File::close()
         EXODUSIICPP_CHECK_ERROR(ex_close(this->exoid));
         this->exoid = -1;
     }
-}
-
-void
-File::write_variable_names(ex_entity_type obj_type, const std::vector<std::string> & var_names)
-{
-    int n_vars = var_names.size();
-    if (n_vars == 0)
-        return;
-
-    EXODUSIICPP_CHECK_ERROR(ex_put_variable_param(this->exoid, obj_type, n_vars));
-    std::vector<const char *> names(n_vars);
-    for (int i = 0; i < n_vars; i++)
-        names[i] = var_names[i].c_str();
-    EXODUSIICPP_CHECK_ERROR(
-        ex_put_variable_names(this->exoid, obj_type, n_vars, (char **) names.data()));
-}
-
-void
-File::write_names(ex_entity_type obj_type, const std::vector<std::string> & names)
-{
-    int n = names.size();
-    if (n == 0)
-        return;
-
-    std::vector<const char *> c_names(n);
-    for (int i = 0; i < n; i++)
-        c_names[i] = names[i].c_str();
-    EXODUSIICPP_CHECK_ERROR(ex_put_names(this->exoid, obj_type, (char **) c_names.data()));
 }
 
 } // namespace exodusIIcpp

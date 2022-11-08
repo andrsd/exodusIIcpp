@@ -1,3 +1,4 @@
+if(CMAKE_PROJECT_NAME STREQUAL "exodusIIcpp")
 
 option(EXODUSIICPP_CODE_COVERAGE "Builds targets with code coverage instrumentation" OFF)
 
@@ -134,8 +135,7 @@ if(EXODUSIICPP_CODE_COVERAGE)
             COMMAND
                 ${LCOV_PATH}
                 --capture
-                --directory src
-                --directory test
+                --directory ${PROJECT_BINARY_DIR}
                 --output-file ${COVERAGE_INFO}
                 ${EXCLUDE_REGEX}
         )
@@ -173,5 +173,7 @@ else()
 
     function(target_code_coverage TARGET_NAME)
     endfunction()
+
+endif()
 
 endif()
