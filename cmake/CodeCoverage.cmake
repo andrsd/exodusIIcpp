@@ -15,21 +15,22 @@ if(EXODUSIICPP_CODE_COVERAGE)
             LLVM_COV_PATH
             NAMES
                 llvm-cov
+                llvm-cov-12
+                llvm-cov-13
+                llvm-cov-14
         )
         find_program(
             LLVM_PROFDATA_PATH
             NAMES
                 llvm-profdata
+                llvm-profdata-12
+                llvm-profdata-13
+                llvm-profdata-14
         )
         mark_as_advanced(FORCE
             LLVM_COV_PATH
             LLVM_PROFDATA_PATH
         )
-
-        set(CODE_COVERAGE_PROFRAWS
-            ${CMAKE_BINARY_DIR}/test/exodusIIcpp-test.profraw
-        )
-        set_property(DIRECTORY APPEND PROPERTY ADDITIONAL_CLEAN_FILES "${CODE_COVERAGE_PROFRAWS}")
 
         set(EXCLUDE_REGEX
             --ignore-filename-regex=/include/fmt/*
@@ -42,7 +43,7 @@ if(EXODUSIICPP_CODE_COVERAGE)
 
         set(CODE_COVERAGE_BINS
             --object=${PROJECT_BINARY_DIR}/test/exodusIIcpp-test
-            --object=${PROJECT_BINARY_DIR}/src/libexodusIIcpp${CMAKE_SHARED_LIBRARY_SUFFIX}
+            --object=${PROJECT_BINARY_DIR}/libexodusIIcpp${CMAKE_SHARED_LIBRARY_SUFFIX}
         )
 
         set(MERGED_PROFDATA ${PROJECT_BINARY_DIR}/all-merged.profdata)
@@ -72,10 +73,8 @@ if(EXODUSIICPP_CODE_COVERAGE)
                 ${LLVM_PROFDATA_PATH}
                 merge
                 -sparse
-                ${CODE_COVERAGE_PROFRAWS}
+                ${CMAKE_BINARY_DIR}/test/exodusIIcpp-test-*.profraw
                 -o ${MERGED_PROFDATA}
-            DEPENDS
-                ${CODE_COVERAGE_PROFRAWS}
         )
 
         add_custom_target(htmlcov DEPENDS ${PROJECT_BINARY_DIR}/htmlcov/index.html)

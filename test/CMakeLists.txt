@@ -12,6 +12,7 @@ add_executable(${PROJECT_NAME}
     main.cpp
 )
 target_code_coverage(${PROJECT_NAME})
+target_sanitization(${PROJECT_NAME})
 
 target_include_directories(
     ${PROJECT_NAME}
@@ -41,6 +42,6 @@ if(EXODUSIICPP_CODE_COVERAGE)
     set_tests_properties(
         ${PROJECT_NAME}
         PROPERTIES
-            ENVIRONMENT LLVM_PROFILE_FILE=${PROJECT_NAME}.profraw
+            ENVIRONMENT LLVM_PROFILE_FILE=${PROJECT_NAME}-%m.profraw
     )
 endif()
