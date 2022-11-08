@@ -11,6 +11,7 @@ set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 
 include(FetchContent)
 include(${PROJECT_SOURCE_DIR}/cmake/CodeCoverage.cmake)
+include(${PROJECT_SOURCE_DIR}/cmake/Sanitization.cmake)
 
 option(EXODUSIICPP_BUILD_TESTS "Build tests" NO)
 
@@ -51,6 +52,7 @@ add_library(${PROJECT_NAME}
         src/exodusIIcppSideSet.cpp
 )
 target_code_coverage(${PROJECT_NAME})
+target_sanitization(${PROJECT_NAME})
 
 set_target_properties(${PROJECT_NAME}
     PROPERTIES
