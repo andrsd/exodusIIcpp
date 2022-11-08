@@ -1,4 +1,5 @@
 # Documentation
+if(CMAKE_PROJECT_NAME STREQUAL "exodusIIcpp")
 
 find_package(Doxygen QUIET)
 
@@ -14,6 +15,7 @@ if(DOXYGEN_FOUND)
     add_custom_target(doc DEPENDS ${PROJECT_BINARY_DIR}/docs/html/index.html)
 
     file(GLOB_RECURSE RST_FILES ${PROJECT_SOURCE_DIR}/docs/*.rst)
+    file(GLOB_RECURSE EXODUSIICPP_HEADER_FILES ${PROJECT_SOURCE_DIR}/include/*.h)
 
     add_custom_command(
         OUTPUT
@@ -33,7 +35,7 @@ if(DOXYGEN_FOUND)
             doxygen Doxyfile
         DEPENDS
             ${PROJECT_BINARY_DIR}/docs/Doxyfile
-            ${PROJECT_SOURCE_DIR}/include/*.h
+            ${EXODUSIICPP_HEADER_FILES}
     )
 
     add_custom_command(
@@ -43,5 +45,7 @@ if(DOXYGEN_FOUND)
         COMMENT
             "Open ${PROJECT_BINARY_DIR}/docs/html/index.html in your browser to view the documentation."
     )
+
+endif()
 
 endif()
