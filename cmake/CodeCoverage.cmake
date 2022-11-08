@@ -15,11 +15,17 @@ if(EXODUSIICPP_CODE_COVERAGE)
             LLVM_COV_PATH
             NAMES
                 llvm-cov
+                llvm-cov-12
+                llvm-cov-13
+                llvm-cov-14
         )
         find_program(
             LLVM_PROFDATA_PATH
             NAMES
                 llvm-profdata
+                llvm-profdata-12
+                llvm-profdata-13
+                llvm-profdata-14
         )
         mark_as_advanced(FORCE
             LLVM_COV_PATH
