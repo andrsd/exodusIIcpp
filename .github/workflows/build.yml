@@ -87,9 +87,9 @@ jobs:
       - name: Run tests
         run: |
           echo "### Test results" >> $GITHUB_STEP_SUMMARY
-          ctest --test-dir ${{ github.workspace }}/main/build -V -O test.log
+          ctest --test-dir ${{ github.workspace }}/main/build -O test.log
           echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
-          cat test.log >> $GITHUB_STEP_SUMMARY
+          awk 's;/^\[HANDLER_OUTPUT\]/{s=1}' test.log >> $GITHUB_STEP_SUMMARY
           echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
 
       - name: Upload test result
