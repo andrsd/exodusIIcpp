@@ -1,7 +1,6 @@
 #pragma once
 
 #include <vector>
-#include "exodusII.h"
 #include "exodusIIcppElementBlock.h"
 #include "exodusIIcppEnums.h"
 #include "exodusIIcppError.h"
@@ -229,7 +228,7 @@ public:
     ///
     /// @param set_id Node set index
     /// @param node_set List of node IDs that comprise the node set
-    void write_node_set(ex_entity_id set_id, const std::vector<int> & node_set);
+    void write_node_set(int64_t set_id, const std::vector<int> & node_set);
 
     /// Write side set names to the ExodusII file
     ///
@@ -241,7 +240,7 @@ public:
     /// @param set_id Side set index
     /// @param elem_list List of element IDs that comprise the side set
     /// @param side_list List of local side numbers that comprise the side set
-    void write_side_set(ex_entity_id set_id,
+    void write_side_set(int64_t set_id,
                         const std::vector<int> & elem_list,
                         const std::vector<int> & side_list);
 
@@ -258,7 +257,7 @@ public:
     /// @param connect Connectivity array ``[el1_n1, el1_n2, ..., el2_n1, el2_n2, ...]``
     /// @note The number of nodes per element is infered from the size of ``connect`` array and the
     /// number of elements in the block `n_elems_in_block`.
-    void write_block(ex_entity_id blk_id,
+    void write_block(int64_t blk_id,
                      const char * elem_type,
                      int64_t n_elems_in_block,
                      const std::vector<int> & connect);
@@ -287,7 +286,7 @@ public:
     /// @param var_value Value to write
     void write_partial_nodal_var(int step_num,
                                  int var_index,
-                                 ex_entity_id obj_id,
+                                 int64_t obj_id,
                                  int64_t start_index,
                                  double var_value);
 
@@ -300,7 +299,7 @@ public:
     /// @param var_value Value to write
     void write_partial_elem_var(int step_num,
                                 int var_index,
-                                ex_entity_id obj_id,
+                                int64_t obj_id,
                                 int64_t start_index,
                                 double var_value);
 
@@ -318,19 +317,6 @@ public:
 
     /// Close the file
     void close();
-
-protected:
-    /// Auxiliry method to write variable names
-    ///
-    /// @param obj_type Object type
-    /// @param var_names Variable names to write
-    void write_variable_names(ex_entity_type obj_type, const std::vector<std::string> & var_names);
-
-    /// Auxiliry method to write names
-    ///
-    /// @param obj_type Object type
-    /// @param names Names to write
-    void write_names(ex_entity_type obj_type, const std::vector<std::string> & names);
 };
 
 } // namespace exodusIIcpp
