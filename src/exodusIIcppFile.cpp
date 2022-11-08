@@ -32,6 +32,24 @@ write_names(int exoid, ex_entity_type obj_type, const std::vector<std::string> &
     EXODUSIICPP_CHECK_ERROR(ex_put_names(exoid, obj_type, (char **) c_names.data()));
 }
 
+static std::map<int, std::string>
+read_name_map(int exoid, int n, ex_entity_type obj_type)
+{
+    std::map<int, std::string> map_names;
+    int * ids = new int[n];
+    ex_get_ids(exoid, obj_type, ids);
+    char name[MAX_STR_LENGTH + 1];
+    for (int i = 0; i < n; i++) {
+        ex_get_name(exoid, obj_type, ids[i], name);
+        std::string str_name;
+        if (strnlen(name, MAX_STR_LENGTH) > 0)
+            str_name = name;
+        map_names[ids[i]] = str_name;
+    }
+    delete[] ids;
+    return map_names;
+}
+
 File::File() :
     cpu_word_size(sizeof(double)),
     io_word_size(8),
@@ -306,6 +324,12 @@ File::read_blocks()
     }
 }
 
+std::map<int, std::string>
+File::read_block_names() const
+{
+    return read_name_map(this->exoid, this->n_elem_blks, EX_ELEM_BLOCK);
+}
+
 void
 File::read_node_sets()
 {
@@ -333,6 +357,12 @@ File::read_node_sets()
 
         this->node_sets.push_back(ns);
     }
+}
+
+std::map<int, std::string>
+File::read_node_set_names() const
+{
+    return read_name_map(this->exoid, this->n_node_sets, EX_NODE_SET);
 }
 
 void
@@ -364,6 +394,12 @@ File::read_side_sets()
 
         this->side_sets.push_back(ss);
     }
+}
+
+std::map<int, std::string>
+File::read_side_set_names() const
+{
+    return read_name_map(this->exoid, this->n_side_sets, EX_SIDE_SET);
 }
 
 // Write API
