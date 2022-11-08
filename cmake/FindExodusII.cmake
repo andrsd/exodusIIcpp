@@ -14,7 +14,7 @@ find_path(
 
 find_library(
     EXODUSII_LIBRARY
-        exoIIv2c
+        exoIIv2c exodus
     PATHS
         $ENV{EXODUSII_DIR}/lib
 )
