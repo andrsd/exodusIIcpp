@@ -55,7 +55,7 @@ if(EXODUSIICPP_CODE_COVERAGE)
             OUTPUT
                 ${COVERAGE_INFO}
             COMMAND
-                ${LLVM_COV_PATH}
+                "${LLVM_COV_PATH}"
                 export
                 ${CODE_COVERAGE_BINS}
                 -instr-profile=${MERGED_PROFDATA}
