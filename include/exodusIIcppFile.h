@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <map>
 #include "exodusIIcppElementBlock.h"
 #include "exodusIIcppEnums.h"
 #include "exodusIIcppError.h"
@@ -177,11 +178,26 @@ public:
     /// Read element blocks from the ExodusII file
     void read_blocks();
 
+    /// Read block names
+    ///
+    /// @return Map of block ID -> block name
+    std::map<int, std::string> read_block_names() const;
+
     /// Read node sets from the ExodusII file
     void read_node_sets();
 
+    /// Read node set names
+    ///
+    /// @return Map of Node set ID -> node set name
+    std::map<int, std::string> read_node_set_names() const;
+
     /// Read side sets from the ExodusII file
     void read_side_sets();
+
+    /// Read side set names
+    ///
+    /// @return Map of Side set ID -> side set name
+    std::map<int, std::string> read_side_set_names() const;
 
     // Write API
 

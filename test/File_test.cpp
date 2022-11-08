@@ -4,6 +4,7 @@
 #include <stdexcept>
 
 using namespace exodusIIcpp;
+using namespace testing;
 
 TEST(FileTest, empty)
 {
@@ -179,4 +180,28 @@ TEST(FileTest, create_edge2)
     EXPECT_EQ(g.get_num_element_blocks(), 1);
     EXPECT_EQ(g.get_num_node_sets(), 0);
     EXPECT_EQ(g.get_num_side_sets(), 0);
+}
+
+TEST(FileTest, read_square)
+{
+    File f(std::string(EXODUSIICPP_UNIT_TEST_ASSETS) + std::string("/square.e"), FileAccess::READ);
+    if (f.is_opened()) {
+        std::map<int, std::string> blk_names = f.read_block_names();
+        EXPECT_EQ(blk_names.size(), 1);
+        EXPECT_THAT(blk_names, ElementsAre(Pair(0, "")));
+
+        std::map<int, std::string> ss_names = f.read_side_set_names();
+        EXPECT_EQ(ss_names.size(), 4);
+        EXPECT_THAT(
+            ss_names,
+            ElementsAre(Pair(0, "bottom"), Pair(1, "right"), Pair(2, "top"), Pair(3, "left")));
+
+        std::map<int, std::string> ns_names = f.read_node_set_names();
+        EXPECT_EQ(ns_names.size(), 4);
+        EXPECT_THAT(
+            ns_names,
+            ElementsAre(Pair(0, "bottom"), Pair(1, "right"), Pair(2, "top"), Pair(3, "left")));
+
+        f.close();
+    }
 }
