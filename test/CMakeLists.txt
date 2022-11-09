@@ -1,5 +1,7 @@
 project(exodusIIcpp-test)
 
+include(GoogleTest)
+
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
@@ -34,14 +36,4 @@ mark_as_advanced(FORCE EXODUSIICPP_UNIT_TEST_ASSETS)
 
 configure_file(config.h.in config.h)
 
-add_test(
-    NAME ${PROJECT_NAME}
-    COMMAND ${PROJECT_NAME}
-)
-if(EXODUSIICPP_CODE_COVERAGE)
-    set_tests_properties(
-        ${PROJECT_NAME}
-        PROPERTIES
-            ENVIRONMENT LLVM_PROFILE_FILE=${PROJECT_NAME}-%m.profraw
-    )
-endif()
+gtest_discover_tests(${PROJECT_NAME})

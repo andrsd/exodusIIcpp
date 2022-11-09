@@ -1,5 +1,8 @@
 name: build
 
+env:
+  SEACAS_VERSION: 2022-08-01
+
 on:
   push:
     branches:
@@ -16,13 +19,18 @@ jobs:
       matrix:
         include:
           - os: ubuntu-22.04
-            compiler: gcc
+            compiler: gnu
+          - os: macos-11
+            compiler: clang
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout source
         uses: actions/checkout@v3
+        with:
+          path: main
 
-      - name: Install dependencies
+      - name: Install dependencies (linux)
+        if: startsWith(matrix.os, 'ubuntu')
         run: |
           sudo apt-get update -qq
           sudo apt install \
@@ -31,27 +39,76 @@ jobs:
             libnetcdf-dev \
             libhdf5-dev \
             libexodusii-dev
+          echo "CODE_COVERAGE=YES" >> $GITHUB_ENV
+
+      - name: Install dependencies (macOS)
+        if: startsWith(matrix.os, 'macos')
+        run: |
+          brew install \
+            lcov \
+            fmt \
+            netcdf \
+            hdf5
+          echo "CODE_COVERAGE=NO" >> $GITHUB_ENV
+
+      - name: Build exodusII
+        if: startsWith(matrix.os, 'macos')
+        run: |
+          cd ${{ github.workspace }}
+          echo "::group::download"
+          wget -q https://github.com/sandialabs/seacas/archive/v${SEACAS_VERSION}.tar.gz
+          tar -xzf v${SEACAS_VERSION}.tar.gz
+          echo "::endgroup::"
+          cd seacas-${SEACAS_VERSION}
+          echo "::group::configure"
+          export ACCESS=${{ github.workspace }}/seacas-${SEACAS_VERSION}
+          export INSTALL_PATH=/usr/local
+          export SHARED=YES
+          export MPI=NO
+          export COMPILER=${{ matrix.compiler }}
+          export FC=gfortran-11
+          ./cmake-exodus \
+            -DSeacas_ENABLE_TESTS=NO \
+            -B build -S
+          echo "::endgroup::"
+          echo "::group::make install"
+          sudo make -C ${{ github.workspace }}/seacas-${SEACAS_VERSION}/build install
+          echo "::endgroup::"
 
       - name: Configure
         run: |
-          cmake -S . -B ${{ github.workspace }}/build \
+          cmake -S main -B ${{ github.workspace }}/main/build \
             -DEXODUSIICPP_BUILD_TESTS=YES \
-            -DEXODUSIICPP_CODE_COVERAGE=YES
+            -DEXODUSIICPP_CODE_COVERAGE=$CODE_COVERAGE
 
       - name: Build
-        run: make -C ${{ github.workspace }}/build
+        run: make -C ${{ github.workspace }}/main/build
 
       - name: Run tests
-        run: make -C ${{ github.workspace }}/build test ARGS='-V'
+        run: |
+          echo "### Test results" >> $GITHUB_STEP_SUMMARY
+          ctest --test-dir ${{ github.workspace }}/main/build -O test.log
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          awk 's;/^\[HANDLER_OUTPUT\]/{s=1}' test.log >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+
+      - name: Upload test result
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-results-${{ matrix.os }}
+          path: ${{ github.workspace }}/main/build/Testing/Temporary/LastTest.log
 
       - name: Generate code coverage
-        run: make -C ${{ github.workspace }}/build coverage
+        if: startsWith(matrix.os, 'ubuntu')
+        run: make -C ${{ github.workspace }}/main/build coverage
 
       - name: Upload coverage artifact
+        if: startsWith(matrix.os, 'ubuntu')
         uses: actions/upload-artifact@v2
         with:
           name: coverage-${{ matrix.os }}-${{ matrix.compiler }}
-          path: ${{ github.workspace }}/build/coverage.info
+          path: ${{ github.workspace }}/main/build/coverage.info
 
   upload-to-codecov:
     needs: [build]
@@ -70,4 +127,4 @@ jobs:
         uses: codacy/codacy-coverage-reporter-action@v1
         with:
           project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
-          coverage-reports: 'coverage-ubuntu-22.04-gcc/coverage.info'
+          coverage-reports: 'coverage-ubuntu-22.04-gnu/coverage.info'
