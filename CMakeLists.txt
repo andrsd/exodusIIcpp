@@ -118,7 +118,7 @@ install(
 install(
     FILES
         "${PROJECT_SOURCE_DIR}/cmake/exodusIIcppConfig.cmake"
-        "${PROJECT_CURRENT_BINARY_DIR}/exodusIIcppConfigVersion.cmake"
+        "${CMAKE_CURRENT_BINARY_DIR}/exodusIIcppConfigVersion.cmake"
     DESTINATION
         lib/cmake/exodusIIcpp
 )
