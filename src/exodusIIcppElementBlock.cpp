@@ -35,6 +35,12 @@ ElementBlock::get_element_type() const
     return this->elem_type;
 }
 
+const std::vector<int> &
+ElementBlock::get_connectivity() const
+{
+    return this->connect;
+}
+
 std::vector<int>
 ElementBlock::get_element_connectivity(std::size_t element_idx) const
 {
@@ -47,6 +53,12 @@ ElementBlock::get_element_connectivity(std::size_t element_idx) const
     }
     else
         throw std::out_of_range("Index of of range");
+}
+
+int
+ElementBlock::get_num_elements() const
+{
+    return this->n_elems;
 }
 
 void

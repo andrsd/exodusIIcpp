@@ -59,6 +59,16 @@ public:
     /// @return List of node IDs that comprise the element
     std::vector<int> get_element_connectivity(std::size_t element_idx) const;
 
+    /// Get the number of elements in this element block
+    ///
+    /// @return The number of elements in this element block
+    int get_num_elements() const;
+
+    /// Get connectivity of the block
+    ///
+    /// @return Connectivity array
+    const std::vector<int> & get_connectivity() const;
+
     /// Set element block ID
     ///
     /// @param id Desired ID of the element block
