@@ -51,8 +51,10 @@ add_library(${PROJECT_NAME}
         src/exodusIIcppNodeSet.cpp
         src/exodusIIcppSideSet.cpp
 )
+if(CMAKE_PROJECT_NAME STREQUAL "exodusIIcpp")
 target_code_coverage(${PROJECT_NAME})
 target_sanitization(${PROJECT_NAME})
+endif()
 
 set_target_properties(${PROJECT_NAME}
     PROPERTIES
