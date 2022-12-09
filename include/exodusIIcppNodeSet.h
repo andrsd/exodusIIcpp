@@ -42,6 +42,11 @@ public:
     /// @see get_size
     int get_node_id(std::size_t idx) const;
 
+    /// Get node IDs contained in this node set
+    ///
+    /// @return Node IDs contained in this node set
+    const std::vector<int> & get_node_ids() const;
+
     /// Set node set ID
     ///
     /// @param id Desired ID of the node set

@@ -36,4 +36,14 @@ mark_as_advanced(FORCE EXODUSIICPP_UNIT_TEST_ASSETS)
 
 configure_file(config.h.in config.h)
 
-gtest_discover_tests(${PROJECT_NAME})
+add_test(
+    NAME ${PROJECT_NAME}
+    COMMAND ${PROJECT_NAME}
+)
+if(EXODUSIICPP_CODE_COVERAGE)
+    set_tests_properties(
+        ${PROJECT_NAME}
+        PROPERTIES
+            ENVIRONMENT LLVM_PROFILE_FILE=${PROJECT_NAME}.profraw
+    )
+endif()

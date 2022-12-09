@@ -32,6 +32,12 @@ NodeSet::get_node_id(std::size_t idx) const
         throw std::out_of_range("Index of out bounds.");
 }
 
+const std::vector<int> &
+NodeSet::get_node_ids() const
+{
+    return this->node_ids;
+}
+
 void
 NodeSet::set_id(int id)
 {

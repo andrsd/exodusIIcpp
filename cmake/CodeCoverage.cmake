@@ -73,7 +73,7 @@ if(EXODUSIICPP_CODE_COVERAGE)
                 ${LLVM_PROFDATA_PATH}
                 merge
                 -sparse
-                ${CMAKE_BINARY_DIR}/test/exodusIIcpp-test-*.profraw
+                ${CMAKE_BINARY_DIR}/test/exodusIIcpp-test.profraw
                 -o ${MERGED_PROFDATA}
         )
 
