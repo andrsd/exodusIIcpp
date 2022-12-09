@@ -3,6 +3,7 @@
 #include <stdexcept>
 
 using namespace exodusIIcpp;
+using namespace testing;
 
 TEST(NodeSetTest, test)
 {
@@ -25,4 +26,6 @@ TEST(NodeSetTest, test)
     EXPECT_THAT(ns.get_node_id(2), 3);
 
     EXPECT_THROW(ns.get_node_id(3), std::out_of_range);
+
+    EXPECT_THAT(ns.get_node_ids(), ElementsAre(1, 2, 3));
 }
