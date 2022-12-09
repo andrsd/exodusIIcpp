@@ -43,6 +43,16 @@ public:
     /// @see get_size
     int get_element_id(std::size_t idx) const;
 
+    /// Get element IDs
+    ///
+    /// @return Array of element IDs
+    const std::vector<int> & get_element_ids() const;
+
+    /// Get side IDs
+    ///
+    /// @return Array of side IDs
+    const std::vector<int> & get_side_ids() const;
+
     /// Get an local side number of a side in the side set
     ///
     /// @param idx Index of the side. Can be `0..<size of the side set>`.

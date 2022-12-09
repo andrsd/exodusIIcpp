@@ -64,4 +64,16 @@ SideSet::set_sides(const std::vector<int> & elems, const std::vector<int> & side
         throw std::logic_error("The length of 'elems' must be equal to the length of 'sides'");
 }
 
+const std::vector<int> &
+SideSet::get_element_ids() const
+{
+    return this->side_ids;
+}
+
+const std::vector<int> &
+SideSet::get_side_ids() const
+{
+    return this->elem_ids;
+}
+
 } // namespace exodusIIcpp
