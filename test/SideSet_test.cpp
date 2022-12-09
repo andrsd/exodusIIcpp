@@ -3,6 +3,7 @@
 #include <stdexcept>
 
 using namespace exodusIIcpp;
+using namespace testing;
 
 TEST(SideSetTest, test)
 {
@@ -25,11 +26,13 @@ TEST(SideSetTest, test)
     EXPECT_THAT(ss.get_element_id(1), 2);
     EXPECT_THAT(ss.get_element_id(2), 3);
     EXPECT_THROW(ss.get_element_id(3), std::out_of_range);
+    EXPECT_THAT(ss.get_element_ids(), ElementsAre(1, 2, 3));
 
     EXPECT_THAT(ss.get_side_id(0), 0);
     EXPECT_THAT(ss.get_side_id(1), 1);
     EXPECT_THAT(ss.get_side_id(2), 0);
     EXPECT_THROW(ss.get_side_id(3), std::out_of_range);
+    EXPECT_THAT(ss.get_side_ids(), ElementsAre(0, 1, 0));
 }
 
 TEST(SideSetTest, set_sides_oob)

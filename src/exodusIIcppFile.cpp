@@ -2,6 +2,7 @@
 #include "exodusII.h"
 #include "fmt/printf.h"
 #include <stdexcept>
+#include <cassert>
 
 namespace exodusIIcpp {
 
@@ -134,6 +135,7 @@ File::init()
                                             &this->n_node_sets,
                                             &this->n_side_sets));
         this->title = title;
+        this->coord_names.resize(this->n_dim);
     }
     else
         throw std::logic_error("Calling init with non-read file access.");
@@ -157,6 +159,7 @@ File::init(const char * title,
                                             n_elem_blks,
                                             n_node_sets,
                                             n_side_sets));
+        this->coord_names.resize(n_dims);
     }
     else
         throw std::logic_error("Calling init with non-write access.");
@@ -216,6 +219,12 @@ File::get_z_coords() const
     return this->z;
 }
 
+const std::vector<std::string> &
+File::get_coord_names() const
+{
+    return this->coord_names;
+}
+
 const std::vector<ElementBlock> &
 File::get_element_blocks() const
 {
@@ -249,6 +258,7 @@ void
 File::read()
 {
     read_coords();
+    read_coord_names();
     read_blocks();
     read_node_sets();
     read_side_sets();
@@ -272,6 +282,22 @@ File::read_coords()
     if (this->n_dim == 3) {
         this->z.resize(this->n_nodes);
         EXODUSIICPP_CHECK_ERROR(ex_get_coord(this->exoid, nullptr, nullptr, this->z.data()));
+    }
+}
+
+void
+File::read_coord_names()
+{
+    char * names[3] = { nullptr, nullptr, nullptr };
+    for (unsigned int i = 0; i < this->n_dim; i++) {
+        names[i] = (char *) calloc((MAX_STR_LENGTH + 1), sizeof(char));
+        memset(names[i], 0, (MAX_STR_LENGTH + 1) * sizeof(char));
+    }
+
+    EXODUSIICPP_CHECK_ERROR(ex_get_coord_names(this->exoid, names));
+    for (unsigned int i = 0; i < this->n_dim; i++) {
+        this->coord_names[i].assign(names[i]);
+        free(names[i]);
     }
 }
 
@@ -427,8 +453,18 @@ File::write_coords(const std::vector<double> & x,
 void
 File::write_coord_names()
 {
-    const char * coord_names[3] = { "x", "y", "z" };
-    EXODUSIICPP_CHECK_ERROR(ex_put_coord_names(this->exoid, (char **) coord_names));
+    write_coord_names({ "x", "y", "z" });
+}
+
+void
+File::write_coord_names(const std::vector<std::string> & new_names)
+{
+    assert(new_names.size() <= 3);
+    const char * names[3] = { nullptr, nullptr, nullptr };
+    for (unsigned int i = 0; i < new_names.size(); i++)
+        names[i] = new_names[i].c_str();
+    EXODUSIICPP_CHECK_ERROR(ex_put_coord_names(this->exoid, (char **) names));
+    this->coord_names = new_names;
 }
 
 void

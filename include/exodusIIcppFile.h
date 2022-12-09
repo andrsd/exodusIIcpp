@@ -43,6 +43,8 @@ protected:
     std::vector<double> y;
     /// z-coordinates
     std::vector<double> z;
+    /// Coordinate names
+    std::vector<std::string> coord_names;
     /// Element map
     std::vector<int> elem_map;
     /// Element blocks
@@ -143,6 +145,11 @@ public:
     /// @return The z-coordinates of nodes
     const std::vector<double> & get_z_coords() const;
 
+    /// Get coordinate names
+    ///
+    /// @return Array with coordinate names
+    const std::vector<std::string> & get_coord_names() const;
+
     /// Get element blocks
     ///
     /// @return The list of element blocks
@@ -171,6 +178,9 @@ public:
 
     /// Read coordinate data from the ExodusII file
     void read_coords();
+
+    /// Read coordinate names from the ExodusII file
+    void read_coord_names();
 
     /// Read element map from the ExodusII file
     void read_elem_map();
@@ -223,6 +233,11 @@ public:
 
     /// Write coordinate names to the ExodusII file
     void write_coord_names();
+
+    /// Write custom coordinate names to the ExodusII file
+    ///
+    /// @param coord_names Array with coordinate names
+    void write_coord_names(const std::vector<std::string> & coord_names);
 
     /// Write information records to the ExodusII file
     ///

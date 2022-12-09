@@ -67,13 +67,13 @@ SideSet::set_sides(const std::vector<int> & elems, const std::vector<int> & side
 const std::vector<int> &
 SideSet::get_element_ids() const
 {
-    return this->side_ids;
+    return this->elem_ids;
 }
 
 const std::vector<int> &
 SideSet::get_side_ids() const
 {
-    return this->elem_ids;
+    return this->side_ids;
 }
 
 } // namespace exodusIIcpp
