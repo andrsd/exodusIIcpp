@@ -205,3 +205,21 @@ TEST(FileTest, read_square)
         f.close();
     }
 }
+
+TEST(FileTest, custom_coord_names)
+{
+    File f(std::string("coords.e"), FileAccess::WRITE);
+    EXPECT_TRUE(f.is_opened());
+    f.init("test", 2, 3, 0, 0, 0, 0);
+
+    std::vector<double> x = { 0, 1, 0 };
+    std::vector<double> y = { 0, 0, 1 };
+    f.write_coords(x, y);
+    f.write_coord_names({ "r", "z" });
+    f.close();
+
+    // check the file that we created
+    File g(std::string("coords.e"), FileAccess::READ);
+    g.read();
+    EXPECT_THAT(g.get_coord_names(), ElementsAre("r", "z"));
+}
