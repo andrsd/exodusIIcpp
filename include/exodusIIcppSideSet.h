@@ -77,6 +77,12 @@ public:
     ///
     /// @note Size of `elems` and `sides` should be equal.
     void set_sides(const std::vector<int> & elems, const std::vector<int> & sides);
+
+    /// Add an (elem_id, side_id) pair into the side set
+    ///
+    /// @param elem Element ID
+    /// @param side Local side number
+    void add(int elem, int side);
 };
 
 } // namespace exodusIIcpp

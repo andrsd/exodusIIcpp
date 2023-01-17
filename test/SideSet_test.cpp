@@ -33,6 +33,10 @@ TEST(SideSetTest, test)
     EXPECT_THAT(ss.get_side_id(2), 0);
     EXPECT_THROW(ss.get_side_id(3), std::out_of_range);
     EXPECT_THAT(ss.get_side_ids(), ElementsAre(0, 1, 0));
+
+    ss.add(4, 1);
+    EXPECT_EQ(ss.get_element_id(3), 4);
+    EXPECT_EQ(ss.get_side_id(3), 1);
 }
 
 TEST(SideSetTest, set_sides_oob)
