@@ -76,4 +76,11 @@ SideSet::get_side_ids() const
     return this->side_ids;
 }
 
+void
+SideSet::add(int elem, int side)
+{
+    this->elem_ids.push_back(elem);
+    this->side_ids.push_back(side);
+}
+
 } // namespace exodusIIcpp
