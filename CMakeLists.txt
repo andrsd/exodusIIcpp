@@ -13,6 +13,12 @@ include(FetchContent)
 include(${PROJECT_SOURCE_DIR}/cmake/CodeCoverage.cmake)
 include(${PROJECT_SOURCE_DIR}/cmake/Sanitization.cmake)
 
+set(LibraryTypeValues "SHARED;STATIC")
+if(NOT EXODUSIICPP_LIBRARY_TYPE)
+    set(EXODUSIICPP_LIBRARY_TYPE "SHARED" CACHE STRING "Build as a shared or static library." FORCE)
+endif()
+set_property(CACHE EXODUSIICPP_LIBRARY_TYPE PROPERTY STRINGS ${LibraryTypeValues})
+
 option(EXODUSIICPP_BUILD_TESTS "Build tests" NO)
 
 find_package(fmt REQUIRED)
@@ -45,7 +51,7 @@ mark_as_advanced(FORCE
 # Library
 
 add_library(${PROJECT_NAME}
-    SHARED
+    ${EXODUSIICPP_LIBRARY_TYPE}
         src/exodusIIcppElementBlock.cpp
         src/exodusIIcppFile.cpp
         src/exodusIIcppNodeSet.cpp
@@ -60,6 +66,7 @@ set_target_properties(${PROJECT_NAME}
     PROPERTIES
         VERSION ${PROJECT_VERSION}
         SOVERSION ${PROJECT_VERSION_MAJOR}
+        POSITION_INDEPENDENT_CODE ON
 )
 
 target_include_directories(${PROJECT_NAME}
