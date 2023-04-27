@@ -73,6 +73,9 @@ target_include_directories(${PROJECT_NAME}
     PUBLIC
         $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
         $<INSTALL_INTERFACE:include/exodusIIcpp>
+    PRIVATE
+        $<BUILD_INTERFACE:${EXODUSII_INCLUDE_DIR}>
+        $<BUILD_INTERFACE:${NETCDF_INCLUDE_DIR}>
 )
 
 target_link_libraries(${PROJECT_NAME}
