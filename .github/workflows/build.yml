@@ -78,6 +78,7 @@ jobs:
       - name: Configure
         run: |
           cmake -S main -B ${{ github.workspace }}/main/build \
+            -DEXODUSIICPP_LIBRARY_TYPE=SHARED \
             -DEXODUSIICPP_BUILD_TESTS=YES \
             -DEXODUSIICPP_CODE_COVERAGE=$CODE_COVERAGE
 
