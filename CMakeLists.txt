@@ -10,6 +10,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 
 include(FetchContent)
+include(CMakePackageConfigHelpers)
+include(GNUInstallDirs)
 include(${PROJECT_SOURCE_DIR}/cmake/CodeCoverage.cmake)
 include(${PROJECT_SOURCE_DIR}/cmake/Sanitization.cmake)
 
@@ -49,44 +51,7 @@ if (EXODUSIICPP_BUILD_TESTS)
     )
 endif()
 
-# Library
-
-add_library(${PROJECT_NAME}
-    ${EXODUSIICPP_LIBRARY_TYPE}
-        src/exodusIIcppElementBlock.cpp
-        src/exodusIIcppFile.cpp
-        src/exodusIIcppNodeSet.cpp
-        src/exodusIIcppSideSet.cpp
-)
-if(CMAKE_PROJECT_NAME STREQUAL "exodusIIcpp")
-target_code_coverage(${PROJECT_NAME})
-target_sanitization(${PROJECT_NAME})
-endif()
-
-set_target_properties(${PROJECT_NAME}
-    PROPERTIES
-        VERSION ${PROJECT_VERSION}
-        SOVERSION ${PROJECT_VERSION_MAJOR}
-        POSITION_INDEPENDENT_CODE ON
-)
-
-target_include_directories(${PROJECT_NAME}
-    PUBLIC
-        $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
-        $<INSTALL_INTERFACE:include/exodusIIcpp>
-    PRIVATE
-        $<BUILD_INTERFACE:${EXODUSII_INCLUDE_DIR}>
-        $<BUILD_INTERFACE:${NETCDF_INCLUDE_DIR}>
-)
-
-target_link_libraries(${PROJECT_NAME}
-    PUBLIC
-        fmt::fmt
-    PRIVATE
-        ${EXODUSII_LIBRARY}
-        ${NETCDF_LIBRARY}
-        ${HDF5_LIBRARIES}
-)
+add_subdirectory(src)
 
 # Tests
 
@@ -96,42 +61,3 @@ if (EXODUSIICPP_BUILD_TESTS)
 endif()
 
 add_subdirectory(docs)
-
-# Install
-
-install(
-    TARGETS exodusIIcpp
-    EXPORT exodusIIcppTargets
-    LIBRARY DESTINATION lib
-    ARCHIVE DESTINATION lib
-    RUNTIME DESTINATION bin
-    INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
-    PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
-)
-
-install(
-    DIRECTORY ${PROJECT_SOURCE_DIR}/include/
-    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}
-    FILES_MATCHING PATTERN "*.h"
-)
-
-include(CMakePackageConfigHelpers)
-write_basic_package_version_file(exodusIIcppConfigVersion.cmake
-    VERSION ${PROJECT_VERSION}
-    COMPATIBILITY AnyNewerVersion
-)
-
-install(
-    EXPORT exodusIIcppTargets
-    FILE exodusIIcppTargets.cmake
-    NAMESPACE exodusIIcpp::
-    DESTINATION lib/cmake/exodusIIcpp
-)
-
-install(
-    FILES
-        "${PROJECT_SOURCE_DIR}/cmake/exodusIIcppConfig.cmake"
-        "${CMAKE_CURRENT_BINARY_DIR}/exodusIIcppConfigVersion.cmake"
-    DESTINATION
-        lib/cmake/exodusIIcpp
-)
