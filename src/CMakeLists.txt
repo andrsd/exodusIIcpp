@@ -41,6 +41,12 @@ target_link_libraries(
 
 # Install
 
+configure_package_config_file(
+    ${PROJECT_SOURCE_DIR}/cmake/exodusIIcppConfig.cmake.in
+    exodusIIcppConfig.cmake
+    INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/exodusIIcpp
+    NO_SET_AND_CHECK_MACRO
+)
 write_basic_package_version_file(exodusIIcppConfigVersion.cmake
     VERSION ${PROJECT_VERSION}
     COMPATIBILITY AnyNewerVersion
@@ -71,7 +77,7 @@ install(
 
 install(
     FILES
-        "${PROJECT_SOURCE_DIR}/cmake/exodusIIcppConfig.cmake"
+        "${CMAKE_CURRENT_BINARY_DIR}/exodusIIcppConfig.cmake"
         "${CMAKE_CURRENT_BINARY_DIR}/exodusIIcppConfigVersion.cmake"
     DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/exodusIIcpp
 )
