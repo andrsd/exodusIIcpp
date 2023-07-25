@@ -25,7 +25,7 @@ option(EXODUSIICPP_BUILD_TESTS "Build tests" NO)
 
 find_package(fmt 8.0 REQUIRED)
 find_package(NetCDF 4.5 REQUIRED)
-find_package(HDF5 1.10 COMPONENTS C)
+find_package(HDF5 1.10 REQUIRED COMPONENTS C)
 find_package(ExodusII REQUIRED)
 
 if (EXODUSIICPP_BUILD_TESTS)
