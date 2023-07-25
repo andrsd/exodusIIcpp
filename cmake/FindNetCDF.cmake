@@ -1,9 +1,10 @@
 # Find NetCDF
 #
 # Once done this will define
-#  NETCDF_FOUND - System has ExodusII
-#  NETCDF_INCLUDE_DIR - The ExodusII include directory
-#  NETCDF_LIBRARY - The ExodusII library
+#  NETCDF_FOUND - System has NetCDF
+#  NETCDF_INCLUDE_DIR - The NetCDF include directory
+#  NETCDF_LIBRARY - The NetCDF library
+#  NETCDF_VERSION - The NetCDF library
 
 find_path(
     NETCDF_INCLUDE_DIR
@@ -19,12 +20,28 @@ find_library(
         $ENV{NETCDF_DIR}/lib
 )
 
+set(NETCDF_VERSION "unknown")
+find_file(NETCDF_META_H netcdf_meta.h
+    PATHS
+        $ENV{NETCDF_DIR}/include
+)
+mark_as_advanced(NETCDF_META_H)
+if (NETCDF_META_H)
+    file(READ ${NETCDF_META_H} NETCDF_META_FILE)
+    string(REGEX MATCH "define[ ]+NC_VERSION_MAJOR[ ]+([0-9]+)" TMP "${NETCDF_META_FILE}")
+    set(NETCDF_VERSION_MAJOR ${CMAKE_MATCH_1})
+    string(REGEX MATCH "define[ ]+NC_VERSION_MINOR[ ]+([0-9]+)" TMP "${NETCDF_META_FILE}")
+    set(NETCDF_VERSION_MINOR ${CMAKE_MATCH_1})
+    string(REGEX MATCH "define[ ]+NC_VERSION_PATCH[ ]+([0-9]+)" TMP "${NETCDF_META_FILE}")
+    set(NETCDF_VERSION_PATCH ${CMAKE_MATCH_1})
+    set(NETCDF_VERSION "${NETCDF_VERSION_MAJOR}.${NETCDF_VERSION_MINOR}.${NETCDF_VERSION_PATCH}")
+endif()
+
 include(FindPackageHandleStandardArgs)
 find_package_handle_standard_args(
     NetCDF
-    DEFAULT_MSG
-    NETCDF_LIBRARY
-    NETCDF_INCLUDE_DIR
+    REQUIRED_VARS NETCDF_LIBRARY NETCDF_INCLUDE_DIR
+    VERSION_VAR NETCDF_VERSION
 )
 
 mark_as_advanced(FORCE
