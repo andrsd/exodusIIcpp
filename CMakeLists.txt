@@ -23,9 +23,9 @@ set_property(CACHE EXODUSIICPP_LIBRARY_TYPE PROPERTY STRINGS ${LibraryTypeValues
 
 option(EXODUSIICPP_BUILD_TESTS "Build tests" NO)
 
-find_package(fmt REQUIRED)
+find_package(fmt 8.0 REQUIRED)
 find_package(NetCDF REQUIRED)
-find_package(HDF5 COMPONENTS C)
+find_package(HDF5 1.10 COMPONENTS C)
 find_package(ExodusII REQUIRED)
 
 if (EXODUSIICPP_BUILD_TESTS)
