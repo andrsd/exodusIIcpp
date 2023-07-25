@@ -1,0 +1,17 @@
+set(EXODUSIICPP_VERSION @PROJECT_VERSION@)
+
+@PACKAGE_INIT@
+
+include("${CMAKE_CURRENT_LIST_DIR}/exodusIIcppTargets.cmake")
+
+check_required_components(exodusIIcpp)
+
+find_library(EXODUSIICPP_LIBRARY NAMES exodusIIcpp HINTS ${PACKAGE_PREFIX_DIR}/lib NO_DEFAULT_PATH)
+find_path(EXODUSIICPP_INCLUDE_DIR exodusIIcpp.h HINTS ${PACKAGE_PREFIX_DIR}/include/exodusIIcpp)
+
+include(FindPackageHandleStandardArgs)
+find_package_handle_standard_args(
+    exodusIIcpp
+    REQUIRED_VARS EXODUSIICPP_LIBRARY EXODUSIICPP_INCLUDE_DIR
+    VERSION_VAR EXODUSIICPP_VERSION
+)
