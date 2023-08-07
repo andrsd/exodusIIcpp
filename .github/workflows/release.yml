@@ -1,8 +1,5 @@
 name: release
 
-env:
-  CACHE_NUM: 0
-
 on:
   push:
     tags:
