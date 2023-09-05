@@ -165,6 +165,12 @@ File::init(const char * title,
         throw std::logic_error("Calling init with non-write access.");
 }
 
+const std::string &
+File::get_title() const
+{
+    return this->title;
+}
+
 int
 File::get_dim() const
 {

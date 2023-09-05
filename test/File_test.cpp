@@ -29,6 +29,7 @@ TEST(FileTest, open)
     EXPECT_EQ(f.get_num_nodes(), 3);
     EXPECT_EQ(f.get_num_elements(), 1);
     EXPECT_EQ(f.get_num_element_blocks(), 1);
+    EXPECT_EQ(f.get_title(), "Created by meshio v5.3.4, 2022-04-25T17:29:15.676538");
 
     f.read_elem_map();
     // TODO: add a check that map was read and is ok

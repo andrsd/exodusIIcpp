@@ -42,9 +42,7 @@ jobs:
             cmake \
             make \
             cxx-compiler \
-            libnetcdf==4.8.1 \
             exodusii==2022.08.01 \
-            hdf5==1.12.2 \
             fmt==9.1.0 \
             lcov
 
