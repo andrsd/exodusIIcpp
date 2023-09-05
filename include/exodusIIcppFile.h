@@ -100,6 +100,11 @@ public:
               int n_node_sets,
               int n_side_sets);
 
+    /// Get the title of the file
+    ///
+    /// @return The file title
+    const std::string & get_title() const;
+
     /// Get the spatial dimension
     ///
     /// @return The spatial dimension
