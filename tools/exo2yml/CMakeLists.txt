@@ -1,0 +1,34 @@
+project(exo2yml LANGUAGES CXX)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
+set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
+
+find_package(yaml-cpp 0.7 REQUIRED)
+
+add_executable(${PROJECT_NAME}
+    main.cpp
+)
+
+target_include_directories(
+    ${PROJECT_NAME}
+    PRIVATE
+        ${CMAKE_SOURCE_DIR}/contrib
+        ${CMAKE_SOURCE_DIR}/include
+        ${PROJECT_SOURCE_DIR}/..
+)
+
+target_link_libraries(
+    ${PROJECT_NAME}
+    PUBLIC
+        fmt::fmt
+        yaml-cpp
+        exodusIIcpp
+)
+
+install(
+    TARGETS ${PROJECT_NAME}
+    EXPORT exodusIIcppTargets
+    RUNTIME DESTINATION bin
+)

@@ -29,7 +29,7 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get update -qq
-        sudo apt install libfmt-dev libnetcdf-dev libhdf5-dev libexodusii-dev
+        sudo apt install libfmt-dev libnetcdf-dev libhdf5-dev libexodusii-dev libyaml-cpp-dev
 
     - name: Configure
       run: |
