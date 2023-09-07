@@ -3,6 +3,7 @@
 #include "fmt/printf.h"
 #include <stdexcept>
 #include <cassert>
+#include <iostream>
 
 namespace exodusIIcpp {
 
@@ -300,6 +301,41 @@ std::vector<std::string>
 File::get_global_variable_names() const
 {
     return read_variable_names(this->exoid, EX_GLOBAL);
+}
+
+std::vector<double>
+File::get_nodal_variable_values(int time_step, int var_idx) const
+{
+    std::vector<double> values;
+    values.resize(this->n_nodes);
+    EXODUSIICPP_CHECK_ERROR(
+        ex_get_var(this->exoid, time_step, EX_NODAL, var_idx, 1, this->n_nodes, values.data()));
+    return values;
+}
+
+std::vector<double>
+File::get_elemental_variable_values(int time_step, int var_idx, int block_id) const
+{
+    std::vector<double> values;
+    int n_blk_elems;
+    EXODUSIICPP_CHECK_ERROR(ex_get_block(this->exoid,
+                                         EX_ELEM_BLOCK,
+                                         block_id,
+                                         nullptr,
+                                         &n_blk_elems,
+                                         nullptr,
+                                         nullptr,
+                                         nullptr,
+                                         nullptr));
+    values.resize(n_blk_elems);
+    EXODUSIICPP_CHECK_ERROR(ex_get_var(this->exoid,
+                                       time_step,
+                                       EX_ELEM_BLOCK,
+                                       var_idx,
+                                       block_id,
+                                       n_blk_elems,
+                                       values.data()));
+    return values;
 }
 
 // Read API

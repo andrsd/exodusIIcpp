@@ -217,6 +217,30 @@ TEST(FileTest, read_square)
         auto global_var_names = f.get_global_variable_names();
         EXPECT_EQ(global_var_names.size(), 0);
 
+        int var_idx = 1;
+        auto u_var_0 = f.get_nodal_variable_values(1, var_idx);
+        EXPECT_THAT(u_var_0,
+                    ElementsAre(DoubleEq(0.),
+                                DoubleEq(0.),
+                                DoubleEq(0.),
+                                DoubleEq(0.),
+                                DoubleEq(0.),
+                                DoubleEq(0.),
+                                DoubleEq(0.),
+                                DoubleEq(0.),
+                                DoubleEq(0.)));
+        auto u_var_1 = f.get_nodal_variable_values(2, var_idx);
+        EXPECT_THAT(u_var_1,
+                    ElementsAre(DoubleEq(0.),
+                                DoubleEq(0.5),
+                                DoubleEq(0.5),
+                                DoubleEq(0.),
+                                DoubleEq(1.),
+                                DoubleEq(1.),
+                                DoubleEq(0.5),
+                                DoubleEq(0.),
+                                DoubleEq(1.)));
+
         f.close();
     }
 }
