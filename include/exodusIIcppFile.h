@@ -53,6 +53,8 @@ protected:
     std::vector<SideSet> side_sets;
     /// Node sets
     std::vector<NodeSet> node_sets;
+    /// Times
+    std::vector<double> time_values;
 
 public:
     File();
@@ -176,6 +178,11 @@ public:
     /// @return The list of node sets
     const std::vector<NodeSet> & get_node_sets() const;
 
+    /// Get time values
+    ///
+    /// @return Time values
+    const std::vector<double> & get_times() const;
+
     // Read API
 
     /// Read *all* data from the ExodusII file
@@ -213,6 +220,9 @@ public:
     ///
     /// @return Map of Side set ID -> side set name
     std::map<int, std::string> read_side_set_names() const;
+
+    /// Read times
+    void read_times();
 
     // Write API
 
