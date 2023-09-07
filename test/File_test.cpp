@@ -202,6 +202,11 @@ TEST(FileTest, read_square)
             ns_names,
             ElementsAre(Pair(0, "bottom"), Pair(1, "right"), Pair(2, "top"), Pair(3, "left")));
 
+        f.read_times();
+        auto times = f.get_times();
+        EXPECT_EQ(times.size(), 2);
+        EXPECT_THAT(times, ElementsAre(0., 1.));
+
         f.close();
     }
 }

@@ -258,6 +258,12 @@ File::get_node_sets() const
     return this->node_sets;
 }
 
+const std::vector<double> &
+File::get_times() const
+{
+    return this->time_values;
+}
+
 // Read API
 
 void
@@ -268,6 +274,7 @@ File::read()
     read_blocks();
     read_node_sets();
     read_side_sets();
+    read_times();
 }
 
 void
@@ -432,6 +439,14 @@ std::map<int, std::string>
 File::read_side_set_names() const
 {
     return read_name_map(this->exoid, this->n_side_sets, EX_SIDE_SET);
+}
+
+void
+File::read_times()
+{
+    int n_time_steps = ex_inquire_int(this->exoid, EX_INQ_TIME);
+    this->time_values.resize(n_time_steps);
+    EXODUSIICPP_CHECK_ERROR(ex_get_all_times(this->exoid, this->time_values.data()));
 }
 
 // Write API
