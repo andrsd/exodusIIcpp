@@ -2,6 +2,7 @@ add_library(
     ${PROJECT_NAME}
     ${EXODUSIICPP_LIBRARY_TYPE}
         exodusIIcppElementBlock.cpp
+        exodusIIcppException.cpp
         exodusIIcppFile.cpp
         exodusIIcppNodeSet.cpp
         exodusIIcppSideSet.cpp

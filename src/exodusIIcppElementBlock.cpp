@@ -1,5 +1,5 @@
 #include "exodusIIcppElementBlock.h"
-#include <stdexcept>
+#include "exodusIIcppException.h"
 
 namespace exodusIIcpp {
 
@@ -52,7 +52,7 @@ ElementBlock::get_element_connectivity(std::size_t element_idx) const
         return elem_connect;
     }
     else
-        throw std::out_of_range("Index of of range");
+        throw Exception("Index of of range");
 }
 
 int

@@ -1,7 +1,6 @@
 #include "gmock/gmock.h"
 #include "exodusIIcpp.h"
 #include "config.h"
-#include <stdexcept>
 
 using namespace exodusIIcpp;
 using namespace testing;
@@ -22,7 +21,7 @@ TEST(FileTest, empty)
 TEST(FileTest, open)
 {
     File f(std::string(EXODUSIICPP_UNIT_TEST_ASSETS) + std::string("/tri.e"), FileAccess::READ);
-    EXPECT_THROW({ f.init("t", 2, 3, 1, 1, 0, 0); }, std::logic_error);
+    EXPECT_THROW({ f.init("t", 2, 3, 1, 1, 0, 0); }, Exception);
 
     EXPECT_TRUE(f.is_opened());
     EXPECT_EQ(f.get_dim(), 2);
@@ -42,7 +41,7 @@ TEST(FileTest, open_non_existing)
             File f(std::string(EXODUSIICPP_UNIT_TEST_ASSETS) + std::string("/non-existent-file.e"),
                    FileAccess::READ);
         },
-        std::runtime_error);
+        Exception);
 }
 
 TEST(FileTest, create_tet4)
@@ -73,7 +72,7 @@ TEST(FileTest, create_tet4)
 
     std::vector<int> elem_list_err = { 1 };
     std::vector<int> side_list_err = {};
-    EXPECT_THROW({ f.write_side_set(2, elem_list_err, side_list_err); }, std::logic_error);
+    EXPECT_THROW({ f.write_side_set(2, elem_list_err, side_list_err); }, Exception);
 
     std::vector<int> ns1 = { 2 };
     f.write_node_set(1, ns1);
@@ -110,7 +109,7 @@ TEST(FileTest, create_tet4)
     EXPECT_EQ(eb1.get_size(), 1);
     EXPECT_EQ(eb1.get_id(), 1);
 
-    EXPECT_THROW({ g.get_element_block(9999); }, std::out_of_range);
+    EXPECT_THROW({ g.get_element_block(9999); }, Exception);
 
     const std::vector<SideSet> & side_sets = g.get_side_sets();
     EXPECT_EQ(side_sets.size(), 1);
@@ -123,7 +122,7 @@ TEST(FileTest, create_tri3)
 {
     File f(std::string("tri3.e"), FileAccess::WRITE);
     EXPECT_TRUE(f.is_opened());
-    EXPECT_THROW({ f.init(); }, std::logic_error);
+    EXPECT_THROW({ f.init(); }, Exception);
     f.init("test", 2, 3, 1, 1, 0, 0);
 
     std::vector<double> x = { 0, 1, 0 };

@@ -1,6 +1,5 @@
 #include "gmock/gmock.h"
 #include "exodusIIcpp.h"
-#include <stdexcept>
 
 using namespace exodusIIcpp;
 
@@ -30,5 +29,5 @@ TEST(ElementBlockTest, test)
 
     EXPECT_THAT(eb.get_connectivity(), testing::ElementsAre(1, 2, 2, 3, 3, 4));
 
-    EXPECT_THROW(eb.get_element_connectivity(3), std::out_of_range);
+    EXPECT_THROW(eb.get_element_connectivity(3), Exception);
 }

@@ -25,13 +25,13 @@ TEST(SideSetTest, test)
     EXPECT_THAT(ss.get_element_id(0), 1);
     EXPECT_THAT(ss.get_element_id(1), 2);
     EXPECT_THAT(ss.get_element_id(2), 3);
-    EXPECT_THROW(ss.get_element_id(3), std::out_of_range);
+    EXPECT_THROW(ss.get_element_id(3), Exception);
     EXPECT_THAT(ss.get_element_ids(), ElementsAre(1, 2, 3));
 
     EXPECT_THAT(ss.get_side_id(0), 0);
     EXPECT_THAT(ss.get_side_id(1), 1);
     EXPECT_THAT(ss.get_side_id(2), 0);
-    EXPECT_THROW(ss.get_side_id(3), std::out_of_range);
+    EXPECT_THROW(ss.get_side_id(3), Exception);
     EXPECT_THAT(ss.get_side_ids(), ElementsAre(0, 1, 0));
 
     ss.add(4, 1);
@@ -44,5 +44,5 @@ TEST(SideSetTest, set_sides_oob)
     SideSet ss;
     std::vector<int> elems = { 1, 2 };
     std::vector<int> sides = { 0, 1, 0 };
-    EXPECT_THROW(ss.set_sides(elems, sides), std::logic_error);
+    EXPECT_THROW(ss.set_sides(elems, sides), Exception);
 }
