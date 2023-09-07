@@ -1,5 +1,5 @@
 #include "exodusIIcppNodeSet.h"
-#include <stdexcept>
+#include "exodusIIcppException.h"
 
 namespace exodusIIcpp {
 
@@ -29,7 +29,7 @@ NodeSet::get_node_id(std::size_t idx) const
     if (idx < this->node_ids.size())
         return this->node_ids[idx];
     else
-        throw std::out_of_range("Index of out bounds.");
+        throw Exception("Index of out bounds.");
 }
 
 const std::vector<int> &

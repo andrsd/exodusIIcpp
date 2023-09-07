@@ -101,7 +101,7 @@ File::open(const std::string & file_path)
                           &this->io_word_size,
                           &this->version);
     if (this->exoid < 0)
-        throw std::runtime_error(fmt::sprintf("Unable to open file '%s'.", file_path));
+        throw Exception(fmt::sprintf("Unable to open file '%s'.", file_path));
 }
 
 void
@@ -111,7 +111,7 @@ File::create(const std::string & file_path)
     this->exoid =
         ex_create(file_path.c_str(), EX_CLOBBER, &this->cpu_word_size, &this->io_word_size);
     if (this->exoid < 0)
-        throw std::runtime_error(fmt::sprintf("Unable to open file '%s'.", file_path));
+        throw Exception(fmt::sprintf("Unable to open file '%s'.", file_path));
 }
 
 bool
@@ -138,7 +138,7 @@ File::init()
         this->coord_names.resize(this->n_dim);
     }
     else
-        throw std::logic_error("Calling init with non-read file access.");
+        throw Exception("Calling init with non-read file access.");
 }
 
 void
@@ -162,7 +162,7 @@ File::init(const char * title,
         this->coord_names.resize(n_dims);
     }
     else
-        throw std::logic_error("Calling init with non-write access.");
+        throw Exception("Calling init with non-write access.");
 }
 
 const std::string &
@@ -243,7 +243,7 @@ File::get_element_block(std::size_t idx) const
     if (idx < this->element_blocks.size())
         return this->element_blocks[idx];
     else
-        throw std::out_of_range(fmt::sprintf("Index out of range '%d'", idx));
+        throw Exception(fmt::sprintf("Index out of range '%d'", idx));
 }
 
 const std::vector<SideSet> &
@@ -522,7 +522,7 @@ File::write_side_set(int64_t set_id,
             ex_put_set(this->exoid, EX_SIDE_SET, set_id, elem_list.data(), side_list.data()));
     }
     else
-        throw std::logic_error("The length of elem_list must be equal to the length of side_list.");
+        throw Exception("The length of elem_list must be equal to the length of side_list.");
 }
 
 void
