@@ -198,6 +198,22 @@ public:
     /// @return Global variable names
     std::vector<std::string> get_global_variable_names() const;
 
+    /// Get nodal variable values at once
+    ///
+    /// @param time_step Time step index (1-based)
+    /// @param var_idx Variable index (1-based)
+    /// @return Vector of nodal values for the given variable
+    std::vector<double> get_nodal_variable_values(int time_step, int var_idx) const;
+
+    /// Get elemental variable values for a given block at once
+    ///
+    /// @param time_step Time step index (1-based)
+    /// @param var_idx Variable index (1-based)
+    /// @param block_id Block ID
+    /// @return Vector of elemental values for a given variable and block
+    std::vector<double>
+    get_elemental_variable_values(int time_step, int var_idx, int block_id) const;
+
     // Read API
 
     /// Read *all* data from the ExodusII file
