@@ -369,6 +369,41 @@
 </dd></dl>
 
 <dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11exodusIIcpp4File25get_nodal_variable_valuesEii">
+<span id="_CPPv3NK11exodusIIcpp4File25get_nodal_variable_valuesEii"></span><span id="_CPPv2NK11exodusIIcpp4File25get_nodal_variable_valuesEii"></span><span id="exodusIIcpp::File::get_nodal_variable_values__i.iC"></span><span class="target" id="classexodus_i_icpp_1_1_file_1ac021fdeff38ead0200461b36e138d945"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">double</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_nodal_variable_values</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">time_step</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">var_idx</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK11exodusIIcpp4File25get_nodal_variable_valuesEii" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get nodal variable values at once. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>time_step</strong> – Time step index (1-based) </p></li>
+<li><p><strong>var_idx</strong> – Variable index (1-based) </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Vector of nodal values for the given variable </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11exodusIIcpp4File29get_elemental_variable_valuesEiii">
+<span id="_CPPv3NK11exodusIIcpp4File29get_elemental_variable_valuesEiii"></span><span id="_CPPv2NK11exodusIIcpp4File29get_elemental_variable_valuesEiii"></span><span id="exodusIIcpp::File::get_elemental_variable_values__i.i.iC"></span><span class="target" id="classexodus_i_icpp_1_1_file_1a194d454867bf04345ee80a1414c1a664"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">double</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_elemental_variable_values</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">time_step</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">var_idx</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">block_id</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK11exodusIIcpp4File29get_elemental_variable_valuesEiii" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get elemental variable values for a given block at once. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>time_step</strong> – Time step index (1-based) </p></li>
+<li><p><strong>var_idx</strong> – Variable index (1-based) </p></li>
+<li><p><strong>block_id</strong> – Block ID </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Vector of elemental values for a given variable and block </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N11exodusIIcpp4File4readEv">
 <span id="_CPPv3N11exodusIIcpp4File4readEv"></span><span id="_CPPv2N11exodusIIcpp4File4readEv"></span><span id="exodusIIcpp::File::read"></span><span class="target" id="classexodus_i_icpp_1_1_file_1a83d717a506fcaa7322e1a174bcad27d3"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">read</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11exodusIIcpp4File4readEv" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Read <em>all</em> data from the ExodusII file. </p>
