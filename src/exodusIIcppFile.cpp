@@ -51,6 +51,26 @@ read_name_map(int exoid, int n, ex_entity_type obj_type)
     return map_names;
 }
 
+static std::vector<std::string>
+read_variable_names(int exoid, ex_entity_type obj_type)
+{
+    int n_vars;
+    EXODUSIICPP_CHECK_ERROR(ex_get_variable_param(exoid, obj_type, &n_vars));
+    std::vector<std::string> var_names;
+    if (n_vars > 0) {
+        var_names.resize(n_vars);
+        for (int i = 0; i < n_vars; i++)
+            var_names[i].resize(MAX_STR_LENGTH);
+        std::vector<char *> names(n_vars);
+        for (int i = 0; i < n_vars; i++)
+            names[i] = var_names[i].data();
+        EXODUSIICPP_CHECK_ERROR(ex_get_variable_names(exoid, obj_type, n_vars, names.data()));
+        for (int i = 0; i < n_vars; i++)
+            var_names[i] = var_names[i].c_str();
+    }
+    return var_names;
+}
+
 File::File() :
     cpu_word_size(sizeof(double)),
     io_word_size(8),
@@ -262,6 +282,24 @@ const std::vector<double> &
 File::get_times() const
 {
     return this->time_values;
+}
+
+std::vector<std::string>
+File::get_nodal_variable_names() const
+{
+    return read_variable_names(this->exoid, EX_NODAL);
+}
+
+std::vector<std::string>
+File::get_elemental_variable_names() const
+{
+    return read_variable_names(this->exoid, EX_ELEM_BLOCK);
+}
+
+std::vector<std::string>
+File::get_global_variable_names() const
+{
+    return read_variable_names(this->exoid, EX_GLOBAL);
 }
 
 // Read API

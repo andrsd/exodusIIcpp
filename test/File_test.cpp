@@ -207,6 +207,16 @@ TEST(FileTest, read_square)
         EXPECT_EQ(times.size(), 2);
         EXPECT_THAT(times, ElementsAre(0., 1.));
 
+        auto nodal_var_names = f.get_nodal_variable_names();
+        EXPECT_EQ(nodal_var_names.size(), 1);
+        EXPECT_THAT(nodal_var_names, ElementsAre("u"));
+
+        auto elem_var_names = f.get_elemental_variable_names();
+        EXPECT_EQ(elem_var_names.size(), 0);
+
+        auto global_var_names = f.get_global_variable_names();
+        EXPECT_EQ(global_var_names.size(), 0);
+
         f.close();
     }
 }

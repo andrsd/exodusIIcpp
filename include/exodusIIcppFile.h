@@ -183,6 +183,21 @@ public:
     /// @return Time values
     const std::vector<double> & get_times() const;
 
+    /// Get nodal variable names
+    ///
+    /// @return Nodal variable names
+    std::vector<std::string> get_nodal_variable_names() const;
+
+    /// Get elemental variable names
+    ///
+    /// @return Elemental variable names
+    std::vector<std::string> get_elemental_variable_names() const;
+
+    /// Get global variable names
+    ///
+    /// @return Global variable names
+    std::vector<std::string> get_global_variable_names() const;
+
     // Read API
 
     /// Read *all* data from the ExodusII file
