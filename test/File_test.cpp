@@ -295,6 +295,12 @@ TEST(FileTest, test)
         EXPECT_THAT(vals,
                     ElementsAre(DoubleEq(0.08), DoubleEq(0.10), DoubleEq(0.12), DoubleEq(0.14)));
 
+        auto elem_var_names = f.get_elemental_variable_names();
+        EXPECT_THAT(elem_var_names, ElementsAre("ele_var0", "ele_var1", "ele_var2"));
+
+        auto ev3b2_vals = f.get_elemental_variable_values(10, 3, 11);
+        EXPECT_THAT(ev3b2_vals, ElementsAre(DoubleEq(7.1)));
+
         f.close();
     }
 }
