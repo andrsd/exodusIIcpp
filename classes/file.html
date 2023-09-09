@@ -325,6 +325,17 @@
 </dd></dl>
 
 <dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11exodusIIcpp4File13get_num_timesEv">
+<span id="_CPPv3NK11exodusIIcpp4File13get_num_timesEv"></span><span id="_CPPv2NK11exodusIIcpp4File13get_num_timesEv"></span><span id="exodusIIcpp::File::get_num_timesC"></span><span class="target" id="classexodus_i_icpp_1_1_file_1a2d6ca90f1b9b7669c9d8d5dac77cc72a"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_num_times</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK11exodusIIcpp4File13get_num_timesEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get number of time steps. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Number of time steps </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK11exodusIIcpp4File9get_timesEv">
 <span id="_CPPv3NK11exodusIIcpp4File9get_timesEv"></span><span id="_CPPv2NK11exodusIIcpp4File9get_timesEv"></span><span id="exodusIIcpp::File::get_timesC"></span><span class="target" id="classexodus_i_icpp_1_1_file_1a2ec0da3316d22ecb0c37a5de967b0ccf"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">double</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">get_times</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK11exodusIIcpp4File9get_timesEv" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Get time values. </p>
@@ -399,6 +410,38 @@
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Vector of elemental values for a given variable and block </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11exodusIIcpp4File26get_global_variable_valuesEi">
+<span id="_CPPv3NK11exodusIIcpp4File26get_global_variable_valuesEi"></span><span id="_CPPv2NK11exodusIIcpp4File26get_global_variable_valuesEi"></span><span id="exodusIIcpp::File::get_global_variable_values__iC"></span><span class="target" id="classexodus_i_icpp_1_1_file_1a69c4a44b2152467f892f18c00238fad0"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">double</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_global_variable_values</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">time_step</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK11exodusIIcpp4File26get_global_variable_valuesEi" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get values of global variables for a given time steps. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>time_step</strong> – Time step index (1-based) </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Values of global variables </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11exodusIIcpp4File26get_global_variable_valuesEiii">
+<span id="_CPPv3NK11exodusIIcpp4File26get_global_variable_valuesEiii"></span><span id="_CPPv2NK11exodusIIcpp4File26get_global_variable_valuesEiii"></span><span id="exodusIIcpp::File::get_global_variable_values__i.i.iC"></span><span class="target" id="classexodus_i_icpp_1_1_file_1a766fca0c0c57b8103f4f4b140f9f332f"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">double</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_global_variable_values</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">var_idx</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">begin_idx</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">end_idx</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="o"><span class="pre">-</span></span><span class="m"><span class="pre">1</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK11exodusIIcpp4File26get_global_variable_valuesEiii" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get global variable values over time. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>var_idx</strong> – Variable index (1-based) </p></li>
+<li><p><strong>begin_idx</strong> – First time step (1-based) </p></li>
+<li><p><strong>end_idx</strong> – End time step (1-based). -1 means use last time step. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
 </dd>
 </dl>
 </dd></dl>
