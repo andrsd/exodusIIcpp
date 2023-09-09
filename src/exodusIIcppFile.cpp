@@ -279,6 +279,12 @@ File::get_node_sets() const
     return this->node_sets;
 }
 
+int
+File::get_num_times() const
+{
+    return ex_inquire_int(this->exoid, EX_INQ_TIME);
+}
+
 const std::vector<double> &
 File::get_times() const
 {
@@ -335,6 +341,29 @@ File::get_elemental_variable_values(int time_step, int var_idx, int block_id) co
                                        block_id,
                                        n_blk_elems,
                                        values.data()));
+    return values;
+}
+
+std::vector<double>
+File::get_global_variable_values(int time_step) const
+{
+    int n_glob_vars;
+    EXODUSIICPP_CHECK_ERROR(ex_get_variable_param(this->exoid, EX_GLOBAL, &n_glob_vars));
+
+    std::vector<double> values(n_glob_vars);
+    EXODUSIICPP_CHECK_ERROR(
+        ex_get_var(this->exoid, time_step, EX_GLOBAL, 1, 0, n_glob_vars, values.data()));
+    return values;
+}
+
+std::vector<double>
+File::get_global_variable_values(int var_idx, int begin_idx, int end_idx) const
+{
+    int last_idx = end_idx == -1 ? get_num_times() : end_idx;
+    int n_vals = last_idx - begin_idx + 1;
+    std::vector<double> values(n_vals);
+    EXODUSIICPP_CHECK_ERROR(
+        ex_get_var_time(this->exoid, EX_GLOBAL, var_idx, 1, begin_idx, last_idx, values.data()));
     return values;
 }
 
@@ -518,8 +547,7 @@ File::read_side_set_names() const
 void
 File::read_times()
 {
-    int n_time_steps = ex_inquire_int(this->exoid, EX_INQ_TIME);
-    this->time_values.resize(n_time_steps);
+    this->time_values.resize(get_num_times());
     EXODUSIICPP_CHECK_ERROR(ex_get_all_times(this->exoid, this->time_values.data()));
 }
 

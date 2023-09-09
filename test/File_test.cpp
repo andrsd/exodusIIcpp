@@ -262,3 +262,45 @@ TEST(FileTest, custom_coord_names)
     g.read();
     EXPECT_THAT(g.get_coord_names(), ElementsAre("r", "z"));
 }
+
+TEST(FileTest, test)
+{
+    File f(std::string(EXODUSIICPP_UNIT_TEST_ASSETS) + std::string("/test.exo"), FileAccess::READ);
+    if (f.is_opened()) {
+        auto global_var_names = f.get_global_variable_names();
+        EXPECT_EQ(global_var_names.size(), 1);
+        EXPECT_THAT(global_var_names, ElementsAre("glo_vars"));
+
+        auto vals = f.get_global_variable_values(1);
+        EXPECT_THAT(vals, ElementsAre(DoubleEq(0.02)));
+        vals = f.get_global_variable_values(5);
+        EXPECT_THAT(vals, ElementsAre(DoubleEq(0.1)));
+        vals = f.get_global_variable_values(10);
+        EXPECT_THAT(vals, ElementsAre(DoubleEq(0.2)));
+
+        vals = f.get_global_variable_values(1, 1);
+        EXPECT_THAT(vals,
+                    ElementsAre(DoubleEq(0.02),
+                                DoubleEq(0.04),
+                                DoubleEq(0.06),
+                                DoubleEq(0.08),
+                                DoubleEq(0.1),
+                                DoubleEq(0.12),
+                                DoubleEq(0.14),
+                                DoubleEq(0.16),
+                                DoubleEq(0.18),
+                                DoubleEq(0.2)));
+
+        vals = f.get_global_variable_values(1, 4, 7);
+        EXPECT_THAT(vals,
+                    ElementsAre(DoubleEq(0.08), DoubleEq(0.10), DoubleEq(0.12), DoubleEq(0.14)));
+
+        auto elem_var_names = f.get_elemental_variable_names();
+        EXPECT_THAT(elem_var_names, ElementsAre("ele_var0", "ele_var1", "ele_var2"));
+
+        auto ev3b2_vals = f.get_elemental_variable_values(10, 3, 11);
+        EXPECT_THAT(ev3b2_vals, ElementsAre(DoubleEq(7.1)));
+
+        f.close();
+    }
+}

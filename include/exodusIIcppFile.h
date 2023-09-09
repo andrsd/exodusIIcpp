@@ -178,6 +178,11 @@ public:
     /// @return The list of node sets
     const std::vector<NodeSet> & get_node_sets() const;
 
+    /// Get number of time steps
+    ///
+    /// @return Number of time steps
+    int get_num_times() const;
+
     /// Get time values
     ///
     /// @return Time values
@@ -213,6 +218,21 @@ public:
     /// @return Vector of elemental values for a given variable and block
     std::vector<double>
     get_elemental_variable_values(int time_step, int var_idx, int block_id) const;
+
+    /// Get values of global variables for a given time steps
+    ///
+    /// @param time_step Time step index (1-based)
+    /// @return Values of global variables
+    std::vector<double> get_global_variable_values(int time_step) const;
+
+    /// Get global variable values over time
+    ///
+    /// @param var_idx Variable index (1-based)
+    /// @param begin_idx First time step (1-based)
+    /// @param end_idx End time step (1-based). -1 means use last time step.
+    /// @return
+    std::vector<double>
+    get_global_variable_values(int var_idx, int begin_idx, int end_idx = -1) const;
 
     // Read API
 
