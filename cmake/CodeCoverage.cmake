@@ -43,7 +43,7 @@ if(EXODUSIICPP_CODE_COVERAGE)
 
         set(CODE_COVERAGE_BINS
             --object=${PROJECT_BINARY_DIR}/test/exodusIIcpp-test
-            --object=${PROJECT_BINARY_DIR}/libexodusIIcpp${CMAKE_SHARED_LIBRARY_SUFFIX}
+            --object=${PROJECT_BINARY_DIR}/src/libexodusIIcpp${CMAKE_SHARED_LIBRARY_SUFFIX}
         )
 
         set(MERGED_PROFDATA ${PROJECT_BINARY_DIR}/all-merged.profdata)
