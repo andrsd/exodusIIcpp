@@ -344,6 +344,29 @@ File::get_elemental_variable_values(int time_step, int var_idx, int block_id) co
     return values;
 }
 
+std::vector<double>
+File::get_global_variable_values(int time_step) const
+{
+    int n_glob_vars;
+    EXODUSIICPP_CHECK_ERROR(ex_get_variable_param(this->exoid, EX_GLOBAL, &n_glob_vars));
+
+    std::vector<double> values(n_glob_vars);
+    EXODUSIICPP_CHECK_ERROR(
+        ex_get_var(this->exoid, time_step, EX_GLOBAL, 1, 0, n_glob_vars, values.data()));
+    return values;
+}
+
+std::vector<double>
+File::get_global_variable_values(int var_idx, int begin_idx, int end_idx) const
+{
+    int last_idx = end_idx == -1 ? get_num_times() : end_idx;
+    int n_vals = last_idx - begin_idx + 1;
+    std::vector<double> values(n_vals);
+    EXODUSIICPP_CHECK_ERROR(
+        ex_get_var_time(this->exoid, EX_GLOBAL, var_idx, 1, begin_idx, last_idx, values.data()));
+    return values;
+}
+
 // Read API
 
 void
