@@ -279,6 +279,12 @@ File::get_node_sets() const
     return this->node_sets;
 }
 
+int
+File::get_num_times() const
+{
+    return ex_inquire_int(this->exoid, EX_INQ_TIME);
+}
+
 const std::vector<double> &
 File::get_times() const
 {
@@ -518,8 +524,7 @@ File::read_side_set_names() const
 void
 File::read_times()
 {
-    int n_time_steps = ex_inquire_int(this->exoid, EX_INQ_TIME);
-    this->time_values.resize(n_time_steps);
+    this->time_values.resize(get_num_times());
     EXODUSIICPP_CHECK_ERROR(ex_get_all_times(this->exoid, this->time_values.data()));
 }
 

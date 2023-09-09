@@ -178,6 +178,11 @@ public:
     /// @return The list of node sets
     const std::vector<NodeSet> & get_node_sets() const;
 
+    /// Get number of time steps
+    ///
+    /// @return Number of time steps
+    int get_num_times() const;
+
     /// Get time values
     ///
     /// @return Time values
