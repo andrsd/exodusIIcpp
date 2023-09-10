@@ -230,7 +230,7 @@ public:
     /// @param var_idx Variable index (1-based)
     /// @param begin_idx First time step (1-based)
     /// @param end_idx End time step (1-based). -1 means use last time step.
-    /// @return
+    /// @return Values of a given global variable over specified time interval
     std::vector<double>
     get_global_variable_values(int var_idx, int begin_idx, int end_idx = -1) const;
 
