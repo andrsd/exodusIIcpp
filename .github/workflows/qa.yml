@@ -9,14 +9,71 @@ on:
       - main
 
 jobs:
-  formatting-check:
-    name: Check formatting
+  cpp-linter:
+    name: c++ linter
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - name: Clang-format style check
-      uses: jidicula/clang-format-action@v4.3.0
-      with:
-        clang-format-version: '14'
-        check-path: .
-        exclude-regex: './contrib/'
+      - uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt install libfmt-dev libnetcdf-dev libhdf5-dev libexodusii-dev libyaml-cpp-dev
+
+      - name: Configure
+        run: |
+          cmake -S . -B ${{ github.workspace }}/build \
+            -DEXODUSIICPP_BUILD_TESTS=YES \
+            -DCMAKE_EXPORT_COMPILE_COMMANDS=on
+
+      - uses: cpp-linter/cpp-linter-action@v2
+        id: linter
+        with:
+          style: file
+          version: 14
+          lines-changed-only: true
+          ignore: 'contrib'
+          step-summary: true
+          database: build
+
+      - name: Result
+        if: steps.linter.outputs.checks-failed > 0
+        run: exit 1
+
+  analyze:
+    name: analyze
+    runs-on: ubuntu-22.04
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [ 'cpp' ]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt install libfmt-dev libnetcdf-dev libhdf5-dev libexodusii-dev libyaml-cpp-dev
+
+      - name: Configure
+        run: |
+          cmake -S . -B ${{ github.workspace }}/build \
+            -DEXODUSIICPP_BUILD_TESTS=YES
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v2
+        with:
+          languages: ${{ matrix.language }}
+
+      - name: Build
+        run: make -C ${{ github.workspace }}/build
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v2
