@@ -169,6 +169,13 @@ TEST(FileTest, create_edge2)
     std::vector<int> connect1 = { 1, 2, 2, 3 };
     f.write_block(1, "BAR2", 2, connect1);
 
+    f.write_time(1, 1.);
+
+    std::vector<std::string> nv_names = { "nv1" };
+    f.write_nodal_var_names(nv_names);
+    f.write_nodal_var(1, 1, { 10, 11, 12 });
+    f.update();
+
     f.close();
 
     // check the file that we created

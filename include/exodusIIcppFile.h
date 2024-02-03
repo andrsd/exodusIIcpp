@@ -374,6 +374,13 @@ public:
     /// @param var_names Names of global variables
     void write_global_var_names(const std::vector<std::string> & var_names);
 
+    /// Write nodal variable values to the ExodusII file
+    ///
+    /// @param step_num Time step index
+    /// @param var_index Variable index
+    /// @param values Values to write
+    void write_nodal_var(int step_num, int var_index, const std::vector<double> & values);
+
     /// Write nodal variable value to the ExodusII file
     ///
     /// @param step_num Time step index
