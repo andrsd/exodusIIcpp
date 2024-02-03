@@ -686,6 +686,13 @@ File::write_global_var_names(const std::vector<std::string> & var_names)
 }
 
 void
+File::write_nodal_var(int step_num, int var_index, const std::vector<double> & values)
+{
+    EXODUSIICPP_CHECK_ERROR(
+        ex_put_var(this->exoid, step_num, EX_NODAL, var_index, 0, values.size(), values.data()));
+}
+
+void
 File::write_partial_nodal_var(int step_num,
                               int var_index,
                               int64_t obj_id,
