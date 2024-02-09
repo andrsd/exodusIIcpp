@@ -1,9 +1,8 @@
 #include "exodusIIcppFile.h"
 #include "exodusII.h"
 #include "fmt/printf.h"
-#include <stdexcept>
 #include <cassert>
-#include <iostream>
+#include <numeric>
 
 namespace exodusIIcpp {
 
@@ -271,6 +270,26 @@ const std::vector<SideSet> &
 File::get_side_sets() const
 {
     return this->side_sets;
+}
+
+void
+File::get_side_set_node_list(int side_set_id,
+                             std::vector<int> & node_count_list,
+                             std::vector<int> & node_list) const
+{
+    int num_sides_in_set;
+    EXODUSIICPP_CHECK_ERROR(
+        ex_get_set_param(this->exoid, EX_SIDE_SET, side_set_id, &num_sides_in_set, nullptr));
+
+    node_count_list.resize(num_sides_in_set);
+    // the maximum number of nodes of a 2D element (which would be a side element) is 9 on QUAD9
+    node_list.resize(num_sides_in_set * 9);
+    EXODUSIICPP_CHECK_ERROR(ex_get_side_set_node_list(this->exoid,
+                                                      side_set_id,
+                                                      node_count_list.data(),
+                                                      node_list.data()));
+    int n = std::accumulate(node_count_list.begin(), node_count_list.end(), 0);
+    node_list.resize(n);
 }
 
 const std::vector<NodeSet> &

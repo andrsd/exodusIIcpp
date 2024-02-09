@@ -173,6 +173,19 @@ public:
     /// @return The list of side sets
     const std::vector<SideSet> & get_side_sets() const;
 
+    /// Get node list for a given side set index
+    ///
+    /// Example: For a side set that would have one EDGE2 and one TRI3, we would receive:
+    /// - node_count_list: [2, 3]
+    /// - node_list: [1, 2, 7, 2, 8]
+    ///
+    /// @param side_set_id Side set ID (not index)
+    /// @param node_count_list Number of elements in the side set
+    /// @param node_list Nodes corresponding to sides
+    void get_side_set_node_list(int side_set_idx,
+                                std::vector<int> & node_count_list,
+                                std::vector<int> & node_list) const;
+
     /// Get node sets
     ///
     /// @return The list of node sets

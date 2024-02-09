@@ -308,6 +308,12 @@ TEST(FileTest, test)
         auto ev3b2_vals = f.get_elemental_variable_values(10, 3, 11);
         EXPECT_THAT(ev3b2_vals, ElementsAre(DoubleEq(7.1)));
 
+        std::vector<int> ss_cnts;
+        std::vector<int> ss_nodes;
+        f.get_side_set_node_list(31, ss_cnts, ss_nodes);
+        EXPECT_THAT(ss_cnts, ElementsAre(2, 2));
+        EXPECT_THAT(ss_nodes, ElementsAre(2, 3, 7, 8));
+
         f.close();
     }
 }
