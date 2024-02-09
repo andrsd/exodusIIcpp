@@ -314,6 +314,26 @@
 </dd></dl>
 
 <dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11exodusIIcpp4File22get_side_set_node_listEiRNSt6vectorIiEERNSt6vectorIiEE">
+<span id="_CPPv3NK11exodusIIcpp4File22get_side_set_node_listEiRNSt6vectorIiEERNSt6vectorIiEE"></span><span id="_CPPv2NK11exodusIIcpp4File22get_side_set_node_listEiRNSt6vectorIiEERNSt6vectorIiEE"></span><span id="exodusIIcpp::File::get_side_set_node_list__i.std::vector:i:R.std::vector:i:RC"></span><span class="target" id="classexodus_i_icpp_1_1_file_1a8708fb022f9b3eca557f9267329977a2"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_side_set_node_list</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">side_set_idx</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">int</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">node_count_list</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">int</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">node_list</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK11exodusIIcpp4File22get_side_set_node_listEiRNSt6vectorIiEERNSt6vectorIiEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get node list for a given side set index. </p>
+<p>Example: For a side set that would have one EDGE2 and one TRI3, we would receive:<ul class="simple">
+<li><p>node_count_list: [2, 3]</p></li>
+<li><p>node_list: [1, 2, 7, 2, 8]</p></li>
+</ul>
+</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>side_set_id</strong> – Side set ID (not index) </p></li>
+<li><p><strong>node_count_list</strong> – Number of elements in the side set </p></li>
+<li><p><strong>node_list</strong> – Nodes corresponding to sides </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK11exodusIIcpp4File13get_node_setsEv">
 <span id="_CPPv3NK11exodusIIcpp4File13get_node_setsEv"></span><span id="_CPPv2NK11exodusIIcpp4File13get_node_setsEv"></span><span id="exodusIIcpp::File::get_node_setsC"></span><span class="target" id="classexodus_i_icpp_1_1_file_1a598b8e4ece98b42f7e9bbfd960a18baf"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="node-set.html#_CPPv4N11exodusIIcpp7NodeSetE" title="exodusIIcpp::NodeSet"><span class="n"><span class="pre">NodeSet</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">get_node_sets</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK11exodusIIcpp4File13get_node_setsEv" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Get node sets. </p>
