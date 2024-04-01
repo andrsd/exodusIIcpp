@@ -3,7 +3,7 @@ project(yml2exo LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(yaml-cpp 0.7 REQUIRED)
+find_package(yaml-cpp 0.8 REQUIRED)
 
 add_executable(${PROJECT_NAME}
     main.cpp
@@ -21,7 +21,7 @@ target_link_libraries(
     ${PROJECT_NAME}
     PUBLIC
         fmt::fmt
-        yaml-cpp
+        yaml-cpp::yaml-cpp
         exodusIIcpp
 )
 
