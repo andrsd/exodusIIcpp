@@ -39,7 +39,7 @@ jobs:
             mpich-mpicxx \
             exodusii==2022.08.01 \
             fmt==9.1.0 \
-            yaml-cpp==0.7.0 \
+            yaml-cpp==0.8.0 \
             lcov
 
       - name: Configure
