@@ -22,6 +22,7 @@ endif()
 set_property(CACHE EXODUSIICPP_LIBRARY_TYPE PROPERTY STRINGS ${LibraryTypeValues})
 
 option(EXODUSIICPP_BUILD_TESTS "Build tests" NO)
+option(EXODUSIICPP_BUILD_TOOLS "Build tools" YES)
 
 find_package(fmt 8.0 REQUIRED)
 find_package(NetCDF 4.5 REQUIRED)
@@ -52,7 +53,9 @@ if (EXODUSIICPP_BUILD_TESTS)
 endif()
 
 add_subdirectory(src)
-add_subdirectory(tools)
+if (EXODUSIICPP_BUILD_TOOLS)
+    add_subdirectory(tools)
+endif()
 
 # Tests
 
