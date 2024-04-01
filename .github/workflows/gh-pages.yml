@@ -11,19 +11,41 @@ permissions:
 jobs:
   build-and-deploy:
     concurrency: ci-${{ github.ref }}
+    defaults:
+      run:
+        shell: bash -el {0}
     runs-on: ubuntu-latest
     steps:
+      - name: Set up miniconda
+        uses: conda-incubator/setup-miniconda@v2
+        with:
+          python-version: 3.9
+          auto-update-conda: false
+          channels: andrsd,defaults
+
       - name: Checkout
         uses: actions/checkout@v3
+
       - name: Install dependencies
         run: |
-          sudo apt-get update -qq
-          sudo apt install python3-sphinx python3-sphinx-rtd-theme doxygen python3-breathe \
-            libfmt-dev libnetcdf-dev libhdf5-dev libexodusii-dev libyaml-cpp-dev
+          conda install \
+            cmake \
+            make \
+            mpich-mpicxx \
+            exodusii==2022.08.01 \
+            fmt==9.1.0 \
+            yaml-cpp==0.8.0 \
+            doxygen \
+            sphinx \
+            sphinx_rtd_theme \
+            breathe==4.35.0 \
+            sphinx-design
+
       - name: Build doco
         run: |
           cmake -S . -B ${{ github.workspace }}/build
           make -C ${{ github.workspace }}/build doc
+
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
