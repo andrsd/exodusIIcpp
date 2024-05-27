@@ -27,7 +27,7 @@ target_include_directories(
         $<INSTALL_INTERFACE:include>
     PRIVATE
         $<BUILD_INTERFACE:${EXODUSII_INCLUDE_DIR}>
-        $<BUILD_INTERFACE:${NETCDF_INCLUDE_DIR}>
+        $<BUILD_INTERFACE:${NETCDF_INCLUDE_DIRS}>
 )
 
 target_link_libraries(
