@@ -2,7 +2,7 @@
 #
 # Once done this will define
 #  NETCDF_FOUND - System has NetCDF
-#  NETCDF_INCLUDE_DIR - The NetCDF include directory
+#  NETCDF_INCLUDE_DIRS - The NetCDF include directories
 #  NETCDF_LIBRARY - The NetCDF library
 #  NETCDF_VERSION - The NetCDF library
 
@@ -19,6 +19,7 @@ find_library(
     PATHS
         $ENV{NETCDF_DIR}/lib
 )
+set(NETCDF_INCLUDE_DIRS ${NETCDF_INCLUDE_DIR})
 
 set(NETCDF_VERSION "unknown")
 find_file(NETCDF_META_H netcdf_meta.h
@@ -35,6 +36,13 @@ if (NETCDF_META_H)
     string(REGEX MATCH "define[ ]+NC_VERSION_PATCH[ ]+([0-9]+)" TMP "${NETCDF_META_FILE}")
     set(NETCDF_VERSION_PATCH ${CMAKE_MATCH_1})
     set(NETCDF_VERSION "${NETCDF_VERSION_MAJOR}.${NETCDF_VERSION_MINOR}.${NETCDF_VERSION_PATCH}")
+    string(REGEX MATCH "define[ ]+NC_HAS_PARALLEL[ ]+([0-9]+)" TMP "${NETCDF_META_FILE}")
+    set(NETCDF_PARALLEL ${CMAKE_MATCH_1})
+endif()
+
+if (NETCDF_PARALLEL EQUAL "1")
+    find_package(MPI REQUIRED)
+    list(APPEND NETCDF_INCLUDE_DIRS ${MPI_C_INCLUDE_DIRS})
 endif()
 
 include(FindPackageHandleStandardArgs)
@@ -45,6 +53,7 @@ find_package_handle_standard_args(
 )
 
 mark_as_advanced(FORCE
+    NETCDF_INCLUDE_DIRS
     NETCDF_INCLUDE_DIR
     NETCDF_LIBRARY
 )
