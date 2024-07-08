@@ -22,14 +22,14 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - name: Set up miniconda
-        uses: conda-incubator/setup-miniconda@v2
+        uses: conda-incubator/setup-miniconda@v3
         with:
           python-version: 3.9
           auto-update-conda: false
           channels: andrsd,defaults
 
       - name: Checkout source
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Install dependencies
         run: |
@@ -62,7 +62,7 @@ jobs:
 
       - name: Upload test result
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: test-results-${{ matrix.os }}
           path: ${{ github.workspace }}/build/Testing/Temporary/LastTest.log
@@ -74,7 +74,7 @@ jobs:
 
       - name: Upload coverage artifact
         if: startsWith(matrix.os, 'ubuntu')
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: coverage-${{ matrix.os }}
           path: ${{ github.workspace }}/build/coverage.info
@@ -84,10 +84,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Download artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
 
       - name: Upload to Codecov
         uses: codecov/codecov-action@v4
