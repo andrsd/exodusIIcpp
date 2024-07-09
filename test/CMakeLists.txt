@@ -31,10 +31,10 @@ target_link_libraries(
         gmock_main
 )
 
-set(EXODUSIICPP_UNIT_TEST_ASSETS ${PROJECT_SOURCE_DIR}/assets CACHE PATH "" FORCE)
-mark_as_advanced(FORCE EXODUSIICPP_UNIT_TEST_ASSETS)
-
-configure_file(config.h.in config.h)
+target_compile_definitions(${PROJECT_NAME}
+    PRIVATE
+        -DEXODUSIICPP_UNIT_TEST_ASSETS="${EXODUSIICPP_UNIT_TEST_ASSETS}"
+)
 
 add_test(
     NAME ${PROJECT_NAME}
