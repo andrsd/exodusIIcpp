@@ -1,11 +1,11 @@
 add_library(
     ${PROJECT_NAME}
     ${EXODUSIICPP_LIBRARY_TYPE}
-        exodusIIcppElementBlock.cpp
-        exodusIIcppException.cpp
-        exodusIIcppFile.cpp
-        exodusIIcppNodeSet.cpp
-        exodusIIcppSideSet.cpp
+        element_block.cpp
+        exception.cpp
+        file.cpp
+        node_set.cpp
+        side_set.cpp
 )
 if(CMAKE_PROJECT_NAME STREQUAL "exodusIIcpp")
     target_code_coverage(${PROJECT_NAME})
@@ -23,9 +23,10 @@ set_target_properties(
 target_include_directories(
     ${PROJECT_NAME}
     PUBLIC
-        $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
+        $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}>
         $<INSTALL_INTERFACE:include>
     PRIVATE
+        ${PROJECT_SOURCE_DIR}/include
         $<BUILD_INTERFACE:${EXODUSII_INCLUDE_DIR}>
         $<BUILD_INTERFACE:${NETCDF_INCLUDE_DIRS}>
 )
@@ -65,7 +66,7 @@ install(
 
 install(
     DIRECTORY ${PROJECT_SOURCE_DIR}/include/
-    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/exodusIIcpp
+    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
     FILES_MATCHING PATTERN "*.h"
 )
 

@@ -5,7 +5,7 @@
 
 #include "fmt/format.h"
 #include "fmt/printf.h"
-#include "exodusIIcppException.h"
+#include "exception.h"
 
 #define EXODUSIICPP_CHECK_ERROR(err) \
     exodusIIcpp::internal::check_error(err, __PRETTY_FUNCTION__, __FILE__, __LINE__)

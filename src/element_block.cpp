@@ -1,8 +1,8 @@
 // SPDX-FileCopyrightText: 2022 David Andrs <andrsd@gmail.com>
 // SPDX-License-Identifier: MIT
 
-#include "exodusIIcppElementBlock.h"
-#include "exodusIIcppException.h"
+#include "exodusIIcpp/element_block.h"
+#include "exodusIIcpp/exception.h"
 
 namespace exodusIIcpp {
 
