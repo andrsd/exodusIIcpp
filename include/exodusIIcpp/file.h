@@ -5,12 +5,12 @@
 
 #include <vector>
 #include <map>
-#include "exodusIIcppElementBlock.h"
-#include "exodusIIcppEnums.h"
-#include "exodusIIcppError.h"
-#include "exodusIIcppNodeSet.h"
-#include "exodusIIcppSideSet.h"
-#include "exodusIIcppFilesystem.h"
+#include "element_block.h"
+#include "enums.h"
+#include "error.h"
+#include "node_set.h"
+#include "side_set.h"
+#include "filesystem.h"
 
 namespace exodusIIcpp {
 

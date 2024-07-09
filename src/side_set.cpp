@@ -1,8 +1,8 @@
 // SPDX-FileCopyrightText: 2022 David Andrs <andrsd@gmail.com>
 // SPDX-License-Identifier: MIT
 
-#include "exodusIIcppSideSet.h"
-#include "exodusIIcppException.h"
+#include "exodusIIcpp/side_set.h"
+#include "exodusIIcpp/exception.h"
 
 namespace exodusIIcpp {
 

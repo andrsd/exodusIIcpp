@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: 2022 David Andrs <andrsd@gmail.com>
 // SPDX-License-Identifier: MIT
 
-#include "exodusIIcppFile.h"
+#include "exodusIIcpp/file.h"
 #include "exodusII.h"
 #include "fmt/printf.h"
 #include <cassert>

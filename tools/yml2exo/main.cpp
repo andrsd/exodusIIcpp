@@ -1,7 +1,7 @@
 #include "cxxopts/cxxopts.hpp"
 #include "fmt/printf.h"
 #include "yaml-cpp/yaml.h"
-#include "exodusIIcpp.h"
+#include "exodusIIcpp/exodusIIcpp.h"
 #include "common/error.h"
 
 YAML::Node
