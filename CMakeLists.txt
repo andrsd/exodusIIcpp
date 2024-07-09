@@ -60,6 +60,9 @@ endif()
 # Tests
 
 if (EXODUSIICPP_BUILD_TESTS)
+    set(EXODUSIICPP_UNIT_TEST_ASSETS ${CMAKE_SOURCE_DIR}/test/assets CACHE PATH "" FORCE)
+    mark_as_advanced(FORCE EXODUSIICPP_UNIT_TEST_ASSETS)
+
     enable_testing()
     add_subdirectory(test)
 endif()

@@ -1,6 +1,5 @@
 #include "gmock/gmock.h"
 #include "exodusIIcpp/exodusIIcpp.h"
-#include "config.h"
 
 using namespace exodusIIcpp;
 using namespace testing;
