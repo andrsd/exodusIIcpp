@@ -23,7 +23,7 @@ set_target_properties(
 target_include_directories(
     ${PROJECT_NAME}
     PUBLIC
-        $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}>
+        $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
         $<INSTALL_INTERFACE:include>
     PRIVATE
         ${PROJECT_SOURCE_DIR}/include
