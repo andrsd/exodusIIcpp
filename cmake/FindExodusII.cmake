@@ -48,6 +48,15 @@ find_package_handle_standard_args(
     VERSION_VAR EXODUSII_VERSION
 )
 
+if (EXODUSII_FOUND AND NOT TARGET exodusii::exodusii)
+    add_library(exodusii::exodusii UNKNOWN IMPORTED)
+    set_target_properties(exodusii::exodusii
+        PROPERTIES
+            IMPORTED_LOCATION "${EXODUSII_LIBRARY}"
+            INTERFACE_INCLUDE_DIRECTORIES "${EXODUSII_INCLUDE_DIR}"
+    )
+endif()
+
 mark_as_advanced(FORCE
     EXODUSII_INCLUDE_DIR
     EXODUSII_LIBRARY
