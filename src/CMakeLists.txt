@@ -35,8 +35,8 @@ target_link_libraries(
     ${PROJECT_NAME}
     PUBLIC
         fmt::fmt
-        exodusii::exodusii
     PRIVATE
+        exodusii::exodusii
         ${NETCDF_LIBRARY}
         ${HDF5_LIBRARIES}
 )
