@@ -55,6 +55,7 @@ if (EXODUSII_FOUND AND NOT TARGET exodusii::exodusii)
             IMPORTED_LOCATION "${EXODUSII_LIBRARY}"
             INTERFACE_INCLUDE_DIRECTORIES "${EXODUSII_INCLUDE_DIR}"
     )
+    target_link_libraries(exodusii::exodusii INTERFACE ${NETCDF_LIBRARY} ${HDF5_LIBRARIES})
 endif()
 
 mark_as_advanced(FORCE
