@@ -37,8 +37,6 @@ target_link_libraries(
         fmt::fmt
     PRIVATE
         exodusii::exodusii
-        ${NETCDF_LIBRARY}
-        ${HDF5_LIBRARIES}
 )
 
 # Install
