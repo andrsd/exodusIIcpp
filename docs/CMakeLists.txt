@@ -12,7 +12,11 @@ if(DOXYGEN_FOUND)
     configure_file(Doxyfile.in Doxyfile)
     configure_file(conf.py.in conf.py)
 
-    add_custom_target(doc DEPENDS ${PROJECT_BINARY_DIR}/docs/html/index.html)
+    add_custom_target(doc
+        DEPENDS ${PROJECT_BINARY_DIR}/docs/html/index.html
+        COMMENT
+            "Open ${PROJECT_BINARY_DIR}/docs/html/index.html in your browser to view the documentation."
+    )
 
     file(GLOB_RECURSE RST_FILES ${PROJECT_SOURCE_DIR}/docs/*.rst)
     file(GLOB_RECURSE EXODUSIICPP_HEADER_FILES ${PROJECT_SOURCE_DIR}/include/*.h)
@@ -36,14 +40,6 @@ if(DOXYGEN_FOUND)
         DEPENDS
             ${PROJECT_BINARY_DIR}/docs/Doxyfile
             ${EXODUSIICPP_HEADER_FILES}
-    )
-
-    add_custom_command(
-        TARGET doc
-        POST_BUILD
-        COMMAND ;
-        COMMENT
-            "Open ${PROJECT_BINARY_DIR}/docs/html/index.html in your browser to view the documentation."
     )
 
 endif()
