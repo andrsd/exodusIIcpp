@@ -77,7 +77,10 @@ if(EXODUSIICPP_CODE_COVERAGE)
                 -o ${MERGED_PROFDATA}
         )
 
-        add_custom_target(htmlcov DEPENDS ${PROJECT_BINARY_DIR}/htmlcov/index.html)
+        add_custom_target(htmlcov
+            DEPENDS ${PROJECT_BINARY_DIR}/htmlcov/index.html
+            COMMENT "Open ${PROJECT_BINARY_DIR}/htmlcov/index.html in your browser to view the coverage report."
+        )
         add_custom_command(
             OUTPUT
                 ${PROJECT_BINARY_DIR}/htmlcov/index.html
@@ -92,14 +95,6 @@ if(EXODUSIICPP_CODE_COVERAGE)
                 ${EXCLUDE_REGEX}
             DEPENDS
                 ${COVERAGE_INFO}
-        )
-
-        add_custom_command(
-            TARGET htmlcov
-            POST_BUILD
-            COMMAND ;
-            COMMENT
-                "Open ${PROJECT_BINARY_DIR}/htmlcov/index.html in your browser to view the coverage report."
         )
 
         function(target_code_coverage TARGET_NAME)
@@ -139,7 +134,10 @@ if(EXODUSIICPP_CODE_COVERAGE)
                 ${EXCLUDE_REGEX}
         )
 
-        add_custom_target(htmlcov DEPENDS ${PROJECT_BINARY_DIR}/htmlcov/index.html)
+        add_custom_target(htmlcov
+            DEPENDS ${PROJECT_BINARY_DIR}/htmlcov/index.html
+            COMMENT "Open ${PROJECT_BINARY_DIR}/htmlcov/index.html in your browser to view the coverage report."
+        )
         add_custom_command(
             OUTPUT
                 ${PROJECT_BINARY_DIR}/htmlcov/index.html
@@ -149,14 +147,6 @@ if(EXODUSIICPP_CODE_COVERAGE)
                 ${COVERAGE_INFO}
             DEPENDS
                 ${COVERAGE_INFO}
-        )
-
-        add_custom_command(
-            TARGET htmlcov
-            POST_BUILD
-            COMMAND ;
-            COMMENT
-                "Open ${PROJECT_BINARY_DIR}/htmlcov/index.html in your browser to view the coverage report."
         )
 
         function(target_code_coverage TARGET_NAME)
