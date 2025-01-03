@@ -1,0 +1,52 @@
+{
+    "version": 6,
+    "configurePresets": [
+        {
+            "name": "debug",
+            "displayName": "Debug",
+            "generator": "Unix Makefiles",
+            "binaryDir": "build-debug",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_CXX_FLAGS_DEBUG": "-g -Wall",
+                "CMAKE_C_FLAGS_DEBUG": "-g -Wall",
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+                "EXODUSIICPP_BUILD_TESTS": "ON",
+                "EXODUSIICPP_CODE_COVERAGE": "ON"
+            }
+        },
+        {
+            "name": "release",
+            "displayName": "Release",
+            "generator": "Unix Makefiles",
+            "binaryDir": "build-release",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "CMAKE_CXX_FLAGS_RELEASE": "-O3 -DNDEBUG",
+                "CMAKE_C_FLAGS_RELEASE": "-O3 -DNDEBUG",
+                "EXODUSIICPP_BUILD_TESTS": "OFF",
+                "EXODUSIICPP_CODE_COVERAGE": "OFF"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "debug",
+            "displayName": "Debug Build",
+            "configurePreset": "debug",
+            "configuration": "Debug"
+        },
+        {
+            "name": "release",
+            "displayName": "Release Build",
+            "configurePreset": "release",
+            "configuration": "Release"
+        }
+    ],
+    "testPresets": [
+        {
+            "name": "debug",
+            "configurePreset": "debug"
+        }
+    ]
+}
