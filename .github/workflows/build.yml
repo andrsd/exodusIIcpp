@@ -24,7 +24,7 @@ jobs:
       - name: Set up miniconda
         uses: conda-incubator/setup-miniconda@v3
         with:
-          python-version: 3.9
+          python-version: 3.11
           auto-update-conda: false
           channels: andrsd,defaults
 
@@ -37,7 +37,7 @@ jobs:
             cmake \
             make \
             mpich-mpicxx \
-            exodusii==2022.08.01 \
+            exodusii==2022.10.* \
             fmt==9.1.0 \
             yaml-cpp==0.8.0 \
             lcov
@@ -45,6 +45,7 @@ jobs:
       - name: Configure
         run: |
           cmake -S . -B ${{ github.workspace }}/build \
+            -DGCOV_PATH=`which x86_64-conda-linux-gnu-gcov` \
             -DEXODUSIICPP_LIBRARY_TYPE=SHARED \
             -DEXODUSIICPP_BUILD_TESTS=YES \
             -DEXODUSIICPP_CODE_COVERAGE=YES

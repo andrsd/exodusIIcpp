@@ -13,14 +13,14 @@ jobs:
     name: Check formatting
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-    - name: Clang-format style check
-      uses: jidicula/clang-format-action@v4.13.0
-      with:
-        clang-format-version: '14'
-        check-path: .
-        exclude-regex: './contrib/'
+      - name: Clang-format style check
+        uses: jidicula/clang-format-action@v4.13.0
+        with:
+          clang-format-version: "14"
+          check-path: .
+          exclude-regex: "./contrib/"
 
   analyze:
     name: analyze
@@ -36,13 +36,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        language: [ 'cpp' ]
+        language: ["cpp"]
 
     steps:
       - name: Set up miniconda
         uses: conda-incubator/setup-miniconda@v3
         with:
-          python-version: 3.9
+          python-version: 3.11
           auto-update-conda: false
           channels: andrsd,defaults
 
@@ -55,7 +55,7 @@ jobs:
             cmake \
             make \
             mpich-mpicxx \
-            exodusii==2022.08.01 \
+            exodusii==2022.10.* \
             fmt==9.1.0 \
             yaml-cpp==0.8.0
 
