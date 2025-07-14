@@ -45,6 +45,7 @@ jobs:
       - name: Configure
         run: |
           cmake -S . -B ${{ github.workspace }}/build \
+            -DGCOV_PATH=`which x86_64-conda-linux-gnu-gcov` \
             -DEXODUSIICPP_LIBRARY_TYPE=SHARED \
             -DEXODUSIICPP_BUILD_TESTS=YES \
             -DEXODUSIICPP_CODE_COVERAGE=YES
