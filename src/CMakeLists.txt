@@ -35,7 +35,6 @@ target_link_libraries(
     ${PROJECT_NAME}
     PUBLIC
         fmt::fmt
-    PRIVATE
         exodusii::exodusii
 )
 
@@ -79,5 +78,7 @@ install(
     FILES
         "${CMAKE_CURRENT_BINARY_DIR}/exodusiicpp-config.cmake"
         "${CMAKE_CURRENT_BINARY_DIR}/exodusiicpp-config-version.cmake"
+        "${CMAKE_SOURCE_DIR}/cmake/FindExodusII.cmake"
+        "${CMAKE_SOURCE_DIR}/cmake/FindNetCDF.cmake"
     DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/exodusIIcpp
 )
