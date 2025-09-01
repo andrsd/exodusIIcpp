@@ -5,7 +5,7 @@ Requirements
 
 * C++17 compiler
 * cmake 3.16+
-* `fmt`_
+* `fmt`_ 11.x
 * ExodusII
 
    * Usually depends on NetCDF and HDF5

@@ -38,7 +38,7 @@ jobs:
             make \
             mpich-mpicxx \
             exodusii==2022.10.* \
-            fmt==9.1.0 \
+            fmt=11.* \
             yaml-cpp==0.8.0 \
             lcov
 
