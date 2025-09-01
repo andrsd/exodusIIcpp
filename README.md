@@ -6,17 +6,17 @@
 
 # exodusIIcpp
 
-`exodusIIcpp` is a C++17 wrapper around [ExodusII file format](https://sandialabs.github.io/seacas-docs/sphinx/html/index.html#exodus-library). 
+`exodusIIcpp` is a C++17 wrapper around [ExodusII file format](https://sandialabs.github.io/seacas-docs/sphinx/html/index.html#exodus-library).
 
 ### Features
 
-* C++ API for reading and writing exodusII files
-* Support for:
-  - element blocks,
-  - side sets,
-  - node sets
-* CMake installation
-* Support for Linux, macOS X
+- C++ API for reading and writing exodusII files
+- Support for:
+    - element blocks,
+    - side sets,
+    - node sets
+- CMake installation
+- Support for Linux, macOS X
 
 ### Examples
 
@@ -44,11 +44,10 @@ for (auto & ss : exo.get_side_sets()) {
 }
 ```
 
-
 ### Requirements
 
-* C++17 compiler
-* CMake 3.16+
-* [fmt](https://github.com/fmtlib/fmt)
-* ExodusII
-  - usually also depends on NetCDF and HDF5
+- C++17 compiler
+- CMake 3.16+
+- [fmt](https://github.com/fmtlib/fmt) 11.x
+- ExodusII
+    - usually also depends on NetCDF and HDF5
