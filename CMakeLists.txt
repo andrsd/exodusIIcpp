@@ -23,6 +23,8 @@ set_property(CACHE EXODUSIICPP_LIBRARY_TYPE PROPERTY STRINGS ${LibraryTypeValues
 
 option(EXODUSIICPP_BUILD_TESTS "Build tests" NO)
 option(EXODUSIICPP_BUILD_TOOLS "Build tools" YES)
+option(EXODUSIICPP_INSTALL "Install the library" ON)
+mark_as_advanced(FORCE EXODUSIICPP_INSTALL)
 
 find_package(fmt 11 REQUIRED)
 find_package(NetCDF 4.5 REQUIRED)

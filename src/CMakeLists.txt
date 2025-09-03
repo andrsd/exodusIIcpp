@@ -39,46 +39,47 @@ target_link_libraries(
 )
 
 # Install
+if (EXODUSIICPP_INSTALL)
+    configure_package_config_file(
+        ${PROJECT_SOURCE_DIR}/cmake/exodusiicpp-config.cmake.in
+        exodusiicpp-config.cmake
+        INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/exodusIIcpp
+        NO_SET_AND_CHECK_MACRO
+    )
+    write_basic_package_version_file(exodusiicpp-config-version.cmake
+        VERSION ${PROJECT_VERSION}
+        COMPATIBILITY AnyNewerVersion
+    )
 
-configure_package_config_file(
-    ${PROJECT_SOURCE_DIR}/cmake/exodusiicpp-config.cmake.in
-    exodusiicpp-config.cmake
-    INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/exodusIIcpp
-    NO_SET_AND_CHECK_MACRO
-)
-write_basic_package_version_file(exodusiicpp-config-version.cmake
-    VERSION ${PROJECT_VERSION}
-    COMPATIBILITY AnyNewerVersion
-)
+    install(
+        TARGETS exodusIIcpp
+        EXPORT exodusIIcppTargets
+        LIBRARY DESTINATION lib
+        ARCHIVE DESTINATION lib
+        RUNTIME DESTINATION bin
+        INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+        PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+    )
 
-install(
-    TARGETS exodusIIcpp
-    EXPORT exodusIIcppTargets
-    LIBRARY DESTINATION lib
-    ARCHIVE DESTINATION lib
-    RUNTIME DESTINATION bin
-    INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
-    PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
-)
+    install(
+        DIRECTORY ${PROJECT_SOURCE_DIR}/include/
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+        FILES_MATCHING PATTERN "*.h"
+    )
 
-install(
-    DIRECTORY ${PROJECT_SOURCE_DIR}/include/
-    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
-    FILES_MATCHING PATTERN "*.h"
-)
+    install(
+        EXPORT exodusIIcppTargets
+        FILE exodusiicpp-targets.cmake
+        NAMESPACE exodusIIcpp::
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/exodusIIcpp
+    )
 
-install(
-    EXPORT exodusIIcppTargets
-    FILE exodusiicpp-targets.cmake
-    NAMESPACE exodusIIcpp::
-    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/exodusIIcpp
-)
-
-install(
-    FILES
-        "${CMAKE_CURRENT_BINARY_DIR}/exodusiicpp-config.cmake"
-        "${CMAKE_CURRENT_BINARY_DIR}/exodusiicpp-config-version.cmake"
-        "${CMAKE_SOURCE_DIR}/cmake/FindExodusII.cmake"
-        "${CMAKE_SOURCE_DIR}/cmake/FindNetCDF.cmake"
-    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/exodusIIcpp
-)
+    install(
+        FILES
+            "${CMAKE_CURRENT_BINARY_DIR}/exodusiicpp-config.cmake"
+            "${CMAKE_CURRENT_BINARY_DIR}/exodusiicpp-config-version.cmake"
+            "${CMAKE_SOURCE_DIR}/cmake/FindExodusII.cmake"
+            "${CMAKE_SOURCE_DIR}/cmake/FindNetCDF.cmake"
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/exodusIIcpp
+    )
+endif()
