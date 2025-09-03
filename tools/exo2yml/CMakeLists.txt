@@ -25,8 +25,10 @@ target_link_libraries(
         exodusIIcpp
 )
 
-install(
-    TARGETS ${PROJECT_NAME}
-    EXPORT exodusIIcppTargets
-    RUNTIME DESTINATION bin
-)
+if (EXODUSIICPP_INSTALL)
+    install(
+        TARGETS ${PROJECT_NAME}
+        EXPORT exodusIIcppTargets
+        RUNTIME DESTINATION bin
+    )
+endif()
