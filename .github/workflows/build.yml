@@ -40,6 +40,9 @@ jobs:
             exodusii==2022.10.* \
             fmt=11.* \
             yaml-cpp==0.8.0 \
+            pybind11 \
+            pytest \
+            flake8 \
             lcov
 
       - name: Configure
@@ -47,6 +50,7 @@ jobs:
           cmake -S . -B ${{ github.workspace }}/build \
             -DGCOV_PATH=`which x86_64-conda-linux-gnu-gcov` \
             -DEXODUSIICPP_LIBRARY_TYPE=SHARED \
+            -DEXODUSIICPP_WITH_PYTHON=ON \
             -DEXODUSIICPP_BUILD_TESTS=YES \
             -DEXODUSIICPP_CODE_COVERAGE=YES
 

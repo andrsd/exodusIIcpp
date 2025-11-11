@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.26)
 
 project(exodusIIcpp
     VERSION 3.0.0
@@ -24,6 +24,7 @@ set_property(CACHE EXODUSIICPP_LIBRARY_TYPE PROPERTY STRINGS ${LibraryTypeValues
 option(EXODUSIICPP_BUILD_TESTS "Build tests" NO)
 option(EXODUSIICPP_BUILD_TOOLS "Build tools" YES)
 option(EXODUSIICPP_INSTALL "Install the library" ON)
+option(EXODUSIICPP_WITH_PYTHON "Build python wrapper" NO)
 mark_as_advanced(FORCE EXODUSIICPP_INSTALL)
 
 find_package(fmt 11 REQUIRED)
@@ -57,6 +58,10 @@ endif()
 add_subdirectory(src)
 if (EXODUSIICPP_BUILD_TOOLS)
     add_subdirectory(tools)
+endif()
+
+if (EXODUSIICPP_WITH_PYTHON)
+    add_subdirectory(python)
 endif()
 
 # Tests
