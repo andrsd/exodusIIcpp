@@ -1,8 +1,5 @@
 project(exo2yml LANGUAGES CXX)
 
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
 find_package(yaml-cpp 0.8 REQUIRED)
 
 add_executable(${PROJECT_NAME}
