@@ -48,7 +48,7 @@ if (EXODUSIICPP_INSTALL)
     )
     write_basic_package_version_file(exodusiicpp-config-version.cmake
         VERSION ${PROJECT_VERSION}
-        COMPATIBILITY AnyNewerVersion
+        COMPATIBILITY SameMajorVersion
     )
 
     install(
