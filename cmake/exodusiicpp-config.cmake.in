@@ -9,6 +9,7 @@ include(CMakeFindDependencyMacro)
 
 find_dependency(fmt 11 REQUIRED)
 find_dependency(NetCDF REQUIRED)
+find_dependency(HDF5 1.10 REQUIRED COMPONENTS C)
 find_dependency(ExodusII REQUIRED)
 check_required_components(exodusIIcpp)
 
