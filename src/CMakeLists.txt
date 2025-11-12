@@ -7,6 +7,9 @@ add_library(
         node_set.cpp
         side_set.cpp
 )
+
+target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_17)
+
 if(CMAKE_PROJECT_NAME STREQUAL "exodusIIcpp")
     target_code_coverage(${PROJECT_NAME})
     target_sanitization(${PROJECT_NAME})
@@ -48,7 +51,7 @@ if (EXODUSIICPP_INSTALL)
     )
     write_basic_package_version_file(exodusiicpp-config-version.cmake
         VERSION ${PROJECT_VERSION}
-        COMPATIBILITY AnyNewerVersion
+        COMPATIBILITY SameMajorVersion
     )
 
     install(
