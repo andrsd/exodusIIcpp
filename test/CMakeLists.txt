@@ -1,6 +1,6 @@
 project(exodusIIcpp-test)
 
-include(GoogleTest)
+find_package(GTest REQUIRED)
 
 add_executable(${PROJECT_NAME}
     ElementBlock_test.cpp
@@ -24,8 +24,7 @@ target_link_libraries(
     ${PROJECT_NAME}
     PUBLIC
         exodusIIcpp
-        gtest_main
-        gmock_main
+        GTest::gmock_main
 )
 
 target_compile_definitions(${PROJECT_NAME}

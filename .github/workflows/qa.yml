@@ -56,6 +56,7 @@ jobs:
             rhash=1.4.3 \
             make \
             mpich-mpicxx \
+            gtest \
             exodusii==2022.10.* \
             fmt=11.* \
             yaml-cpp==0.8.0
