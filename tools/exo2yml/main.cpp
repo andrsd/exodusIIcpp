@@ -1,3 +1,4 @@
+#include <cstdint>
 #include "cxxopts/cxxopts.hpp"
 #include "fmt/printf.h"
 #include "yaml-cpp/yaml.h"
