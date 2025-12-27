@@ -57,7 +57,7 @@ jobs:
             make \
             mpich-mpicxx \
             gtest \
-            exodusii==2022.10.* \
+            exodusii==2024.06.* \
             fmt=11.* \
             yaml-cpp==0.8.0
 
