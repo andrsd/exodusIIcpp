@@ -38,7 +38,7 @@ jobs:
             rhash=1.4.3 \
             make \
             mpich-mpicxx \
-            exodusii==2022.10.* \
+            exodusii==2024.06.* \
             fmt=11.* \
             yaml-cpp==0.8.0 \
             pybind11 \

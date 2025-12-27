@@ -26,7 +26,7 @@ option(EXODUSIICPP_WITH_PYTHON "Build python wrapper" NO)
 mark_as_advanced(FORCE EXODUSIICPP_INSTALL)
 
 find_package(fmt 11 REQUIRED)
-find_package(NetCDF 4.5 REQUIRED)
+find_package(NetCDF 4.9 REQUIRED)
 find_package(HDF5 1.10 REQUIRED COMPONENTS C)
 find_package(ExodusII REQUIRED)
 
