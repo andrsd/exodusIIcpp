@@ -6,6 +6,7 @@
 #include "fmt/printf.h"
 #include <cassert>
 #include <numeric>
+#include <stdexcept>
 
 namespace exodusIIcpp {
 
@@ -101,12 +102,22 @@ File::File(exodusIIcpp::fs::path file_path, exodusIIcpp::FileAccess file_access)
     n_node_sets(-1),
     n_side_sets(-1)
 {
-    if (file_access == exodusIIcpp::FileAccess::READ) {
+    switch (file_access) {
+    case exodusIIcpp::FileAccess::READ:
         open(file_path.string());
         init();
-    }
-    else
+        break;
+    case exodusIIcpp::FileAccess::WRITE:
         create(file_path.string());
+        break;
+    case exodusIIcpp::FileAccess::APPEND:
+        open(file_path.string());
+        init();
+        break;
+    default:
+        throw std::runtime_error("Unknown FileAccess mode");
+        break;
+    }
 }
 
 File::~File()
@@ -133,6 +144,19 @@ File::create(const std::string & file_path)
     this->file_access = exodusIIcpp::FileAccess::WRITE;
     this->exoid =
         ex_create(file_path.c_str(), EX_CLOBBER, &this->cpu_word_size, &this->io_word_size);
+    if (this->exoid < 0)
+        throw Exception(fmt::sprintf("Unable to open file '%s'.", file_path));
+}
+
+void
+File::append(const std::string & file_path)
+{
+    this->file_access = exodusIIcpp::FileAccess::APPEND;
+    this->exoid = ex_open(file_path.c_str(),
+                          EX_WRITE,
+                          &this->cpu_word_size,
+                          &this->io_word_size,
+                          &this->version);
     if (this->exoid < 0)
         throw Exception(fmt::sprintf("Unable to open file '%s'.", file_path));
 }

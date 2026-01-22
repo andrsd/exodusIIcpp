@@ -80,6 +80,11 @@ public:
     /// @param file_path Path to the file to create
     void create(const std::string & file_path);
 
+    /// Open an ExodusII file for appending
+    ///
+    /// @param file_path Path to the file to create
+    void append(const std::string & file_path);
+
     /// Is file opened
     ///
     /// @return `true` if opened, `false` otherwise
