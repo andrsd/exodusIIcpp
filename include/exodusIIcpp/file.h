@@ -68,23 +68,23 @@ public:
     ///  - ``exodusIIcpp::FileAccess::READ`` for reading,
     ///  - ``exodusIIcpp::FileAccess::WRITE`` for writing,
     ///  - ``exodusIIcpp::FileAccess::APPEND`` for appending to an existing file.
-    explicit File(exodusIIcpp::fs::path file_path, exodusIIcpp::FileAccess file_access);
+    explicit File(fs::path file_path, exodusIIcpp::FileAccess file_access);
     ~File();
 
     /// Open an ExodusII file
     ///
     /// @param file_path Path to the file to open
-    void open(const std::string & file_path);
+    void open(const fs::path & file_path);
 
     /// Create an ExodusII file
     ///
     /// @param file_path Path to the file to create
-    void create(const std::string & file_path);
+    void create(const fs::path & file_path);
 
     /// Open an existing ExodusII file for appending new time steps
     ///
     /// @param file_path Path to the file to open
-    void append(const std::string & file_path);
+    void append(const fs::path & file_path);
 
     /// Is file opened
     ///
