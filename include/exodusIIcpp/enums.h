@@ -8,7 +8,8 @@ namespace exodusIIcpp {
 /* clang-format off */
 enum class FileAccess {
     READ,
-    WRITE
+    WRITE,
+    APPEND
 };
 /* clang-format on */
 

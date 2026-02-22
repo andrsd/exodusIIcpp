@@ -19,6 +19,7 @@ PYBIND11_MODULE(exodusIIcpp, m)
         .def(py::init())
         .def("open", &File::open)
         .def("create", &File::create)
+        .def("append", &File::append)
         .def("is_opened", &File::is_opened)
         .def("init", static_cast<void (File::*)()>(&File::init))
         .def("init",

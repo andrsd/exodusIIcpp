@@ -188,6 +188,80 @@ TEST(FileTest, create_edge2)
     EXPECT_EQ(g.get_num_side_sets(), 0);
 }
 
+TEST(FileTest, append_time_step)
+{
+    // Create initial file with one time step
+    {
+        File f(std::string("append_test.e"), FileAccess::WRITE);
+        EXPECT_TRUE(f.is_opened());
+        f.init("test", 2, 3, 1, 1, 0, 0);
+
+        std::vector<double> x = { 0, 1, 0 };
+        std::vector<double> y = { 0, 0, 1 };
+        f.write_coords(x, y);
+        f.write_coord_names();
+
+        std::vector<int> connect1 = { 1, 2, 3 };
+        f.write_block(1, "TRI3", 1, connect1);
+        std::vector<std::string> blk_names = { "blk1" };
+        f.write_block_names(blk_names);
+
+        f.write_time(1, 0.0);
+
+        std::vector<std::string> nv_names = { "nv1" };
+        f.write_nodal_var_names(nv_names);
+        f.write_nodal_var(1, 1, { 1.0, 2.0, 3.0 });
+
+        f.update();
+        f.close();
+    }
+
+    // Verify initial file has 1 time step
+    {
+        File f(std::string("append_test.e"), FileAccess::READ);
+        EXPECT_TRUE(f.is_opened());
+        f.read_times();
+        EXPECT_EQ(f.get_num_times(), 1);
+        f.close();
+    }
+
+    // Open with APPEND and add another time step
+    {
+        File f(std::string("append_test.e"), FileAccess::APPEND);
+        EXPECT_TRUE(f.is_opened());
+        f.read_times();
+        EXPECT_EQ(f.get_num_times(), 1);
+
+        // Write second time step
+        int next_step = f.get_num_times() + 1;
+        f.write_time(next_step, 1.0);
+        f.write_nodal_var(next_step, 1, { 2.0, 4.0, 6.0 });
+
+        f.update();
+        f.close();
+    }
+
+    // Verify file now has 2 time steps
+    {
+        File f(std::string("append_test.e"), FileAccess::READ);
+        EXPECT_TRUE(f.is_opened());
+        f.read_times();
+        EXPECT_EQ(f.get_num_times(), 2);
+
+        const std::vector<double> & times = f.get_times();
+        EXPECT_THAT(times, ElementsAre(DoubleEq(0.0), DoubleEq(1.0)));
+
+        // Verify variable values for both time steps
+        auto ts1_values = f.get_nodal_variable_values(1, 1);
+        EXPECT_THAT(ts1_values, ElementsAre(DoubleEq(1.0), DoubleEq(2.0), DoubleEq(3.0)));
+
+        auto ts2_values = f.get_nodal_variable_values(2, 1);
+        EXPECT_THAT(ts2_values, ElementsAre(DoubleEq(2.0), DoubleEq(4.0), DoubleEq(6.0)));
+
+        f.close();
+    }
+}
+
 TEST(FileTest, read_square)
 {
     File f(std::string(EXODUSIICPP_UNIT_TEST_ASSETS) + std::string("/square.e"), FileAccess::READ);
