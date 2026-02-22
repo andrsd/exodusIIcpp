@@ -5,12 +5,14 @@
 
 #include <vector>
 #include <map>
+#include <filesystem>
 #include "element_block.h"
 #include "enums.h"
 #include "error.h"
 #include "node_set.h"
 #include "side_set.h"
-#include "filesystem.h"
+
+namespace fs = std::filesystem;
 
 namespace exodusIIcpp {
 
