@@ -83,6 +83,297 @@
              
   <section id="writing-a-file">
 <h1>Writing a file<a class="headerlink" href="#writing-a-file" title="Link to this heading"></a></h1>
+<p>This example demonstrates how to create and write data to an ExodusII file.</p>
+<section id="creating-a-file">
+<h2>Creating a file<a class="headerlink" href="#creating-a-file" title="Link to this heading"></a></h2>
+<p>To create a new ExodusII file, create a <code class="docutils literal notranslate"><span class="pre">File</span></code> object with <code class="docutils literal notranslate"><span class="pre">FileAccess::WRITE</span></code>:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;exodusIIcpp/exodusIIcpp.h&quot;</span>
+
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">exodusIIcpp</span><span class="p">;</span>
+
+<span class="c1">// Create a new file</span>
+<span class="n">File</span><span class="w"> </span><span class="n">file</span><span class="p">(</span><span class="s">&quot;output.e&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">FileAccess</span><span class="o">::</span><span class="n">WRITE</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="initializing-the-file-structure">
+<h2>Initializing the file structure<a class="headerlink" href="#initializing-the-file-structure" title="Link to this heading"></a></h2>
+<p>Before writing any data, you must initialize the file with mesh dimensions and counts. This defines the overall structure of the mesh:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Initialize file with:</span>
+<span class="c1">// - title: descriptive name</span>
+<span class="c1">// - num_dims: spatial dimension (1, 2, or 3)</span>
+<span class="c1">// - num_nodes: total number of nodes</span>
+<span class="c1">// - num_elems: total number of elements</span>
+<span class="c1">// - num_elem_blks: number of element blocks</span>
+<span class="c1">// - num_node_sets: number of node sets</span>
+<span class="c1">// - num_side_sets: number of side sets</span>
+<span class="n">file</span><span class="p">.</span><span class="n">init</span><span class="p">(</span><span class="s">&quot;My Mesh&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="mi">3</span><span class="p">,</span><span class="w">      </span><span class="c1">// 3D</span>
+<span class="w">          </span><span class="mi">10</span><span class="p">,</span><span class="w">     </span><span class="c1">// 10 nodes</span>
+<span class="w">          </span><span class="mi">5</span><span class="p">,</span><span class="w">      </span><span class="c1">// 5 elements</span>
+<span class="w">          </span><span class="mi">2</span><span class="p">,</span><span class="w">      </span><span class="c1">// 2 element blocks</span>
+<span class="w">          </span><span class="mi">1</span><span class="p">,</span><span class="w">      </span><span class="c1">// 1 node set</span>
+<span class="w">          </span><span class="mi">0</span><span class="p">);</span><span class="w">     </span><span class="c1">// 0 side sets</span>
+</pre></div>
+</div>
+</section>
+<section id="writing-coordinates">
+<h2>Writing coordinates<a class="headerlink" href="#writing-coordinates" title="Link to this heading"></a></h2>
+<p>Write node coordinates to the file. The number of coordinates must match the number of nodes specified in <code class="docutils literal notranslate"><span class="pre">init()</span></code>:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// For 1D meshes</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p">,</span><span class="w"> </span><span class="mf">4.0</span><span class="w"> </span><span class="p">};</span>
+<span class="n">file</span><span class="p">.</span><span class="n">write_coords</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+
+<span class="c1">// For 2D meshes</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="w"> </span><span class="p">};</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="w"> </span><span class="p">};</span>
+<span class="n">file</span><span class="p">.</span><span class="n">write_coords</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
+
+<span class="c1">// For 3D meshes</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="w"> </span><span class="p">};</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="w"> </span><span class="p">};</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="w"> </span><span class="p">};</span>
+<span class="n">file</span><span class="p">.</span><span class="n">write_coords</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">z</span><span class="p">);</span>
+
+<span class="c1">// Write coordinate names (optional)</span>
+<span class="n">file</span><span class="p">.</span><span class="n">write_coord_names</span><span class="p">();</span>
+</pre></div>
+</div>
+</section>
+<section id="writing-element-blocks">
+<h2>Writing element blocks<a class="headerlink" href="#writing-element-blocks" title="Link to this heading"></a></h2>
+<p>Define and write element blocks. Each block contains elements of the same type:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Connectivity for block 1: 2 TRI3 elements</span>
+<span class="c1">// Triangle 1: nodes 1, 2, 5</span>
+<span class="c1">// Triangle 2: nodes 2, 3, 5</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">connect1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="p">};</span>
+<span class="n">file</span><span class="p">.</span><span class="n">write_block</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w">         </span><span class="c1">// block ID</span>
+<span class="w">                 </span><span class="s">&quot;TRI3&quot;</span><span class="p">,</span><span class="w">    </span><span class="c1">// element type</span>
+<span class="w">                 </span><span class="mi">2</span><span class="p">,</span><span class="w">         </span><span class="c1">// number of elements</span>
+<span class="w">                 </span><span class="n">connect1</span><span class="p">);</span>
+
+<span class="c1">// Connectivity for block 2: 2 QUAD4 elements</span>
+<span class="c1">// Quad 1: nodes 1, 2, 4, ?</span>
+<span class="c1">// Quad 2: nodes 2, 3, 4, ?</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">connect2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="p">};</span>
+<span class="n">file</span><span class="p">.</span><span class="n">write_block</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span>
+<span class="w">                 </span><span class="s">&quot;QUAD4&quot;</span><span class="p">,</span>
+<span class="w">                 </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">                 </span><span class="n">connect2</span><span class="p">);</span>
+
+<span class="c1">// Write block names (optional)</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">block_names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;Triangles&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Quads&quot;</span><span class="w"> </span><span class="p">};</span>
+<span class="n">file</span><span class="p">.</span><span class="n">write_block_names</span><span class="p">(</span><span class="n">block_names</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="writing-node-sets">
+<h2>Writing node sets<a class="headerlink" href="#writing-node-sets" title="Link to this heading"></a></h2>
+<p>Define node sets (groups of nodes):</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Node set 1: nodes 1 and 2</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">node_set_1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">};</span>
+<span class="n">file</span><span class="p">.</span><span class="n">write_node_set</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">node_set_1</span><span class="p">);</span>
+
+<span class="c1">// Write node set names (optional)</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">node_set_names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;Left Edge&quot;</span><span class="w"> </span><span class="p">};</span>
+<span class="n">file</span><span class="p">.</span><span class="n">write_node_set_names</span><span class="p">(</span><span class="n">node_set_names</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="writing-side-sets">
+<h2>Writing side sets<a class="headerlink" href="#writing-side-sets" title="Link to this heading"></a></h2>
+<p>Define side sets (groups of element sides):</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Side set 1: side 1 of element 1, side 2 of element 2</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">elem_list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">};</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">side_list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">};</span>
+<span class="n">file</span><span class="p">.</span><span class="n">write_side_set</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">elem_list</span><span class="p">,</span><span class="w"> </span><span class="n">side_list</span><span class="p">);</span>
+
+<span class="c1">// Write side set names (optional)</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">side_set_names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;Bottom Edge&quot;</span><span class="w"> </span><span class="p">};</span>
+<span class="n">file</span><span class="p">.</span><span class="n">write_side_set_names</span><span class="p">(</span><span class="n">side_set_names</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="writing-information-records">
+<h2>Writing information records<a class="headerlink" href="#writing-information-records" title="Link to this heading"></a></h2>
+<p>Add metadata information records:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s">&quot;Generated by my simulation&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;Date: 2024-01-01&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;Author: John Doe&quot;</span>
+<span class="p">};</span>
+<span class="n">file</span><span class="p">.</span><span class="n">write_info</span><span class="p">(</span><span class="n">info</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="writing-time-steps-and-variables">
+<h2>Writing time steps and variables<a class="headerlink" href="#writing-time-steps-and-variables" title="Link to this heading"></a></h2>
+<p>To write time-dependent data, define variable names and write values for each time step:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Define time step 1 at time 0.0</span>
+<span class="n">file</span><span class="p">.</span><span class="n">write_time</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">);</span>
+
+<span class="c1">// Write nodal variable names</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">nodal_var_names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;Displacement&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Velocity&quot;</span><span class="w"> </span><span class="p">};</span>
+<span class="n">file</span><span class="p">.</span><span class="n">write_nodal_var_names</span><span class="p">(</span><span class="n">nodal_var_names</span><span class="p">);</span>
+
+<span class="c1">// Write nodal variable values for time step 1</span>
+<span class="c1">// Variable 1 (Displacement) values for all nodes</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">displacement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1</span><span class="p">,</span><span class="w"> </span><span class="mf">0.2</span><span class="p">,</span><span class="w"> </span><span class="mf">0.15</span><span class="p">,</span><span class="w"> </span><span class="mf">0.05</span><span class="w"> </span><span class="p">};</span>
+<span class="n">file</span><span class="p">.</span><span class="n">write_nodal_var</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w">      </span><span class="c1">// time step</span>
+<span class="w">                     </span><span class="mi">1</span><span class="p">,</span><span class="w">      </span><span class="c1">// variable index</span>
+<span class="w">                     </span><span class="n">displacement</span><span class="p">);</span>
+
+<span class="c1">// Variable 2 (Velocity) values for all nodes</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">velocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.5</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="w"> </span><span class="p">};</span>
+<span class="n">file</span><span class="p">.</span><span class="n">write_nodal_var</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">velocity</span><span class="p">);</span>
+
+<span class="c1">// Write elemental variable names</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">elem_var_names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;Stress&quot;</span><span class="w"> </span><span class="p">};</span>
+<span class="n">file</span><span class="p">.</span><span class="n">write_elem_var_names</span><span class="p">(</span><span class="n">elem_var_names</span><span class="p">);</span>
+
+<span class="c1">// Write elemental variable values for block 1</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">stress_block1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mf">100.0</span><span class="p">,</span><span class="w"> </span><span class="mf">150.0</span><span class="w"> </span><span class="p">};</span>
+<span class="n">file</span><span class="p">.</span><span class="n">write_elemental_variable_values</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w">      </span><span class="c1">// time step</span>
+<span class="w">                                    </span><span class="mi">1</span><span class="p">,</span><span class="w">       </span><span class="c1">// variable index</span>
+<span class="w">                                    </span><span class="mi">1</span><span class="p">,</span><span class="w">       </span><span class="c1">// block ID</span>
+<span class="w">                                    </span><span class="n">stress_block1</span><span class="p">);</span>
+
+<span class="c1">// Write global variables</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">global_var_names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;Total Energy&quot;</span><span class="w"> </span><span class="p">};</span>
+<span class="n">file</span><span class="p">.</span><span class="n">write_global_var_names</span><span class="p">(</span><span class="n">global_var_names</span><span class="p">);</span>
+
+<span class="c1">// Write global variable value for time step 1</span>
+<span class="n">file</span><span class="p">.</span><span class="n">write_global_var</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w">    </span><span class="c1">// time step</span>
+<span class="w">                      </span><span class="mi">1</span><span class="p">,</span><span class="w">    </span><span class="c1">// variable index</span>
+<span class="w">                      </span><span class="mf">1000.0</span><span class="p">);</span><span class="w">  </span><span class="c1">// value</span>
+</pre></div>
+</div>
+</section>
+<section id="writing-additional-time-steps">
+<h2>Writing additional time steps<a class="headerlink" href="#writing-additional-time-steps" title="Link to this heading"></a></h2>
+<p>To write more time steps, repeat the process:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Time step 2</span>
+<span class="n">file</span><span class="p">.</span><span class="n">write_time</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">);</span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">displacement_t2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mf">0.1</span><span class="p">,</span><span class="w"> </span><span class="mf">0.2</span><span class="p">,</span><span class="w"> </span><span class="mf">0.4</span><span class="p">,</span><span class="w"> </span><span class="mf">0.3</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1</span><span class="w"> </span><span class="p">};</span>
+<span class="n">file</span><span class="p">.</span><span class="n">write_nodal_var</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">displacement_t2</span><span class="p">);</span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">velocity_t2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">4.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="w"> </span><span class="p">};</span>
+<span class="n">file</span><span class="p">.</span><span class="n">write_nodal_var</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">velocity_t2</span><span class="p">);</span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">stress_block1_t2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mf">200.0</span><span class="p">,</span><span class="w"> </span><span class="mf">250.0</span><span class="w"> </span><span class="p">};</span>
+<span class="n">file</span><span class="p">.</span><span class="n">write_elemental_variable_values</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">stress_block1_t2</span><span class="p">);</span>
+
+<span class="n">file</span><span class="p">.</span><span class="n">write_global_var</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">2000.0</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="partial-writes">
+<h2>Partial writes<a class="headerlink" href="#partial-writes" title="Link to this heading"></a></h2>
+<p>For very large files, you can write variables in parts rather than all at once:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Write nodal variable values node by node</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">num_nodes</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">file</span><span class="p">.</span><span class="n">write_partial_nodal_var</span><span class="p">(</span><span class="n">time_step</span><span class="p">,</span><span class="w">    </span><span class="c1">// time step</span>
+<span class="w">                                 </span><span class="n">var_index</span><span class="p">,</span><span class="w">    </span><span class="c1">// variable index</span>
+<span class="w">                                 </span><span class="n">block_id</span><span class="p">,</span><span class="w">     </span><span class="c1">// block ID</span>
+<span class="w">                                 </span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">        </span><span class="c1">// node index (1-based)</span>
+<span class="w">                                 </span><span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span><span class="w">   </span><span class="c1">// value</span>
+<span class="p">}</span>
+
+<span class="c1">// Write elemental variable values element by element</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">num_elements</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">file</span><span class="p">.</span><span class="n">write_partial_elem_var</span><span class="p">(</span><span class="n">time_step</span><span class="p">,</span><span class="w">    </span><span class="c1">// time step</span>
+<span class="w">                                </span><span class="n">var_index</span><span class="p">,</span><span class="w">    </span><span class="c1">// variable index</span>
+<span class="w">                                </span><span class="n">block_id</span><span class="p">,</span><span class="w">     </span><span class="c1">// block ID</span>
+<span class="w">                                </span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">        </span><span class="c1">// element index (1-based)</span>
+<span class="w">                                </span><span class="n">elem_values</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span><span class="w">  </span><span class="c1">// value</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="updating-and-closing">
+<h2>Updating and closing<a class="headerlink" href="#updating-and-closing" title="Link to this heading"></a></h2>
+<p>After writing all data for a time step, call <code class="docutils literal notranslate"><span class="pre">update()</span></code> to finalize the data:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Update after writing all data for this time step</span>
+<span class="n">file</span><span class="p">.</span><span class="n">update</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Close the file when done:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Close the file explicitly</span>
+<span class="n">file</span><span class="p">.</span><span class="n">close</span><span class="p">();</span>
+
+<span class="c1">// Or let it close automatically when the File object goes out of scope</span>
+</pre></div>
+</div>
+</section>
+<section id="appending-to-an-existing-file">
+<h2>Appending to an existing file<a class="headerlink" href="#appending-to-an-existing-file" title="Link to this heading"></a></h2>
+<p>To add new time steps to an existing file, use <code class="docutils literal notranslate"><span class="pre">FileAccess::APPEND</span></code>:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Open existing file for appending</span>
+<span class="n">File</span><span class="w"> </span><span class="n">file</span><span class="p">(</span><span class="s">&quot;output.e&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">FileAccess</span><span class="o">::</span><span class="n">APPEND</span><span class="p">);</span>
+
+<span class="c1">// Read existing time steps to determine the next time step number</span>
+<span class="n">file</span><span class="p">.</span><span class="n">read_times</span><span class="p">();</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">next_time_step</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="p">.</span><span class="n">get_num_times</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+
+<span class="c1">// Write new time step data</span>
+<span class="n">file</span><span class="p">.</span><span class="n">write_time</span><span class="p">(</span><span class="n">next_time_step</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">);</span>
+<span class="n">file</span><span class="p">.</span><span class="n">write_nodal_var</span><span class="p">(</span><span class="n">next_time_step</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">new_displacement</span><span class="p">);</span>
+<span class="n">file</span><span class="p">.</span><span class="n">update</span><span class="p">();</span>
+<span class="n">file</span><span class="p">.</span><span class="n">close</span><span class="p">();</span>
+</pre></div>
+</div>
+</section>
+<section id="complete-example">
+<h2>Complete example<a class="headerlink" href="#complete-example" title="Link to this heading"></a></h2>
+<p>Here’s a complete example that creates a simple 2D mesh with time-dependent data:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;exodusIIcpp/exodusIIcpp.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">exodusIIcpp</span><span class="p">;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// Create file</span>
+<span class="w">    </span><span class="n">File</span><span class="w"> </span><span class="n">file</span><span class="p">(</span><span class="s">&quot;simple.e&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">FileAccess</span><span class="o">::</span><span class="n">WRITE</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Initialize: 2D mesh, 4 nodes, 1 quad element, 1 block, no sets</span>
+<span class="w">    </span><span class="n">file</span><span class="p">.</span><span class="n">init</span><span class="p">(</span><span class="s">&quot;Simple Quad&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Write coordinates</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="w"> </span><span class="p">};</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="w"> </span><span class="p">};</span>
+<span class="w">    </span><span class="n">file</span><span class="p">.</span><span class="n">write_coords</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
+<span class="w">    </span><span class="n">file</span><span class="p">.</span><span class="n">write_coord_names</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// Write element block</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">connect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="p">};</span>
+<span class="w">    </span><span class="n">file</span><span class="p">.</span><span class="n">write_block</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;QUAD4&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">connect</span><span class="p">);</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">block_names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;Material 1&quot;</span><span class="w"> </span><span class="p">};</span>
+<span class="w">    </span><span class="n">file</span><span class="p">.</span><span class="n">write_block_names</span><span class="p">(</span><span class="n">block_names</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Write time step 1</span>
+<span class="w">    </span><span class="n">file</span><span class="p">.</span><span class="n">write_time</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">);</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">var_names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;Temperature&quot;</span><span class="w"> </span><span class="p">};</span>
+<span class="w">    </span><span class="n">file</span><span class="p">.</span><span class="n">write_nodal_var_names</span><span class="p">(</span><span class="n">var_names</span><span class="p">);</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">temp_t1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mf">100.0</span><span class="p">,</span><span class="w"> </span><span class="mf">200.0</span><span class="p">,</span><span class="w"> </span><span class="mf">250.0</span><span class="p">,</span><span class="w"> </span><span class="mf">150.0</span><span class="w"> </span><span class="p">};</span>
+<span class="w">    </span><span class="n">file</span><span class="p">.</span><span class="n">write_nodal_var</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">temp_t1</span><span class="p">);</span>
+<span class="w">    </span><span class="n">file</span><span class="p">.</span><span class="n">update</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// Write time step 2</span>
+<span class="w">    </span><span class="n">file</span><span class="p">.</span><span class="n">write_time</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">);</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">temp_t2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mf">150.0</span><span class="p">,</span><span class="w"> </span><span class="mf">250.0</span><span class="p">,</span><span class="w"> </span><span class="mf">300.0</span><span class="p">,</span><span class="w"> </span><span class="mf">200.0</span><span class="w"> </span><span class="p">};</span>
+<span class="w">    </span><span class="n">file</span><span class="p">.</span><span class="n">write_nodal_var</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">temp_t2</span><span class="p">);</span>
+<span class="w">    </span><span class="n">file</span><span class="p">.</span><span class="n">update</span><span class="p">();</span>
+
+<span class="w">    </span><span class="n">file</span><span class="p">.</span><span class="n">close</span><span class="p">();</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;File created successfully!&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
 </section>
 
 
