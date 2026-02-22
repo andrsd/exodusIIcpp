@@ -98,7 +98,8 @@
 <li><p><strong>file_path</strong> – Path to the file to open/create </p></li>
 <li><p><strong>file_access</strong> – Desired file access<ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">exodusIIcpp::FileAccess::READ</span></code> for reading,</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">exodusIIcpp::FileAccess::WRITE</span></code> for writing. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">exodusIIcpp::FileAccess::WRITE</span></code> for writing,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">exodusIIcpp::FileAccess::APPEND</span></code> for appending to an existing file. </p></li>
 </ul>
 </p></li>
 </ul>
@@ -124,6 +125,17 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>file_path</strong> – Path to the file to create </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11exodusIIcpp4File6appendERKNSt6stringE">
+<span id="_CPPv3N11exodusIIcpp4File6appendERKNSt6stringE"></span><span id="_CPPv2N11exodusIIcpp4File6appendERKNSt6stringE"></span><span id="exodusIIcpp::File::append__ssCR"></span><span class="target" id="classexodus_i_icpp_1_1_file_1af0e05a3e0480893fb0e548538bb0982c"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">append</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">file_path</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11exodusIIcpp4File6appendERKNSt6stringE" title="Link to this definition"></a><br /></dt>
+<dd><p>Open an existing ExodusII file for appending new time steps. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>file_path</strong> – Path to the file to open </p>
 </dd>
 </dl>
 </dd></dl>
