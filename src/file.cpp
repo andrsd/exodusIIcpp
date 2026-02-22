@@ -88,7 +88,7 @@ File::File() :
 {
 }
 
-File::File(exodusIIcpp::fs::path file_path, exodusIIcpp::FileAccess file_access) :
+File::File(fs::path file_path, FileAccess file_access) :
     file_access(file_access),
     cpu_word_size(sizeof(double)),
     io_word_size(8),
@@ -101,16 +101,16 @@ File::File(exodusIIcpp::fs::path file_path, exodusIIcpp::FileAccess file_access)
     n_node_sets(-1),
     n_side_sets(-1)
 {
-    if (file_access == exodusIIcpp::FileAccess::READ) {
-        open(file_path.string());
+    if (file_access == FileAccess::READ) {
+        open(file_path);
         init();
     }
-    else if (file_access == exodusIIcpp::FileAccess::APPEND) {
-        append(file_path.string());
+    else if (file_access == FileAccess::APPEND) {
+        append(file_path);
         init();
     }
     else
-        create(file_path.string());
+        create(file_path);
 }
 
 File::~File()
@@ -119,39 +119,39 @@ File::~File()
 }
 
 void
-File::open(const std::string & file_path)
+File::open(const fs::path & file_path)
 {
-    this->file_access = exodusIIcpp::FileAccess::READ;
+    this->file_access = FileAccess::READ;
     this->exoid = ex_open(file_path.c_str(),
                           EX_READ,
                           &this->cpu_word_size,
                           &this->io_word_size,
                           &this->version);
     if (this->exoid < 0)
-        throw Exception(fmt::sprintf("Unable to open file '%s'.", file_path));
+        throw Exception(fmt::sprintf("Unable to open file '%s'.", file_path.string()));
 }
 
 void
-File::create(const std::string & file_path)
+File::create(const fs::path & file_path)
 {
-    this->file_access = exodusIIcpp::FileAccess::WRITE;
+    this->file_access = FileAccess::WRITE;
     this->exoid =
         ex_create(file_path.c_str(), EX_CLOBBER, &this->cpu_word_size, &this->io_word_size);
     if (this->exoid < 0)
-        throw Exception(fmt::sprintf("Unable to open file '%s'.", file_path));
+        throw Exception(fmt::sprintf("Unable to open file '%s'.", file_path.string()));
 }
 
 void
-File::append(const std::string & file_path)
+File::append(const fs::path & file_path)
 {
-    this->file_access = exodusIIcpp::FileAccess::APPEND;
+    this->file_access = FileAccess::APPEND;
     this->exoid = ex_open(file_path.c_str(),
                           EX_WRITE,
                           &this->cpu_word_size,
                           &this->io_word_size,
                           &this->version);
     if (this->exoid < 0)
-        throw Exception(fmt::sprintf("Unable to open file '%s'.", file_path));
+        throw Exception(fmt::sprintf("Unable to open file '%s'.", file_path.string()));
 }
 
 bool
@@ -163,8 +163,7 @@ File::is_opened() const
 void
 File::init()
 {
-    if (this->file_access == exodusIIcpp::FileAccess::READ ||
-        this->file_access == exodusIIcpp::FileAccess::APPEND) {
+    if (this->file_access == FileAccess::READ || this->file_access == FileAccess::APPEND) {
         char title[MAX_LINE_LENGTH + 1];
         memset(title, 0, sizeof(title));
         EXODUSIICPP_CHECK_ERROR(ex_get_init(this->exoid,
@@ -191,7 +190,7 @@ File::init(const char * title,
            int n_node_sets,
            int n_side_sets)
 {
-    if (this->file_access == exodusIIcpp::FileAccess::WRITE) {
+    if (this->file_access == FileAccess::WRITE) {
         EXODUSIICPP_CHECK_ERROR(ex_put_init(this->exoid,
                                             title,
                                             n_dims,

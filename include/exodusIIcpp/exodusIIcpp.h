@@ -8,6 +8,5 @@
 #include "error.h"
 #include "exception.h"
 #include "file.h"
-#include "filesystem.h"
 #include "node_set.h"
 #include "side_set.h"
