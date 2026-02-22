@@ -65,7 +65,34 @@ To read element block information:
     // Get all blocks
     const std::vector<ElementBlock> & blocks = file.get_element_blocks();
 
-    // Access individual block
+    // Loop over all blocks and print information
+    for (const auto & block : blocks) {
+        std::cout << "Block ID: " << block.get_id() << std::endl;
+        std::cout << "Block name: " << block.get_name() << std::endl;
+        std::cout << "Number of elements: " << block.get_num_elements() << std::endl;
+        std::cout << "Element type: " << block.get_element_type() << std::endl;
+        std::cout << "Nodes per element: " << block.get_num_nodes_per_element() << std::endl;
+
+        // Access connectivity
+        const std::vector<int> & connectivity = block.get_connectivity();
+        std::cout << "Connectivity size: " << connectivity.size() << std::endl;
+
+        // Get individual element connectivity
+        if (block.get_num_elements() > 0) {
+            std::vector<int> elem_nodes = block.get_element_connectivity(0);
+            std::cout << "First element nodes: ";
+            for (int node : elem_nodes) {
+                std::cout << node << " ";
+            }
+            std::cout << std::endl;
+        }
+    }
+
+You can also access individual blocks by index:
+
+.. code-block:: cpp
+
+    // Access block by index
     const ElementBlock & block = file.get_element_block(0);
 
 Reading node and side sets
