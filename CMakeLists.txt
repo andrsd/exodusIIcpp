@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.26)
 
 project(exodusIIcpp
-    VERSION 3.0.0
+    VERSION 3.1.0
     LANGUAGES CXX C
 )
 
