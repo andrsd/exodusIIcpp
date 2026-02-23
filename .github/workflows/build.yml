@@ -49,6 +49,7 @@ jobs:
       - name: Configure
         run: |
           cmake -S . -B ${{ github.workspace }}/build \
+            -DCMAKE_INSTALL_PREFIX=$CONDA_PREFIX \
             -DGCOV_PATH=`which x86_64-conda-linux-gnu-gcov` \
             -DEXODUSIICPP_LIBRARY_TYPE=SHARED \
             -DEXODUSIICPP_WITH_PYTHON=ON \
@@ -56,12 +57,19 @@ jobs:
             -DEXODUSIICPP_CODE_COVERAGE=YES
 
       - name: Build
-        run: make -C ${{ github.workspace }}/build
+        run: cmake --build ${{ github.workspace }}/build
 
-      - name: Run tests
+      - name: Install
+        run: cmake --install ${{ github.workspace }}/build
+
+      - name: Run C++ tests
         run: |
           ${{ github.workspace }}/build/test/exodusIIcpp-test \
             --gtest_output=xml:${{ github.workspace }}/build/gtest-results.xml
+
+      - name: Run Python tests
+        run: |
+          pytest ${{ github.workspace }}/python/tests
 
       - name: Test summary
         uses: test-summary/action@v2
