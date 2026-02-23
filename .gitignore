@@ -5,3 +5,4 @@ build-*/
 .zed/
 .vscode
 .claude
+__pycache__
