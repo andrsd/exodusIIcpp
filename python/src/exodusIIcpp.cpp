@@ -16,8 +16,53 @@ PYBIND11_MODULE(exodusIIcpp, m)
     m.doc() = "pybind11 plugin for exodusIIcpp";
     py::setattr(m, "version", py::str(EXODUSIICPP_VERSION));
 
+    py::enum_<exodusIIcpp::FileAccess>(m, "FileAccess")
+        .value("READ", exodusIIcpp::FileAccess::READ)
+        .value("WRITE", exodusIIcpp::FileAccess::WRITE)
+        .value("APPEND", exodusIIcpp::FileAccess::APPEND);
+
+    py::class_<exodusIIcpp::ElementBlock>(m, "ElementBlock")
+        .def(py::init())
+        .def("get_id", &ElementBlock::get_id)
+        .def("get_name", &ElementBlock::get_name)
+        .def("get_size", &ElementBlock::get_size)
+        .def("get_num_nodes_per_element", &ElementBlock::get_num_nodes_per_element)
+        .def("get_element_type", &ElementBlock::get_element_type)
+        .def("get_element_connectivity", &ElementBlock::get_element_connectivity)
+        .def("get_num_elements", &ElementBlock::get_num_elements)
+        .def("get_connectivity", &ElementBlock::get_connectivity)
+        .def("set_id", &ElementBlock::set_id)
+        .def("set_name", &ElementBlock::set_name)
+        .def("set_connectivity", &ElementBlock::set_connectivity);
+
+    py::class_<exodusIIcpp::NodeSet>(m, "NodeSet")
+        .def(py::init())
+        .def("get_id", &NodeSet::get_id)
+        .def("get_name", &NodeSet::get_name)
+        .def("get_size", &NodeSet::get_size)
+        .def("get_node_id", &NodeSet::get_node_id)
+        .def("get_node_ids", &NodeSet::get_node_ids)
+        .def("set_id", &NodeSet::set_id)
+        .def("set_name", &NodeSet::set_name)
+        .def("set_nodes", &NodeSet::set_nodes);
+
+    py::class_<exodusIIcpp::SideSet>(m, "SideSet")
+        .def(py::init())
+        .def("get_id", &SideSet::get_id)
+        .def("get_name", &SideSet::get_name)
+        .def("get_size", &SideSet::get_size)
+        .def("get_element_id", &SideSet::get_element_id)
+        .def("get_element_ids", &SideSet::get_element_ids)
+        .def("get_side_ids", &SideSet::get_side_ids)
+        .def("get_side_id", &SideSet::get_side_id)
+        .def("set_id", &SideSet::set_id)
+        .def("set_name", &SideSet::set_name)
+        .def("set_sides", &SideSet::set_sides)
+        .def("add", &SideSet::add);
+
     py::class_<exodusIIcpp::File>(m, "File")
         .def(py::init())
+        .def(py::init<const fs::path &, exodusIIcpp::FileAccess>())
         .def("open", &File::open)
         .def("create", &File::create)
         .def("append", &File::append)
@@ -38,8 +83,14 @@ PYBIND11_MODULE(exodusIIcpp, m)
         .def("get_z_coords", &File::get_z_coords)
         .def("get_coord_names", &File::get_coord_names)
         .def("get_element_block", &File::get_element_block)
+        .def("get_element_blocks", &File::get_element_blocks)
         .def("get_side_sets", &File::get_side_sets)
-        .def("get_side_set_node_list", &File::get_side_set_node_list)
+        .def("get_side_set_node_list",
+             [](const File & self, int side_set_idx) {
+                 std::vector<int> node_count_list, node_list;
+                 self.get_side_set_node_list(side_set_idx, node_count_list, node_list);
+                 return py::make_tuple(node_count_list, node_list);
+             })
         .def("get_node_sets", &File::get_node_sets)
         .def("get_num_times", &File::get_num_times)
         .def("get_times", &File::get_times)
@@ -51,6 +102,12 @@ PYBIND11_MODULE(exodusIIcpp, m)
         .def("get_global_variable_values",
              static_cast<std::vector<double> (File::*)(int) const>(
                  &File::get_global_variable_values))
+        .def("get_global_variable_values",
+             static_cast<std::vector<double> (File::*)(int, int, int) const>(
+                 &File::get_global_variable_values),
+             py::arg("var_idx"),
+             py::arg("begin_idx"),
+             py::arg("end_idx") = -1)
         // read
         .def("read", &File::read)
         .def("read_coords", &File::read_coords)
