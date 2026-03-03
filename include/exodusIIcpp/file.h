@@ -6,11 +6,11 @@
 #include <vector>
 #include <map>
 #include <filesystem>
-#include "element_block.h"
-#include "enums.h"
-#include "error.h"
-#include "node_set.h"
-#include "side_set.h"
+#include "exodusIIcpp/element_block.h"
+#include "exodusIIcpp/enums.h"
+#include "exodusIIcpp/error.h"
+#include "exodusIIcpp/node_set.h"
+#include "exodusIIcpp/side_set.h"
 
 namespace fs = std::filesystem;
 
