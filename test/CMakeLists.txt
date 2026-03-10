@@ -2,15 +2,21 @@ project(exodusIIcpp-test)
 
 find_package(GTest REQUIRED)
 
-add_executable(${PROJECT_NAME}
-    ElementBlock_test.cpp
-    Error_test.cpp
-    File_test.cpp
-    NodeSet_test.cpp
-    SideSet_test.cpp
-    main.cpp
+add_executable(${PROJECT_NAME})
+
+target_sources(
+    ${PROJECT_NAME}
+    PRIVATE
+        ElementBlock_test.cpp
+        Error_test.cpp
+        File_test.cpp
+        NodeSet_test.cpp
+        SideSet_test.cpp
+        main.cpp
 )
+
 target_code_coverage(${PROJECT_NAME})
+
 target_sanitization(${PROJECT_NAME})
 
 target_include_directories(

@@ -1,11 +1,23 @@
-add_library(
+add_library(${PROJECT_NAME} ${EXODUSIICPP_LIBRARY_TYPE})
+
+target_sources(
     ${PROJECT_NAME}
-    ${EXODUSIICPP_LIBRARY_TYPE}
+    PRIVATE
         element_block.cpp
         exception.cpp
         file.cpp
         node_set.cpp
         side_set.cpp
+)
+
+file(GLOB_RECURSE HDRS CONFIGURE_DEPENDS ${CMAKE_SOURCE_DIR}/include/exodusIIcpp/*.h)
+
+target_sources(
+    ${PROJECT_NAME}
+    PUBLIC
+        FILE_SET HEADERS
+        BASE_DIRS ${CMAKE_SOURCE_DIR}/include
+        FILES ${HDRS}
 )
 
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_17)
@@ -56,22 +68,12 @@ if (EXODUSIICPP_INSTALL)
 
     install(
         TARGETS exodusIIcpp
-        EXPORT exodusIIcppTargets
-        LIBRARY DESTINATION lib
-        ARCHIVE DESTINATION lib
-        RUNTIME DESTINATION bin
-        INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
-        PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+        EXPORT exodusIIcpp-targets
+        FILE_SET HEADERS
     )
 
     install(
-        DIRECTORY ${PROJECT_SOURCE_DIR}/include/
-        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
-        FILES_MATCHING PATTERN "*.h"
-    )
-
-    install(
-        EXPORT exodusIIcppTargets
+        EXPORT exodusIIcpp-targets
         FILE exodusiicpp-targets.cmake
         NAMESPACE exodusIIcpp::
         DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/exodusIIcpp
