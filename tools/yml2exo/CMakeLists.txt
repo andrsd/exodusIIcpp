@@ -2,9 +2,9 @@ project(yml2exo LANGUAGES CXX)
 
 find_package(yaml-cpp 0.8 REQUIRED)
 
-add_executable(${PROJECT_NAME}
-    main.cpp
-)
+add_executable(${PROJECT_NAME})
+
+target_sources(${PROJECT_NAME} PRIVATE main.cpp)
 
 target_include_directories(
     ${PROJECT_NAME}
@@ -25,7 +25,6 @@ target_link_libraries(
 if (EXODUSIICPP_INSTALL)
     install(
         TARGETS ${PROJECT_NAME}
-        EXPORT exodusIIcppTargets
-        RUNTIME DESTINATION bin
+        EXPORT exodusIIcpp-targets
     )
 endif()
