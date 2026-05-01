@@ -48,9 +48,9 @@ std::vector<int>
 ElementBlock::get_element_connectivity(std::size_t element_idx) const
 {
     std::vector<int> elem_connect(this->n_nodes_per_elem);
-    if (element_idx < this->n_elems) {
+    if (element_idx < static_cast<std::size_t>(this->n_elems)) {
         std::size_t ofst = element_idx * this->n_nodes_per_elem;
-        for (std::size_t i = 0; i < this->n_nodes_per_elem; i++)
+        for (int i = 0; i < this->n_nodes_per_elem; i++)
             elem_connect[i] = this->connect[ofst + i];
         return elem_connect;
     }

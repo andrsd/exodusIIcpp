@@ -5,7 +5,6 @@
             "name": "debug",
             "displayName": "Debug",
             "generator": "Unix Makefiles",
-            "binaryDir": "build-debug",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug",
                 "CMAKE_CXX_FLAGS_DEBUG": "-g -Wall",
@@ -19,13 +18,54 @@
             "name": "release",
             "displayName": "Release",
             "generator": "Unix Makefiles",
-            "binaryDir": "build-release",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Release",
                 "CMAKE_CXX_FLAGS_RELEASE": "-O3 -DNDEBUG",
                 "CMAKE_C_FLAGS_RELEASE": "-O3 -DNDEBUG",
                 "EXODUSIICPP_BUILD_TESTS": "OFF",
                 "EXODUSIICPP_CODE_COVERAGE": "OFF"
+            }
+        },
+        {
+            "name": "asan",
+            "displayName": "Sanitizer build",
+            "generator": "Unix Makefiles",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "RelWithDebInfo",
+                "CMAKE_CXX_FLAGS": "-Wall -fsanitize=address,undefined,nullability,float-divide-by-zero,integer-divide-by-zero,implicit-conversion -fno-sanitize-recover -fno-omit-frame-pointer",
+                "CMAKE_C_FLAGS": "-Wall -fsanitize=address,undefined,nullability,float-divide-by-zero,integer-divide-by-zero,implicit-conversion -fno-sanitize-recover -fno-omit-frame-pointer",
+                "CMAKE_EXE_LINKER_FLAGS": "-fsanitize=address,undefined,nullability,float-divide-by-zero,integer-divide-by-zero,implicit-conversion -fsanitize-address-use-after-scope -fno-sanitize-recover",
+                "EXODUSIICPP_CODE_COVERAGE": "NO",
+                "EXODUSIICPP_BUILD_TESTS": "YES"
+            }
+        },
+        {
+            "name": "ci-release",
+            "displayName": "CI/Release",
+            "generator": "Unix Makefiles",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "CMAKE_CXX_FLAGS_RELEASE": "-O3 -Wall -Werror -DNDEBUG",
+                "CMAKE_C_FLAGS_RELEASE": "-O3 -Wall -Werror -DNDEBUG",
+                "EXODUSIICPP_LIBRARY_TYPE": "SHARED",
+                "EXODUSIICPP_WITH_PYTHON": "YES",
+                "EXODUSIICPP_CODE_COVERAGE": "YES",
+                "EXODUSIICPP_BUILD_TESTS": "YES"
+            }
+        },
+        {
+            "name": "ci-asan",
+            "displayName": "Sanitizer build for CI",
+            "generator": "Unix Makefiles",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "RelWithDebInfo",
+                "CMAKE_CXX_FLAGS": "-Wall -fsanitize=address,undefined,float-divide-by-zero,integer-divide-by-zero -fno-sanitize-recover -fno-omit-frame-pointer",
+                "CMAKE_C_FLAGS": "-Wall -fsanitize=address,undefined,float-divide-by-zero,integer-divide-by-zero -fno-sanitize-recover -fno-omit-frame-pointer",
+                "CMAKE_EXE_LINKER_FLAGS": "-fsanitize=address,undefined,float-divide-by-zero,integer-divide-by-zero -fsanitize-address-use-after-scope -fno-sanitize-recover",
+                "EXODUSIICPP_LIBRARY_TYPE": "SHARED",
+                "EXODUSIICPP_WITH_PYTHON": "YES",
+                "EXODUSIICPP_CODE_COVERAGE": "YES",
+                "EXODUSIICPP_BUILD_TESTS": "YES"
             }
         }
     ],
@@ -41,6 +81,24 @@
             "displayName": "Release Build",
             "configurePreset": "release",
             "configuration": "Release"
+        },
+        {
+            "name": "asan",
+            "displayName": "Sanitizer build",
+            "configurePreset": "asan",
+            "configuration": "RelWithDebInfo"
+        },
+        {
+            "name": "ci-release",
+            "displayName": "Release Build for CI",
+            "configurePreset": "ci-release",
+            "configuration": "Release"
+        },
+        {
+            "name": "ci-asan",
+            "displayName": "Sanitizer build for CI",
+            "configurePreset": "ci-asan",
+            "configuration": "RelWithDebInfo"
         }
     ],
     "testPresets": [

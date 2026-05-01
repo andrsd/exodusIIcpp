@@ -37,7 +37,7 @@ write_coordinates(exodusIIcpp::File & exo, int dim, const YAML::Node & yml_coord
 
     for (auto & node : yml_coords) {
         auto coord = node.as<std::vector<double>>();
-        if (coord.size() != dim)
+        if (coord.size() != static_cast<std::size_t>(dim))
             error("Mismatch in mesh dimension and coordinate dimension.");
         for (std::size_t i = 0; i < coord.size(); i++)
             xyz[i].push_back(coord[i]);

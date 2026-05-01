@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    name: ${{ matrix.os }}
+    name: ${{ matrix.os }}, ${{ matrix.preset }}
     defaults:
       run:
         shell: bash -el {0}
@@ -19,6 +19,9 @@ jobs:
       matrix:
         include:
           - os: ubuntu-22.04
+            preset: ci-release
+          - os: ubuntu-22.04
+            preset: ci-asan
     runs-on: ${{ matrix.os }}
     steps:
       - name: Set up miniconda
@@ -37,9 +40,9 @@ jobs:
             cmake \
             make \
             mpich-mpicxx \
-            exodusii==2024.06.* \
+            exodusii=2024.06.* \
             fmt=11.* \
-            yaml-cpp==0.8.0 \
+            yaml-cpp=0.8 \
             pybind11 \
             pytest \
             flake8 \
@@ -48,19 +51,13 @@ jobs:
 
       - name: Configure
         run: |
-          cmake -S . -B ${{ github.workspace }}/build \
+          cmake -B build --preset ${{ matrix.preset }} \
             -DCMAKE_INSTALL_PREFIX=$CONDA_PREFIX \
-            -DGCOV_PATH=`which x86_64-conda-linux-gnu-gcov` \
-            -DEXODUSIICPP_LIBRARY_TYPE=SHARED \
-            -DEXODUSIICPP_WITH_PYTHON=ON \
-            -DEXODUSIICPP_BUILD_TESTS=YES \
-            -DEXODUSIICPP_CODE_COVERAGE=YES
+            -DGCOV_PATH=`which x86_64-conda-linux-gnu-gcov`
 
       - name: Build
-        run: cmake --build ${{ github.workspace }}/build
-
-      - name: Install
-        run: cmake --install ${{ github.workspace }}/build
+        run: |
+          cmake --build build --preset=${{ matrix.preset }} --parallel 4 --target install
 
       - name: Run C++ tests
         run: |
@@ -68,6 +65,7 @@ jobs:
             --gtest_output=xml:${{ github.workspace }}/build/gtest-results.xml
 
       - name: Run Python tests
+        if: ${{ matrix.preset == 'ci-release' }}
         run: |
           pytest ${{ github.workspace }}/python/tests
 
