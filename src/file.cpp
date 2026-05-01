@@ -444,13 +444,13 @@ void
 File::read_coord_names()
 {
     char * names[3] = { nullptr, nullptr, nullptr };
-    for (unsigned int i = 0; i < this->n_dim; i++) {
+    for (int i = 0; i < this->n_dim; i++) {
         names[i] = (char *) calloc((MAX_STR_LENGTH + 1), sizeof(char));
         memset(names[i], 0, (MAX_STR_LENGTH + 1) * sizeof(char));
     }
 
     EXODUSIICPP_CHECK_ERROR(ex_get_coord_names(this->exoid, names));
-    for (unsigned int i = 0; i < this->n_dim; i++) {
+    for (int i = 0; i < this->n_dim; i++) {
         this->coord_names[i].assign(names[i]);
         free(names[i]);
     }

@@ -109,7 +109,7 @@ write_element_block(YAML::Emitter & yml, exodusIIcpp::File & exo)
         yml << YAML::Key << "connectivity";
         yml << YAML::Value;
         yml << YAML::BeginSeq;
-        for (size_t e = 0; e < blk.get_num_elements(); e++) {
+        for (int e = 0; e < blk.get_num_elements(); e++) {
             std::vector<int> connect = blk.get_element_connectivity(e);
             yml << YAML::Flow;
             yml << connect;
@@ -143,7 +143,7 @@ write_side_sets(YAML::Emitter & yml, exodusIIcpp::File & exo)
         yml << YAML::Key << "data";
         yml << YAML::Value;
         yml << YAML::BeginSeq;
-        for (size_t i = 0; i < ss.get_size(); i++) {
+        for (int i = 0; i < ss.get_size(); i++) {
             yml << YAML::Flow;
             std::vector<int> pair = { ss.get_element_id(i), ss.get_side_id(i) };
             yml << pair;
@@ -178,7 +178,7 @@ write_node_sets(YAML::Emitter & yml, exodusIIcpp::File & exo)
         yml << YAML::Value;
         yml << YAML::Flow;
         yml << YAML::BeginSeq;
-        for (size_t i = 0; i < ns.get_size(); i++)
+        for (int i = 0; i < ns.get_size(); i++)
             yml << ns.get_node_id(i);
         yml << YAML::EndSeq;
 
