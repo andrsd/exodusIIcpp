@@ -41,7 +41,7 @@ if (NETCDF_META_H)
 endif()
 
 if (NETCDF_PARALLEL EQUAL "1")
-    find_package(MPI REQUIRED)
+    find_package(MPI REQUIRED COMPONENTS C)
     list(APPEND NETCDF_INCLUDE_DIRS ${MPI_C_INCLUDE_DIRS})
 endif()
 
