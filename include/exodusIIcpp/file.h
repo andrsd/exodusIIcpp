@@ -11,6 +11,7 @@
 #include "exodusIIcpp/error.h"
 #include "exodusIIcpp/node_set.h"
 #include "exodusIIcpp/side_set.h"
+#include "exodusIIcpp/truth_table.h"
 
 namespace fs = std::filesystem;
 
@@ -147,6 +148,12 @@ public:
     ///
     /// @return The number of side sets
     int get_num_side_sets() const;
+
+    /// Get elemental variable table
+    ///
+    /// @return Truth table. Rows are block indices (not IDs), columns are
+    ///         variable indices. Both are 1-based indices!
+    TruthTable get_elemental_var_table() const;
 
     /// Get the x-coordinates of nodes
     ///
