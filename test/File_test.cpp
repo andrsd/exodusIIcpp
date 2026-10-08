@@ -387,6 +387,9 @@ TEST(FileTest, test)
         EXPECT_THAT(ss_cnts, ElementsAre(2, 2));
         EXPECT_THAT(ss_nodes, ElementsAre(2, 3, 7, 8));
 
+        auto ev_tab = f.get_elemental_var_table();
+        EXPECT_TRUE(ev_tab(1, 3));
+
         f.close();
     }
 }

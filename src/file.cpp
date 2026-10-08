@@ -247,6 +247,21 @@ File::get_num_side_sets() const
     return this->n_side_sets;
 }
 
+TruthTable
+File::get_elemental_var_table() const
+{
+    int num_elem_var = 0;
+    EXODUSIICPP_CHECK_ERROR(ex_get_variable_param(exoid, EX_ELEM_BLOCK, &num_elem_var));
+
+    TruthTable truth_table(this->n_elem_blks, num_elem_var);
+    EXODUSIICPP_CHECK_ERROR(ex_get_truth_table(this->exoid,
+                                               EX_ELEM_BLOCK,
+                                               this->n_elem_blks,
+                                               num_elem_var,
+                                               truth_table.data));
+    return truth_table;
+}
+
 const std::vector<double> &
 File::get_x_coords() const
 {

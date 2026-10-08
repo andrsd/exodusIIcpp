@@ -21,6 +21,8 @@ PYBIND11_MODULE(exodusIIcpp, m)
         .value("WRITE", exodusIIcpp::FileAccess::WRITE)
         .value("APPEND", exodusIIcpp::FileAccess::APPEND);
 
+    py::class_<exodusIIcpp::TruthTable>(m, "TruthTable");
+
     py::class_<exodusIIcpp::ElementBlock>(m, "ElementBlock")
         .def(py::init())
         .def("get_id", &ElementBlock::get_id)
@@ -78,6 +80,7 @@ PYBIND11_MODULE(exodusIIcpp, m)
         .def("get_num_element_blocks", &File::get_num_element_blocks)
         .def("get_num_node_sets", &File::get_num_node_sets)
         .def("get_num_side_sets", &File::get_num_side_sets)
+        .def("get_elemental_var_table", &File::get_elemental_var_table)
         .def("get_x_coords", &File::get_x_coords)
         .def("get_y_coords", &File::get_y_coords)
         .def("get_z_coords", &File::get_z_coords)
