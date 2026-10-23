@@ -727,7 +727,9 @@ File::write_node_set(int64_t set_id, const std::vector<int> & node_set)
 {
     EXODUSIICPP_CHECK_ERROR(
         ex_put_set_param(this->exoid, EX_NODE_SET, set_id, (int64_t) node_set.size(), 0));
-    EXODUSIICPP_CHECK_ERROR(ex_put_set(this->exoid, EX_NODE_SET, set_id, node_set.data(), nullptr));
+    if (node_set.size() > 0)
+        EXODUSIICPP_CHECK_ERROR(
+            ex_put_set(this->exoid, EX_NODE_SET, set_id, node_set.data(), nullptr));
 }
 
 void
@@ -753,8 +755,9 @@ File::write_side_set(int64_t set_id,
     if (elem_list.size() == side_list.size()) {
         EXODUSIICPP_CHECK_ERROR(
             ex_put_set_param(this->exoid, EX_SIDE_SET, set_id, (int64_t) elem_list.size(), 0));
-        EXODUSIICPP_CHECK_ERROR(
-            ex_put_set(this->exoid, EX_SIDE_SET, set_id, elem_list.data(), side_list.data()));
+        if (elem_list.size() > 0)
+            EXODUSIICPP_CHECK_ERROR(
+                ex_put_set(this->exoid, EX_SIDE_SET, set_id, elem_list.data(), side_list.data()));
     }
     else
         throw Exception("The length of elem_list must be equal to the length of side_list.");
@@ -790,8 +793,10 @@ File::write_block(int64_t blk_id,
                                          0,
                                          0,
                                          0));
-    EXODUSIICPP_CHECK_ERROR(
-        ex_put_conn(this->exoid, EX_ELEM_BLOCK, blk_id, connect.data(), nullptr, nullptr));
+    if (connect.size() > 0) {
+        EXODUSIICPP_CHECK_ERROR(
+            ex_put_conn(this->exoid, EX_ELEM_BLOCK, blk_id, connect.data(), nullptr, nullptr));
+    }
 }
 
 void
