@@ -577,24 +577,23 @@ File::read_side_sets()
     EXODUSIICPP_CHECK_ERROR(ex_get_ids(this->exoid, EX_SIDE_SET, side_set_ids.data()));
 
     for (auto & id : side_set_ids) {
+        SideSet ss;
+        ss.id = id;
+
         char name[MAX_STR_LENGTH + 1];
         EXODUSIICPP_CHECK_ERROR(ex_get_name(this->exoid, EX_SIDE_SET, id, name));
+        ss.name = name;
 
         int n_sides;
         int n_dfs;
         EXODUSIICPP_CHECK_ERROR(ex_get_set_param(this->exoid, EX_SIDE_SET, id, &n_sides, &n_dfs));
 
-        std::vector<int> elem_list(n_sides);
-        std::vector<int> side_list(n_sides);
+        ss.elem_ids.resize(n_sides);
+        ss.side_ids.resize(n_sides);
         EXODUSIICPP_CHECK_ERROR(
-            ex_get_set(this->exoid, EX_SIDE_SET, id, elem_list.data(), side_list.data()));
+            ex_get_set(this->exoid, EX_SIDE_SET, id, ss.elem_ids.data(), ss.side_ids.data()));
 
-        SideSet ss;
-        ss.set_id(id);
-        ss.set_name(name);
-        ss.set_sides(elem_list, side_list);
-
-        this->side_sets.push_back(ss);
+        this->side_sets.emplace_back(ss);
     }
 }
 

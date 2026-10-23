@@ -6,7 +6,7 @@
 
 namespace exodusIIcpp {
 
-SideSet::SideSet() : id(-1) {}
+SideSet::SideSet() : id(-1), n_distance_factors(0) {}
 
 int
 SideSet::get_id() const
