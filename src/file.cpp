@@ -688,6 +688,18 @@ File::write_coord_names(const std::vector<std::string> & new_names)
 }
 
 void
+File::write_node_map(const std::vector<int> & node_map)
+{
+    EXODUSIICPP_CHECK_ERROR(ex_put_id_map(exoid, EX_NODE_MAP, node_map.data()));
+}
+
+void
+File::write_elem_map(const std::vector<int> & elem_map)
+{
+    EXODUSIICPP_CHECK_ERROR(ex_put_id_map(exoid, EX_ELEM_MAP, elem_map.data()));
+}
+
+void
 File::write_info(std::vector<std::string> info)
 {
     for (auto & s : info)

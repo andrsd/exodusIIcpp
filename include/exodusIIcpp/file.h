@@ -353,6 +353,12 @@ public:
     /// @param coord_names Array with coordinate names
     void write_coord_names(const std::vector<std::string> & coord_names);
 
+    /// Write node map from the ExodusII file
+    void write_node_map(const std::vector<int> & node_map);
+
+    /// Write element map from the ExodusII file
+    void write_elem_map(const std::vector<int> & elem_map);
+
     /// Write information records to the ExodusII file
     ///
     /// @param info List of information records
