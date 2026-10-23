@@ -827,6 +827,27 @@ File::write_global_var(int step_num, int var_index, double value)
 }
 
 void
+File::write_loadbal_param(int64_t n_int_nodes,
+                          int64_t n_bor_nodes,
+                          int64_t n_ext_nodes,
+                          int64_t n_int_elems,
+                          int64_t n_bor_elems,
+                          int64_t n_node_cmaps,
+                          int64_t n_elem_cmaps,
+                          int processor)
+{
+    EXODUSIICPP_CHECK_ERROR(ex_put_loadbal_param(this->exoid,
+                                                 n_int_nodes,
+                                                 n_bor_nodes,
+                                                 n_ext_nodes,
+                                                 n_int_elems,
+                                                 n_bor_elems,
+                                                 n_node_cmaps,
+                                                 n_elem_cmaps,
+                                                 processor));
+}
+
+void
 File::update()
 {
     EXODUSIICPP_CHECK_ERROR(ex_update(this->exoid));

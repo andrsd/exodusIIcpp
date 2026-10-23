@@ -462,6 +462,15 @@ public:
     /// @param value Value to write
     void write_global_var(int step_num, int var_index, double value);
 
+    void write_loadbal_param(int64_t n_int_nodes,
+                             int64_t n_bor_nodes,
+                             int64_t n_ext_nodes,
+                             int64_t n_int_elems,
+                             int64_t n_bor_elems,
+                             int64_t n_node_cmaps,
+                             int64_t n_elem_cmaps,
+                             int processor);
+
     /// Update the file
     ///
     /// Call after the time step data were all saved
