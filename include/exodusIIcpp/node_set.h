@@ -12,14 +12,6 @@ namespace exodusIIcpp {
 ///
 /// Represents a node set stored in/loaded from the ExodusII file
 class NodeSet {
-protected:
-    /// Node set name
-    std::string name;
-    /// Node set ID
-    int id;
-    /// Node IDs
-    std::vector<int> node_ids;
-
 public:
     NodeSet();
 
@@ -64,6 +56,15 @@ public:
     ///
     /// @param nodes List of node IDs that will comprise the node set
     void set_nodes(const std::vector<int> & nodes);
+
+    /// Node set name
+    std::string name;
+    /// Node set ID
+    int id;
+    /// Node IDs
+    std::vector<int> node_ids;
+    /// Number of distance factors
+    int n_distance_factors;
 };
 
 } // namespace exodusIIcpp

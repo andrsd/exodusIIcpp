@@ -542,22 +542,22 @@ File::read_node_sets()
     EXODUSIICPP_CHECK_ERROR(ex_get_ids(this->exoid, EX_NODE_SET, node_set_ids.data()));
 
     for (auto & id : node_set_ids) {
+        NodeSet ns;
+        ns.id = id;
+
         char name[MAX_STR_LENGTH + 1];
         EXODUSIICPP_CHECK_ERROR(ex_get_name(this->exoid, EX_NODE_SET, id, name));
+        ns.name = name;
 
         int n_nodes;
         int n_dfs;
         EXODUSIICPP_CHECK_ERROR(ex_get_set_param(this->exoid, EX_NODE_SET, id, &n_nodes, &n_dfs));
+        ns.n_distance_factors = n_dfs;
 
-        std::vector<int> node_list(n_nodes);
-        EXODUSIICPP_CHECK_ERROR(ex_get_set(this->exoid, EX_NODE_SET, id, node_list.data(), 0));
+        ns.node_ids.resize(n_nodes);
+        EXODUSIICPP_CHECK_ERROR(ex_get_set(this->exoid, EX_NODE_SET, id, ns.node_ids.data(), 0));
 
-        NodeSet ns;
-        ns.set_id(id);
-        ns.set_name(name);
-        ns.set_nodes(node_list);
-
-        this->node_sets.push_back(ns);
+        this->node_sets.emplace_back(ns);
     }
 }
 
