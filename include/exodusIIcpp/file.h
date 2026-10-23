@@ -116,6 +116,12 @@ public:
 
     void init_info(int n_procs, int n_procs_in_f, const char * ftype);
 
+    void init_global(int64_t n_nodes_g,
+                     int64_t n_elems_g,
+                     int64_t n_elem_blks_g,
+                     int64_t n_node_sets_g,
+                     int64_t n_side_sets_g);
+
     /// Get the title of the file
     ///
     /// @return The file title

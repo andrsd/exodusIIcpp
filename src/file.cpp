@@ -211,6 +211,21 @@ File::init_info(int n_procs, int n_procs_in_f, const char * ftype)
     EXODUSIICPP_CHECK_ERROR(ex_put_init_info(this->exoid, n_procs, n_procs_in_f, ftype));
 }
 
+void
+File::init_global(int64_t n_nodes_g,
+                  int64_t n_elems_g,
+                  int64_t n_elem_blks_g,
+                  int64_t n_node_sets_g,
+                  int64_t n_side_sets_g)
+{
+    EXODUSIICPP_CHECK_ERROR(ex_put_init_global(this->exoid,
+                                               n_nodes_g,
+                                               n_elems_g,
+                                               n_elem_blks_g,
+                                               n_node_sets_g,
+                                               n_side_sets_g));
+}
+
 const std::string &
 File::get_title() const
 {
