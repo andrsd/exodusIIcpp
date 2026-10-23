@@ -205,6 +205,12 @@ File::init(const char * title,
         throw Exception("Calling init with non-write access.");
 }
 
+void
+File::init_info(int n_procs, int n_procs_in_f, const char * ftype)
+{
+    EXODUSIICPP_CHECK_ERROR(ex_put_init_info(this->exoid, n_procs, n_procs_in_f, ftype));
+}
+
 const std::string &
 File::get_title() const
 {

@@ -114,6 +114,8 @@ public:
               int n_node_sets,
               int n_side_sets);
 
+    void init_info(int n_procs, int n_procs_in_f, const char * ftype);
+
     /// Get the title of the file
     ///
     /// @return The file title
