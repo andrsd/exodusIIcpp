@@ -381,6 +381,10 @@ public:
     /// @param node_set List of node IDs that comprise the node set
     void write_node_set(int64_t set_id, const std::vector<int> & node_set);
 
+    void write_node_set_param_global(const std::vector<int> & global_ids,
+                                     const std::vector<int> & node_cnts,
+                                     const std::vector<int> & df_cnts);
+
     /// Write side set names to the ExodusII file
     ///
     /// @param names Names of side sets
@@ -394,6 +398,10 @@ public:
     void write_side_set(int64_t set_id,
                         const std::vector<int> & elem_list,
                         const std::vector<int> & side_list);
+
+    void write_side_set_param_global(const std::vector<int> & global_ids,
+                                     const std::vector<int> & side_cnts,
+                                     const std::vector<int> & df_cnts);
 
     /// Write element block names to the ExodusII file
     ///
@@ -412,6 +420,9 @@ public:
                      const char * elem_type,
                      int64_t n_elems_in_block,
                      const std::vector<int> & connect);
+
+    void write_elem_block_info_global(const std::vector<int> & el_blk_ids,
+                                      const std::vector<int> & el_blk_cnts);
 
     /// Write nodal variable names to the ExodusII file
     ///

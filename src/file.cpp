@@ -731,6 +731,15 @@ File::write_node_set(int64_t set_id, const std::vector<int> & node_set)
 }
 
 void
+File::write_node_set_param_global(const std::vector<int> & global_ids,
+                                  const std::vector<int> & node_cnts,
+                                  const std::vector<int> & df_cnts)
+{
+    EXODUSIICPP_CHECK_ERROR(
+        ex_put_ns_param_global(this->exoid, global_ids.data(), node_cnts.data(), df_cnts.data()));
+}
+
+void
 File::write_side_set_names(const std::vector<std::string> & names)
 {
     write_names(this->exoid, EX_SIDE_SET, names);
@@ -749,6 +758,15 @@ File::write_side_set(int64_t set_id,
     }
     else
         throw Exception("The length of elem_list must be equal to the length of side_list.");
+}
+
+void
+File::write_side_set_param_global(const std::vector<int> & global_ids,
+                                  const std::vector<int> & side_cnts,
+                                  const std::vector<int> & df_cnts)
+{
+    EXODUSIICPP_CHECK_ERROR(
+        ex_put_ss_param_global(this->exoid, global_ids.data(), side_cnts.data(), df_cnts.data()));
 }
 
 void
@@ -774,6 +792,14 @@ File::write_block(int64_t blk_id,
                                          0));
     EXODUSIICPP_CHECK_ERROR(
         ex_put_conn(this->exoid, EX_ELEM_BLOCK, blk_id, connect.data(), nullptr, nullptr));
+}
+
+void
+File::write_elem_block_info_global(const std::vector<int> & el_blk_ids,
+                                   const std::vector<int> & el_blk_cnts)
+{
+    EXODUSIICPP_CHECK_ERROR(
+        ex_put_eb_info_global(this->exoid, el_blk_ids.data(), el_blk_cnts.data()));
 }
 
 void
