@@ -482,6 +482,15 @@ public:
                          const std::vector<int> & proc_ids,
                          int processor);
 
+    void write_processor_node_maps(const std::vector<int> & node_mapi,
+                                   const std::vector<int> & node_mapb,
+                                   const std::vector<int> & node_mape,
+                                   int processor);
+
+    void write_processor_elem_maps(const std::vector<int> & elem_mapi,
+                                   const std::vector<int> & elem_mapb,
+                                   int processor);
+
     /// Update the file
     ///
     /// Call after the time step data were all saved

@@ -874,6 +874,32 @@ File::write_node_cmap(int64_t map_id,
 }
 
 void
+File::write_processor_node_maps(const std::vector<int> & node_mapi,
+                                const std::vector<int> & node_mapb,
+                                const std::vector<int> & node_mape,
+                                int processor)
+{
+    EXODUSIICPP_CHECK_ERROR(
+        ex_put_processor_node_maps(this->exoid,
+                                   node_mapi.size() > 0 ? node_mapi.data() : nullptr,
+                                   node_mapb.size() > 0 ? node_mapb.data() : nullptr,
+                                   node_mape.size() > 0 ? node_mape.data() : nullptr,
+                                   processor));
+}
+
+void
+File::write_processor_elem_maps(const std::vector<int> & elem_mapi,
+                                const std::vector<int> & elem_mapb,
+                                int processor)
+{
+    EXODUSIICPP_CHECK_ERROR(
+        ex_put_processor_elem_maps(this->exoid,
+                                   elem_mapi.size() > 0 ? elem_mapi.data() : nullptr,
+                                   elem_mapb.size() > 0 ? elem_mapb.data() : nullptr,
+                                   processor));
+}
+
+void
 File::update()
 {
     EXODUSIICPP_CHECK_ERROR(ex_update(this->exoid));
