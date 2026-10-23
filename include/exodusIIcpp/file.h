@@ -471,6 +471,17 @@ public:
                              int64_t n_elem_cmaps,
                              int processor);
 
+    void write_cmap_params(const std::vector<int> & node_cmap_ids,
+                           const std::vector<int> & node_cmap_node_cnts,
+                           const std::vector<int> & elem_cmap_ids,
+                           const std::vector<int> & elem_cmap_elem_cnts,
+                           int64_t processor);
+
+    void write_node_cmap(int64_t map_id,
+                         const std::vector<int> & node_ids,
+                         const std::vector<int> & proc_ids,
+                         int processor);
+
     /// Update the file
     ///
     /// Call after the time step data were all saved

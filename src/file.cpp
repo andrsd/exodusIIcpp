@@ -848,6 +848,32 @@ File::write_loadbal_param(int64_t n_int_nodes,
 }
 
 void
+File::write_cmap_params(const std::vector<int> & node_cmap_ids,
+                        const std::vector<int> & node_cmap_node_cnts,
+                        const std::vector<int> & elem_cmap_ids,
+                        const std::vector<int> & elem_cmap_elem_cnts,
+                        int64_t processor)
+{
+    EXODUSIICPP_CHECK_ERROR(
+        ex_put_cmap_params(this->exoid,
+                           node_cmap_ids.size() > 0 ? node_cmap_ids.data() : nullptr,
+                           node_cmap_node_cnts.size() > 0 ? node_cmap_node_cnts.data() : nullptr,
+                           elem_cmap_ids.size() > 0 ? elem_cmap_ids.data() : nullptr,
+                           elem_cmap_elem_cnts.size() > 0 ? elem_cmap_elem_cnts.data() : nullptr,
+                           processor));
+}
+
+void
+File::write_node_cmap(int64_t map_id,
+                      const std::vector<int> & node_ids,
+                      const std::vector<int> & proc_ids,
+                      int processor)
+{
+    EXODUSIICPP_CHECK_ERROR(
+        ex_put_node_cmap(this->exoid, map_id, node_ids.data(), proc_ids.data(), processor));
+}
+
+void
 File::update()
 {
     EXODUSIICPP_CHECK_ERROR(ex_update(this->exoid));
