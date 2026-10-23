@@ -205,6 +205,27 @@ File::init(const char * title,
         throw Exception("Calling init with non-write access.");
 }
 
+void
+File::init_info(int n_procs, int n_procs_in_f, const char * ftype)
+{
+    EXODUSIICPP_CHECK_ERROR(ex_put_init_info(this->exoid, n_procs, n_procs_in_f, ftype));
+}
+
+void
+File::init_global(int64_t n_nodes_g,
+                  int64_t n_elems_g,
+                  int64_t n_elem_blks_g,
+                  int64_t n_node_sets_g,
+                  int64_t n_side_sets_g)
+{
+    EXODUSIICPP_CHECK_ERROR(ex_put_init_global(this->exoid,
+                                               n_nodes_g,
+                                               n_elems_g,
+                                               n_elem_blks_g,
+                                               n_node_sets_g,
+                                               n_side_sets_g));
+}
+
 const std::string &
 File::get_title() const
 {
@@ -260,6 +281,18 @@ File::get_elemental_var_table() const
                                                num_elem_var,
                                                truth_table.data));
     return truth_table;
+}
+
+const std::vector<int> &
+File::get_node_map() const
+{
+    return this->node_map;
+}
+
+const std::vector<int> &
+File::get_elem_map() const
+{
+    return this->elem_map;
 }
 
 const std::vector<double> &
@@ -472,11 +505,19 @@ File::read_coord_names()
 }
 
 void
+File::read_node_map()
+{
+    this->node_map.clear();
+    this->node_map.resize(this->n_nodes);
+    EXODUSIICPP_CHECK_ERROR(ex_get_id_map(this->exoid, EX_NODE_MAP, this->node_map.data()));
+}
+
+void
 File::read_elem_map()
 {
     this->elem_map.clear();
     this->elem_map.resize(this->n_elems);
-    EXODUSIICPP_CHECK_ERROR(ex_get_map(this->exoid, this->elem_map.data()));
+    EXODUSIICPP_CHECK_ERROR(ex_get_id_map(this->exoid, EX_ELEM_MAP, this->elem_map.data()));
 }
 
 void
@@ -536,22 +577,22 @@ File::read_node_sets()
     EXODUSIICPP_CHECK_ERROR(ex_get_ids(this->exoid, EX_NODE_SET, node_set_ids.data()));
 
     for (auto & id : node_set_ids) {
+        NodeSet ns;
+        ns.id = id;
+
         char name[MAX_STR_LENGTH + 1];
         EXODUSIICPP_CHECK_ERROR(ex_get_name(this->exoid, EX_NODE_SET, id, name));
+        ns.name = name;
 
         int n_nodes;
         int n_dfs;
         EXODUSIICPP_CHECK_ERROR(ex_get_set_param(this->exoid, EX_NODE_SET, id, &n_nodes, &n_dfs));
+        ns.n_distance_factors = n_dfs;
 
-        std::vector<int> node_list(n_nodes);
-        EXODUSIICPP_CHECK_ERROR(ex_get_set(this->exoid, EX_NODE_SET, id, node_list.data(), 0));
+        ns.node_ids.resize(n_nodes);
+        EXODUSIICPP_CHECK_ERROR(ex_get_set(this->exoid, EX_NODE_SET, id, ns.node_ids.data(), 0));
 
-        NodeSet ns;
-        ns.set_id(id);
-        ns.set_name(name);
-        ns.set_nodes(node_list);
-
-        this->node_sets.push_back(ns);
+        this->node_sets.emplace_back(ns);
     }
 }
 
@@ -571,24 +612,23 @@ File::read_side_sets()
     EXODUSIICPP_CHECK_ERROR(ex_get_ids(this->exoid, EX_SIDE_SET, side_set_ids.data()));
 
     for (auto & id : side_set_ids) {
+        SideSet ss;
+        ss.id = id;
+
         char name[MAX_STR_LENGTH + 1];
         EXODUSIICPP_CHECK_ERROR(ex_get_name(this->exoid, EX_SIDE_SET, id, name));
+        ss.name = name;
 
         int n_sides;
         int n_dfs;
         EXODUSIICPP_CHECK_ERROR(ex_get_set_param(this->exoid, EX_SIDE_SET, id, &n_sides, &n_dfs));
 
-        std::vector<int> elem_list(n_sides);
-        std::vector<int> side_list(n_sides);
+        ss.elem_ids.resize(n_sides);
+        ss.side_ids.resize(n_sides);
         EXODUSIICPP_CHECK_ERROR(
-            ex_get_set(this->exoid, EX_SIDE_SET, id, elem_list.data(), side_list.data()));
+            ex_get_set(this->exoid, EX_SIDE_SET, id, ss.elem_ids.data(), ss.side_ids.data()));
 
-        SideSet ss;
-        ss.set_id(id);
-        ss.set_name(name);
-        ss.set_sides(elem_list, side_list);
-
-        this->side_sets.push_back(ss);
+        this->side_sets.emplace_back(ss);
     }
 }
 
@@ -624,7 +664,10 @@ File::write_coords(const std::vector<double> & x,
                    const std::vector<double> & y,
                    const std::vector<double> & z)
 {
-    EXODUSIICPP_CHECK_ERROR(ex_put_coord(this->exoid, x.data(), y.data(), z.data()));
+    EXODUSIICPP_CHECK_ERROR(ex_put_coord(this->exoid,
+                                         x.size() > 0 ? x.data() : nullptr,
+                                         y.size() > 0 ? y.data() : nullptr,
+                                         z.size() > 0 ? z.data() : nullptr));
 }
 
 void
@@ -642,6 +685,18 @@ File::write_coord_names(const std::vector<std::string> & new_names)
         names[i] = new_names[i].c_str();
     EXODUSIICPP_CHECK_ERROR(ex_put_coord_names(this->exoid, (char **) names));
     this->coord_names = new_names;
+}
+
+void
+File::write_node_map(const std::vector<int> & node_map)
+{
+    EXODUSIICPP_CHECK_ERROR(ex_put_id_map(exoid, EX_NODE_MAP, node_map.data()));
+}
+
+void
+File::write_elem_map(const std::vector<int> & elem_map)
+{
+    EXODUSIICPP_CHECK_ERROR(ex_put_id_map(exoid, EX_ELEM_MAP, elem_map.data()));
 }
 
 void
@@ -672,7 +727,18 @@ File::write_node_set(int64_t set_id, const std::vector<int> & node_set)
 {
     EXODUSIICPP_CHECK_ERROR(
         ex_put_set_param(this->exoid, EX_NODE_SET, set_id, (int64_t) node_set.size(), 0));
-    EXODUSIICPP_CHECK_ERROR(ex_put_set(this->exoid, EX_NODE_SET, set_id, node_set.data(), nullptr));
+    if (node_set.size() > 0)
+        EXODUSIICPP_CHECK_ERROR(
+            ex_put_set(this->exoid, EX_NODE_SET, set_id, node_set.data(), nullptr));
+}
+
+void
+File::write_node_set_param_global(const std::vector<int> & global_ids,
+                                  const std::vector<int> & node_cnts,
+                                  const std::vector<int> & df_cnts)
+{
+    EXODUSIICPP_CHECK_ERROR(
+        ex_put_ns_param_global(this->exoid, global_ids.data(), node_cnts.data(), df_cnts.data()));
 }
 
 void
@@ -689,11 +755,21 @@ File::write_side_set(int64_t set_id,
     if (elem_list.size() == side_list.size()) {
         EXODUSIICPP_CHECK_ERROR(
             ex_put_set_param(this->exoid, EX_SIDE_SET, set_id, (int64_t) elem_list.size(), 0));
-        EXODUSIICPP_CHECK_ERROR(
-            ex_put_set(this->exoid, EX_SIDE_SET, set_id, elem_list.data(), side_list.data()));
+        if (elem_list.size() > 0)
+            EXODUSIICPP_CHECK_ERROR(
+                ex_put_set(this->exoid, EX_SIDE_SET, set_id, elem_list.data(), side_list.data()));
     }
     else
         throw Exception("The length of elem_list must be equal to the length of side_list.");
+}
+
+void
+File::write_side_set_param_global(const std::vector<int> & global_ids,
+                                  const std::vector<int> & side_cnts,
+                                  const std::vector<int> & df_cnts)
+{
+    EXODUSIICPP_CHECK_ERROR(
+        ex_put_ss_param_global(this->exoid, global_ids.data(), side_cnts.data(), df_cnts.data()));
 }
 
 void
@@ -717,8 +793,18 @@ File::write_block(int64_t blk_id,
                                          0,
                                          0,
                                          0));
+    if (connect.size() > 0) {
+        EXODUSIICPP_CHECK_ERROR(
+            ex_put_conn(this->exoid, EX_ELEM_BLOCK, blk_id, connect.data(), nullptr, nullptr));
+    }
+}
+
+void
+File::write_elem_block_info_global(const std::vector<int> & el_blk_ids,
+                                   const std::vector<int> & el_blk_cnts)
+{
     EXODUSIICPP_CHECK_ERROR(
-        ex_put_conn(this->exoid, EX_ELEM_BLOCK, blk_id, connect.data(), nullptr, nullptr));
+        ex_put_eb_info_global(this->exoid, el_blk_ids.data(), el_blk_cnts.data()));
 }
 
 void
@@ -784,6 +870,79 @@ void
 File::write_global_var(int step_num, int var_index, double value)
 {
     EXODUSIICPP_CHECK_ERROR(ex_put_var(this->exoid, step_num, EX_GLOBAL, var_index, 0, 1, &value));
+}
+
+void
+File::write_loadbal_param(int64_t n_int_nodes,
+                          int64_t n_bor_nodes,
+                          int64_t n_ext_nodes,
+                          int64_t n_int_elems,
+                          int64_t n_bor_elems,
+                          int64_t n_node_cmaps,
+                          int64_t n_elem_cmaps,
+                          int processor)
+{
+    EXODUSIICPP_CHECK_ERROR(ex_put_loadbal_param(this->exoid,
+                                                 n_int_nodes,
+                                                 n_bor_nodes,
+                                                 n_ext_nodes,
+                                                 n_int_elems,
+                                                 n_bor_elems,
+                                                 n_node_cmaps,
+                                                 n_elem_cmaps,
+                                                 processor));
+}
+
+void
+File::write_cmap_params(const std::vector<int> & node_cmap_ids,
+                        const std::vector<int> & node_cmap_node_cnts,
+                        const std::vector<int> & elem_cmap_ids,
+                        const std::vector<int> & elem_cmap_elem_cnts,
+                        int64_t processor)
+{
+    EXODUSIICPP_CHECK_ERROR(
+        ex_put_cmap_params(this->exoid,
+                           node_cmap_ids.size() > 0 ? node_cmap_ids.data() : nullptr,
+                           node_cmap_node_cnts.size() > 0 ? node_cmap_node_cnts.data() : nullptr,
+                           elem_cmap_ids.size() > 0 ? elem_cmap_ids.data() : nullptr,
+                           elem_cmap_elem_cnts.size() > 0 ? elem_cmap_elem_cnts.data() : nullptr,
+                           processor));
+}
+
+void
+File::write_node_cmap(int64_t map_id,
+                      const std::vector<int> & node_ids,
+                      const std::vector<int> & proc_ids,
+                      int processor)
+{
+    EXODUSIICPP_CHECK_ERROR(
+        ex_put_node_cmap(this->exoid, map_id, node_ids.data(), proc_ids.data(), processor));
+}
+
+void
+File::write_processor_node_maps(const std::vector<int> & node_mapi,
+                                const std::vector<int> & node_mapb,
+                                const std::vector<int> & node_mape,
+                                int processor)
+{
+    EXODUSIICPP_CHECK_ERROR(
+        ex_put_processor_node_maps(this->exoid,
+                                   node_mapi.size() > 0 ? node_mapi.data() : nullptr,
+                                   node_mapb.size() > 0 ? node_mapb.data() : nullptr,
+                                   node_mape.size() > 0 ? node_mape.data() : nullptr,
+                                   processor));
+}
+
+void
+File::write_processor_elem_maps(const std::vector<int> & elem_mapi,
+                                const std::vector<int> & elem_mapb,
+                                int processor)
+{
+    EXODUSIICPP_CHECK_ERROR(
+        ex_put_processor_elem_maps(this->exoid,
+                                   elem_mapi.size() > 0 ? elem_mapi.data() : nullptr,
+                                   elem_mapb.size() > 0 ? elem_mapb.data() : nullptr,
+                                   processor));
 }
 
 void

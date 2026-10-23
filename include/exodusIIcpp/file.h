@@ -51,6 +51,8 @@ protected:
     std::vector<double> z;
     /// Coordinate names
     std::vector<std::string> coord_names;
+    /// Node map
+    std::vector<int> node_map;
     /// Element map
     std::vector<int> elem_map;
     /// Element blocks
@@ -114,6 +116,14 @@ public:
               int n_node_sets,
               int n_side_sets);
 
+    void init_info(int n_procs, int n_procs_in_f, const char * ftype);
+
+    void init_global(int64_t n_nodes_g,
+                     int64_t n_elems_g,
+                     int64_t n_elem_blks_g,
+                     int64_t n_node_sets_g,
+                     int64_t n_side_sets_g);
+
     /// Get the title of the file
     ///
     /// @return The file title
@@ -154,6 +164,10 @@ public:
     /// @return Truth table. Rows are block indices (not IDs), columns are
     ///         variable indices. Both are 1-based indices!
     TruthTable get_elemental_var_table() const;
+
+    const std::vector<int> & get_node_map() const;
+
+    const std::vector<int> & get_elem_map() const;
 
     /// Get the x-coordinates of nodes
     ///
@@ -276,6 +290,9 @@ public:
     /// Read coordinate names from the ExodusII file
     void read_coord_names();
 
+    /// Read node map from the ExodusII file
+    void read_node_map();
+
     /// Read element map from the ExodusII file
     void read_elem_map();
 
@@ -336,6 +353,12 @@ public:
     /// @param coord_names Array with coordinate names
     void write_coord_names(const std::vector<std::string> & coord_names);
 
+    /// Write node map from the ExodusII file
+    void write_node_map(const std::vector<int> & node_map);
+
+    /// Write element map from the ExodusII file
+    void write_elem_map(const std::vector<int> & elem_map);
+
     /// Write information records to the ExodusII file
     ///
     /// @param info List of information records
@@ -358,6 +381,10 @@ public:
     /// @param node_set List of node IDs that comprise the node set
     void write_node_set(int64_t set_id, const std::vector<int> & node_set);
 
+    void write_node_set_param_global(const std::vector<int> & global_ids,
+                                     const std::vector<int> & node_cnts,
+                                     const std::vector<int> & df_cnts);
+
     /// Write side set names to the ExodusII file
     ///
     /// @param names Names of side sets
@@ -371,6 +398,10 @@ public:
     void write_side_set(int64_t set_id,
                         const std::vector<int> & elem_list,
                         const std::vector<int> & side_list);
+
+    void write_side_set_param_global(const std::vector<int> & global_ids,
+                                     const std::vector<int> & side_cnts,
+                                     const std::vector<int> & df_cnts);
 
     /// Write element block names to the ExodusII file
     ///
@@ -389,6 +420,9 @@ public:
                      const char * elem_type,
                      int64_t n_elems_in_block,
                      const std::vector<int> & connect);
+
+    void write_elem_block_info_global(const std::vector<int> & el_blk_ids,
+                                      const std::vector<int> & el_blk_cnts);
 
     /// Write nodal variable names to the ExodusII file
     ///
@@ -444,6 +478,35 @@ public:
     /// @param var_index Variable index
     /// @param value Value to write
     void write_global_var(int step_num, int var_index, double value);
+
+    void write_loadbal_param(int64_t n_int_nodes,
+                             int64_t n_bor_nodes,
+                             int64_t n_ext_nodes,
+                             int64_t n_int_elems,
+                             int64_t n_bor_elems,
+                             int64_t n_node_cmaps,
+                             int64_t n_elem_cmaps,
+                             int processor);
+
+    void write_cmap_params(const std::vector<int> & node_cmap_ids,
+                           const std::vector<int> & node_cmap_node_cnts,
+                           const std::vector<int> & elem_cmap_ids,
+                           const std::vector<int> & elem_cmap_elem_cnts,
+                           int64_t processor);
+
+    void write_node_cmap(int64_t map_id,
+                         const std::vector<int> & node_ids,
+                         const std::vector<int> & proc_ids,
+                         int processor);
+
+    void write_processor_node_maps(const std::vector<int> & node_mapi,
+                                   const std::vector<int> & node_mapb,
+                                   const std::vector<int> & node_mape,
+                                   int processor);
+
+    void write_processor_elem_maps(const std::vector<int> & elem_mapi,
+                                   const std::vector<int> & elem_mapb,
+                                   int processor);
 
     /// Update the file
     ///

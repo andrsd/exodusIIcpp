@@ -11,16 +11,6 @@ namespace exodusIIcpp {
 /// Side set
 ///
 class SideSet {
-protected:
-    /// Face set name
-    std::string name;
-    /// Face set ID
-    int id;
-    /// Element IDs
-    std::vector<int> elem_ids;
-    /// Local side IDs
-    std::vector<int> side_ids;
-
 public:
     SideSet();
 
@@ -86,6 +76,17 @@ public:
     /// @param elem Element ID
     /// @param side Local side number
     void add(int elem, int side);
+
+    /// Face set name
+    std::string name;
+    /// Face set ID
+    int id;
+    /// Element IDs
+    std::vector<int> elem_ids;
+    /// Local side IDs
+    std::vector<int> side_ids;
+    /// Number of distance factors
+    int n_distance_factors;
 };
 
 } // namespace exodusIIcpp

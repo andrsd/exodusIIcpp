@@ -6,7 +6,7 @@
 
 namespace exodusIIcpp {
 
-NodeSet::NodeSet() : id(-1) {}
+NodeSet::NodeSet() : id(-1), n_distance_factors(0) {}
 
 int
 NodeSet::get_id() const
