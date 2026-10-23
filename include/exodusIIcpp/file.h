@@ -51,6 +51,8 @@ protected:
     std::vector<double> z;
     /// Coordinate names
     std::vector<std::string> coord_names;
+    /// Node map
+    std::vector<int> node_map;
     /// Element map
     std::vector<int> elem_map;
     /// Element blocks
@@ -162,6 +164,10 @@ public:
     /// @return Truth table. Rows are block indices (not IDs), columns are
     ///         variable indices. Both are 1-based indices!
     TruthTable get_elemental_var_table() const;
+
+    const std::vector<int> & get_node_map() const;
+
+    const std::vector<int> & get_elem_map() const;
 
     /// Get the x-coordinates of nodes
     ///
@@ -283,6 +289,9 @@ public:
 
     /// Read coordinate names from the ExodusII file
     void read_coord_names();
+
+    /// Read node map from the ExodusII file
+    void read_node_map();
 
     /// Read element map from the ExodusII file
     void read_elem_map();

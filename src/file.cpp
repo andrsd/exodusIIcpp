@@ -283,6 +283,18 @@ File::get_elemental_var_table() const
     return truth_table;
 }
 
+const std::vector<int> &
+File::get_node_map() const
+{
+    return this->node_map;
+}
+
+const std::vector<int> &
+File::get_elem_map() const
+{
+    return this->elem_map;
+}
+
 const std::vector<double> &
 File::get_x_coords() const
 {
@@ -493,11 +505,19 @@ File::read_coord_names()
 }
 
 void
+File::read_node_map()
+{
+    this->node_map.clear();
+    this->node_map.resize(this->n_nodes);
+    EXODUSIICPP_CHECK_ERROR(ex_get_id_map(this->exoid, EX_NODE_MAP, this->node_map.data()));
+}
+
+void
 File::read_elem_map()
 {
     this->elem_map.clear();
     this->elem_map.resize(this->n_elems);
-    EXODUSIICPP_CHECK_ERROR(ex_get_map(this->exoid, this->elem_map.data()));
+    EXODUSIICPP_CHECK_ERROR(ex_get_id_map(this->exoid, EX_ELEM_MAP, this->elem_map.data()));
 }
 
 void
