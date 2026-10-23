@@ -664,7 +664,10 @@ File::write_coords(const std::vector<double> & x,
                    const std::vector<double> & y,
                    const std::vector<double> & z)
 {
-    EXODUSIICPP_CHECK_ERROR(ex_put_coord(this->exoid, x.data(), y.data(), z.data()));
+    EXODUSIICPP_CHECK_ERROR(ex_put_coord(this->exoid,
+                                         x.size() > 0 ? x.data() : nullptr,
+                                         y.size() > 0 ? y.data() : nullptr,
+                                         z.size() > 0 ? z.data() : nullptr));
 }
 
 void
