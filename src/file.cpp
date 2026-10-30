@@ -798,12 +798,13 @@ File::write_block(int64_t blk_id,
                   int64_t n_elems_in_block,
                   const std::vector<int> & connect)
 {
+    int64_t n_nodes_per_elem = n_elems_in_block > 0 ? connect.size() / n_elems_in_block : 0;
     EXODUSIICPP_CHECK_ERROR(ex_put_block(this->exoid,
                                          EX_ELEM_BLOCK,
                                          blk_id,
                                          elem_type,
                                          n_elems_in_block,
-                                         connect.size() / n_elems_in_block,
+                                         n_nodes_per_elem,
                                          0,
                                          0,
                                          0));
