@@ -514,8 +514,10 @@ void
 File::read_node_map()
 {
     this->node_map.clear();
-    this->node_map.resize(this->n_nodes);
-    EXODUSIICPP_CHECK_ERROR(ex_get_id_map(this->exoid, EX_NODE_MAP, this->node_map.data()));
+    if (this->n_nodes > 0) {
+        this->node_map.resize(this->n_nodes);
+        EXODUSIICPP_CHECK_ERROR(ex_get_id_map(this->exoid, EX_NODE_MAP, this->node_map.data()));
+    }
 }
 
 void
