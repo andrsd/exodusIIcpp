@@ -590,7 +590,9 @@ File::read_node_sets()
         ns.n_distance_factors = n_dfs;
 
         ns.node_ids.resize(n_nodes);
-        EXODUSIICPP_CHECK_ERROR(ex_get_set(this->exoid, EX_NODE_SET, id, ns.node_ids.data(), 0));
+        if (n_nodes > 0)
+            EXODUSIICPP_CHECK_ERROR(
+                ex_get_set(this->exoid, EX_NODE_SET, id, ns.node_ids.data(), 0));
 
         this->node_sets.emplace_back(ns);
     }
