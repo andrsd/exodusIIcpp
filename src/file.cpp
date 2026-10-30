@@ -524,8 +524,10 @@ void
 File::read_elem_map()
 {
     this->elem_map.clear();
-    this->elem_map.resize(this->n_elems);
-    EXODUSIICPP_CHECK_ERROR(ex_get_id_map(this->exoid, EX_ELEM_MAP, this->elem_map.data()));
+    if (this->n_elems > 0) {
+        this->elem_map.resize(this->n_elems);
+        EXODUSIICPP_CHECK_ERROR(ex_get_id_map(this->exoid, EX_ELEM_MAP, this->elem_map.data()));
+    }
 }
 
 void
