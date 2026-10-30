@@ -638,8 +638,9 @@ File::read_side_sets()
 
         ss.elem_ids.resize(n_sides);
         ss.side_ids.resize(n_sides);
-        EXODUSIICPP_CHECK_ERROR(
-            ex_get_set(this->exoid, EX_SIDE_SET, id, ss.elem_ids.data(), ss.side_ids.data()));
+        if (n_sides > 0)
+            EXODUSIICPP_CHECK_ERROR(
+                ex_get_set(this->exoid, EX_SIDE_SET, id, ss.elem_ids.data(), ss.side_ids.data()));
 
         this->side_sets.emplace_back(ss);
     }
