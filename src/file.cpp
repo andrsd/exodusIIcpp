@@ -478,17 +478,19 @@ File::read_coords()
     this->y.clear();
     this->z.clear();
 
-    this->x.resize(this->n_nodes);
-    EXODUSIICPP_CHECK_ERROR(ex_get_coord(this->exoid, this->x.data(), nullptr, nullptr));
+    if (this->n_nodes > 0) {
+        this->x.resize(this->n_nodes);
+        EXODUSIICPP_CHECK_ERROR(ex_get_coord(this->exoid, this->x.data(), nullptr, nullptr));
 
-    if (this->n_dim >= 2) {
-        this->y.resize(this->n_nodes);
-        EXODUSIICPP_CHECK_ERROR(ex_get_coord(this->exoid, nullptr, this->y.data(), nullptr));
-    }
+        if (this->n_dim >= 2) {
+            this->y.resize(this->n_nodes);
+            EXODUSIICPP_CHECK_ERROR(ex_get_coord(this->exoid, nullptr, this->y.data(), nullptr));
+        }
 
-    if (this->n_dim == 3) {
-        this->z.resize(this->n_nodes);
-        EXODUSIICPP_CHECK_ERROR(ex_get_coord(this->exoid, nullptr, nullptr, this->z.data()));
+        if (this->n_dim == 3) {
+            this->z.resize(this->n_nodes);
+            EXODUSIICPP_CHECK_ERROR(ex_get_coord(this->exoid, nullptr, nullptr, this->z.data()));
+        }
     }
 }
 
