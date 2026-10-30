@@ -560,12 +560,13 @@ File::read_blocks()
         ElementBlock eb;
         eb.set_id(id);
         eb.set_name(name);
+        std::vector<int> connect;
         if (n_elems_in_block > 0) {
-            std::vector<int> connect((std::size_t) n_elems_in_block * n_nodes_per_elem);
+            connect.resize((std::size_t) n_elems_in_block * n_nodes_per_elem);
             EXODUSIICPP_CHECK_ERROR(
                 ex_get_conn(this->exoid, EX_ELEM_BLOCK, id, connect.data(), 0, 0));
-            eb.set_connectivity(elem_type, n_elems_in_block, n_nodes_per_elem, connect);
         }
+        eb.set_connectivity(elem_type, n_elems_in_block, n_nodes_per_elem, connect);
 
         this->element_blocks.push_back(eb);
     }
