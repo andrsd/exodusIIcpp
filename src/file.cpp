@@ -350,6 +350,10 @@ File::get_side_set_node_list(int side_set_id,
         ex_get_set_param(this->exoid, EX_SIDE_SET, side_set_id, &num_sides_in_set, nullptr));
 
     node_count_list.resize(num_sides_in_set);
+    if (num_sides_in_set == 0) {
+        node_list.clear();
+        return;
+    }
     // the maximum number of nodes of a 2D element (which would be a side element) is 9 on QUAD9
     node_list.resize(num_sides_in_set * 9);
     EXODUSIICPP_CHECK_ERROR(ex_get_side_set_node_list(this->exoid,
