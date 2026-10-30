@@ -393,3 +393,55 @@ TEST(FileTest, test)
         f.close();
     }
 }
+
+TEST(FileTest, empty_sets_and_blocks)
+{
+    {
+        File f("empty_sets.e", FileAccess::WRITE);
+        f.init("empty test", 2, 4, 0, 1, 1, 1);
+        std::vector<double> x = { 0, 1, 0, 1 };
+        std::vector<double> y = { 0, 0, 1, 1 };
+        f.write_coords(x, y);
+
+        // empty block
+        f.write_block(1, "QUAD4", 0, {});
+
+        // empty node set
+        f.write_node_set(1, {});
+
+        // empty side set
+        f.write_side_set(1, {}, {});
+
+        f.close();
+    }
+    {
+        File f("empty_sets.e", FileAccess::READ);
+        EXPECT_EQ(f.get_num_nodes(), 4);
+        EXPECT_EQ(f.get_num_elements(), 0);
+        EXPECT_EQ(f.get_num_element_blocks(), 1);
+        EXPECT_EQ(f.get_num_node_sets(), 1);
+        EXPECT_EQ(f.get_num_side_sets(), 1);
+
+        f.read_blocks();
+        auto blks = f.get_element_blocks();
+        ASSERT_EQ(blks.size(), 1);
+        EXPECT_EQ(blks[0].get_num_elements(), 0);
+
+        f.read_node_sets();
+        auto nsets = f.get_node_sets();
+        ASSERT_EQ(nsets.size(), 1);
+        EXPECT_EQ(nsets[0].get_size(), 0);
+
+        f.read_side_sets();
+        auto ssets = f.get_side_sets();
+        ASSERT_EQ(ssets.size(), 1);
+        EXPECT_EQ(ssets[0].get_size(), 0);
+
+        std::vector<int> cnts, nodes;
+        f.get_side_set_node_list(1, cnts, nodes);
+        EXPECT_TRUE(cnts.empty());
+        EXPECT_TRUE(nodes.empty());
+
+        f.close();
+    }
+}

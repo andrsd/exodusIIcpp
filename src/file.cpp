@@ -350,6 +350,10 @@ File::get_side_set_node_list(int side_set_id,
         ex_get_set_param(this->exoid, EX_SIDE_SET, side_set_id, &num_sides_in_set, nullptr));
 
     node_count_list.resize(num_sides_in_set);
+    if (num_sides_in_set == 0) {
+        node_list.clear();
+        return;
+    }
     // the maximum number of nodes of a 2D element (which would be a side element) is 9 on QUAD9
     node_list.resize(num_sides_in_set * 9);
     EXODUSIICPP_CHECK_ERROR(ex_get_side_set_node_list(this->exoid,
@@ -474,17 +478,19 @@ File::read_coords()
     this->y.clear();
     this->z.clear();
 
-    this->x.resize(this->n_nodes);
-    EXODUSIICPP_CHECK_ERROR(ex_get_coord(this->exoid, this->x.data(), nullptr, nullptr));
+    if (this->n_nodes > 0) {
+        this->x.resize(this->n_nodes);
+        EXODUSIICPP_CHECK_ERROR(ex_get_coord(this->exoid, this->x.data(), nullptr, nullptr));
 
-    if (this->n_dim >= 2) {
-        this->y.resize(this->n_nodes);
-        EXODUSIICPP_CHECK_ERROR(ex_get_coord(this->exoid, nullptr, this->y.data(), nullptr));
-    }
+        if (this->n_dim >= 2) {
+            this->y.resize(this->n_nodes);
+            EXODUSIICPP_CHECK_ERROR(ex_get_coord(this->exoid, nullptr, this->y.data(), nullptr));
+        }
 
-    if (this->n_dim == 3) {
-        this->z.resize(this->n_nodes);
-        EXODUSIICPP_CHECK_ERROR(ex_get_coord(this->exoid, nullptr, nullptr, this->z.data()));
+        if (this->n_dim == 3) {
+            this->z.resize(this->n_nodes);
+            EXODUSIICPP_CHECK_ERROR(ex_get_coord(this->exoid, nullptr, nullptr, this->z.data()));
+        }
     }
 }
 
@@ -508,16 +514,20 @@ void
 File::read_node_map()
 {
     this->node_map.clear();
-    this->node_map.resize(this->n_nodes);
-    EXODUSIICPP_CHECK_ERROR(ex_get_id_map(this->exoid, EX_NODE_MAP, this->node_map.data()));
+    if (this->n_nodes > 0) {
+        this->node_map.resize(this->n_nodes);
+        EXODUSIICPP_CHECK_ERROR(ex_get_id_map(this->exoid, EX_NODE_MAP, this->node_map.data()));
+    }
 }
 
 void
 File::read_elem_map()
 {
     this->elem_map.clear();
-    this->elem_map.resize(this->n_elems);
-    EXODUSIICPP_CHECK_ERROR(ex_get_id_map(this->exoid, EX_ELEM_MAP, this->elem_map.data()));
+    if (this->n_elems > 0) {
+        this->elem_map.resize(this->n_elems);
+        EXODUSIICPP_CHECK_ERROR(ex_get_id_map(this->exoid, EX_ELEM_MAP, this->elem_map.data()));
+    }
 }
 
 void
@@ -550,12 +560,13 @@ File::read_blocks()
         ElementBlock eb;
         eb.set_id(id);
         eb.set_name(name);
+        std::vector<int> connect;
         if (n_elems_in_block > 0) {
-            std::vector<int> connect((std::size_t) n_elems_in_block * n_nodes_per_elem);
+            connect.resize((std::size_t) n_elems_in_block * n_nodes_per_elem);
             EXODUSIICPP_CHECK_ERROR(
                 ex_get_conn(this->exoid, EX_ELEM_BLOCK, id, connect.data(), 0, 0));
-            eb.set_connectivity(elem_type, n_elems_in_block, n_nodes_per_elem, connect);
         }
+        eb.set_connectivity(elem_type, n_elems_in_block, n_nodes_per_elem, connect);
 
         this->element_blocks.push_back(eb);
     }
@@ -590,7 +601,9 @@ File::read_node_sets()
         ns.n_distance_factors = n_dfs;
 
         ns.node_ids.resize(n_nodes);
-        EXODUSIICPP_CHECK_ERROR(ex_get_set(this->exoid, EX_NODE_SET, id, ns.node_ids.data(), 0));
+        if (n_nodes > 0)
+            EXODUSIICPP_CHECK_ERROR(
+                ex_get_set(this->exoid, EX_NODE_SET, id, ns.node_ids.data(), 0));
 
         this->node_sets.emplace_back(ns);
     }
@@ -625,8 +638,9 @@ File::read_side_sets()
 
         ss.elem_ids.resize(n_sides);
         ss.side_ids.resize(n_sides);
-        EXODUSIICPP_CHECK_ERROR(
-            ex_get_set(this->exoid, EX_SIDE_SET, id, ss.elem_ids.data(), ss.side_ids.data()));
+        if (n_sides > 0)
+            EXODUSIICPP_CHECK_ERROR(
+                ex_get_set(this->exoid, EX_SIDE_SET, id, ss.elem_ids.data(), ss.side_ids.data()));
 
         this->side_sets.emplace_back(ss);
     }
@@ -784,12 +798,13 @@ File::write_block(int64_t blk_id,
                   int64_t n_elems_in_block,
                   const std::vector<int> & connect)
 {
+    int64_t n_nodes_per_elem = n_elems_in_block > 0 ? connect.size() / n_elems_in_block : 0;
     EXODUSIICPP_CHECK_ERROR(ex_put_block(this->exoid,
                                          EX_ELEM_BLOCK,
                                          blk_id,
                                          elem_type,
                                          n_elems_in_block,
-                                         connect.size() / n_elems_in_block,
+                                         n_nodes_per_elem,
                                          0,
                                          0,
                                          0));
